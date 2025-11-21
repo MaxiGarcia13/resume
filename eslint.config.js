@@ -21,7 +21,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.{js,jsx,html,json}"],
     rules: {
       indent: ["error", 2],
     },
