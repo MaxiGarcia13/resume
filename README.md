@@ -1,2 +1,2 @@
-# resume
+# Resume
 Maximiliano Garcia Mortigliengo resume
