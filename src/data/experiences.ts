@@ -1,6 +1,6 @@
-import type { Experience } from '@/types/experiences';
+import type { WorkExperience } from '@/types/experiences';
 
-export function getExperiences(): Array<Experience> {
+export function getWorksExperience(): Array<WorkExperience> {
   return [
     {
       id: 'empathy-co',

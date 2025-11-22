@@ -1,16 +1,16 @@
-import { getExperiences } from '@/data';
+import { getWorksExperience } from '@/data';
 import { diffDates, formatSechedule } from '@/utils';
 import { ExternalLinkIcon, Heading, Img, Link, LinkIcon, Text } from '../shared';
 import { Positions } from './positions';
 
-export function Experiences() {
-  const experiences = getExperiences();
+export function WroksExperience() {
+  const worksExperience = getWorksExperience();
 
   return (
     <section className="flex flex-col gap-2">
       <Heading tag="h2">Experiences</Heading>
       <ul>
-        {experiences.map((experience) => {
+        {worksExperience.map((experience) => {
           const { startDate, endDate } = formatSechedule(experience.schedule);
           const { years, months } = diffDates(experience.schedule);
 
