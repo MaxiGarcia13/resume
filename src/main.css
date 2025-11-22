@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 
 @font-face {
   font-family: 'Fira Code';
@@ -29,9 +31,6 @@
 }
 
 body {
-  @apply bg-gray-900;
-  @apply text-neutral-100;
-
   font-family: 'Fira Code';
   font-variant-ligatures: contextual;
 }
