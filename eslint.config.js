@@ -1,4 +1,4 @@
-import antfu from '@antfu/eslint-config'
+import antfu from '@antfu/eslint-config';
 
 export default antfu({
   react: true,
@@ -7,4 +7,7 @@ export default antfu({
     indent: 2,
     quotes: 'single',
   },
-})
+  rules: {
+    'style/semi': ['error', 'always'],
+  },
+});
