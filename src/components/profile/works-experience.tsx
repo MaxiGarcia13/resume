@@ -16,7 +16,7 @@ export function WroksExperience() {
 
           return (
             <li key={experience.company} className="py-4 flex flex-col gap-2">
-              <div className="flex gap-6">
+              <div className="flex gap-6 justify-start items-center">
                 <Img src={experience.image} alt={experience.company} className="w-[60px] h-[60px] rounded bg-neutral-100" />
                 <div>
                   <Heading id={experience.id} tag="h3" className="group flex gap-2 items-center justify-start">
