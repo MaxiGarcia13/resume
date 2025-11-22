@@ -1,16 +1,33 @@
-export function Header() {
-  return (
-    <header className="p-16 flex gap-8 items-center">
-      <div className="rounded-full h-[200px] w-[200px] object-contain overflow-hidden border-2 border-solid border-neutral-100">
-        <img src="assets/images/profile.png" alt=" Maxi Garcia Profile Picture" className="h-full w-full" />
-      </div>
+import { getProfile } from '@/data';
+import { ProfileImage } from './profile';
+import { DownloadIcon, GithubIcon, Heading, Link, LinkedInIcon, Text } from './shared';
 
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold">
-          Maximiliano Garcia Mortigliengo
-        </h1>
-        <p className="text-neutral-300">Senior Frontend Software Engineer</p>
-      </div>
+export function Header() {
+  const { name, role, socialMedia } = getProfile();
+
+  return (
+    <header className="pb-10 flex gap-8 items-center flex-col sm:flex-row">
+      <ProfileImage
+        src="assets/images/profile.png"
+        alt={`${name} Profile Picture`}
+      />
+
+      <section className="flex flex-col gap-1">
+        <Heading>{name}</Heading>
+        <Text>{role}</Text>
+        <div className="flex gap-2 mt-2">
+          <Link icon={<LinkedInIcon />} href={socialMedia.linkedin} target="_blank" />
+          <Link icon={<GithubIcon />} href={socialMedia.github} target="_blank" />
+          <Link
+            icon={<DownloadIcon />}
+            href="/assets/cv_maximiliano_garcia.pdf"
+            download="cv_maximiliano_garcia.pdf"
+            variant="primary"
+          >
+            Download CV
+          </Link>
+        </div>
+      </section>
     </header>
   );
 }
