@@ -8,7 +8,7 @@ export function Experiences() {
 
   return (
     <section className="flex flex-col gap-2">
-      <Heading tag="h2">Experiences</Heading>
+      <Heading tag="h2">Professional Experience</Heading>
       <ul>
         {experiences.map((experience) => {
           const { startDate, endDate } = formatSechedule(experience.schedule);
