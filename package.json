@@ -19,7 +19,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
     "@eslint-react/eslint-plugin": "^2.3.7",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -38,11 +40,12 @@
     "globals": "^16.5.0",
     "lint-staged": "^16.2.7",
     "simple-git-hooks": "^2.13.1",
+    "tailwindcss": "^4.1.17",
     "typescript": "~5.9.3",
     "vite": "^7.2.4"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "npm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
