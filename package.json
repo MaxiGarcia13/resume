@@ -45,7 +45,7 @@
     "vite": "^7.2.4"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
