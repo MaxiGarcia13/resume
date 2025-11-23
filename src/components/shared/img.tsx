@@ -1,6 +1,7 @@
 import type { ImgHTMLAttributes, SyntheticEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/utils';
+import { Skeleton } from './skeleton';
 
 interface ImgProps extends ImgHTMLAttributes<HTMLImageElement> { }
 
@@ -8,13 +9,6 @@ export function Img({ src, alt, className, ...props }: ImgProps) {
   const ref = useRef<HTMLImageElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-
-  const resetImageState = () => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
-    setImageError(false);
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
-    setImageLoaded(false);
-  };
 
   const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
     setImageLoaded(true);
@@ -24,7 +18,16 @@ export function Img({ src, alt, className, ...props }: ImgProps) {
 
   const onError = (error: SyntheticEvent<HTMLImageElement>) => {
     props.onError?.(error);
-    resetImageState();
+
+    setImageError(true);
+    setImageLoaded(false);
+  };
+
+  const resetImageState = () => {
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+    setImageError(false);
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+    setImageLoaded(false);
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export function Img({ src, alt, className, ...props }: ImgProps) {
 
   return (
     <figure className={cn('relative overflow-hidden shrink-0', className)}>
-      {!imageLoaded && <span className="w-full h-full absolute animate-pulse bg-current" />}
+      {!imageLoaded && <Skeleton />}
       <img ref={ref} src={src} alt={alt} loading={props.loading ?? 'lazy'} className="object-contain w-full h-full shrink-0" onLoad={onLoad} onError={onError} {...props} />
     </figure>
   );

@@ -6,7 +6,7 @@ export function Header() {
   const { name, role, socialMedia, email } = getProfile();
 
   return (
-    <header className="pb-10 flex gap-8 items-center flex-col sm:flex-row">
+    <header className="flex gap-8 items-center flex-col sm:flex-row">
       <ProfileImage
         src="assets/images/profile.png"
         alt={`${name} Profile Picture`}

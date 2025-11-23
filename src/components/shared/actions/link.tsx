@@ -10,14 +10,19 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, BaseProps {
 export function Link({ icon, iconPosition, noWrap, ...props }: LinkProps) {
   const styles = !noWrap ? getActionStyles({ icon, iconPosition, ...props }) : undefined;
   const rel = props.target === '_blank' ? 'noopener noreferrer' : undefined;
+  const anchorProps = {
+    rel,
+    parent,
+    ...props,
+  };
+
+  if (noWrap) {
+    return <a {...anchorProps}>{props.children}</a>;
+  }
 
   return (
-    <a className={styles} rel={rel} {...props}>
-      {
-        noWrap
-          ? props.children
-          : <ActionText icon={icon} iconPosition={iconPosition} {...props}>{props.children}</ActionText>
-      }
+    <a className={styles} {...anchorProps}>
+      <ActionText icon={icon} iconPosition={iconPosition} {...props}>{props.children}</ActionText>
     </a>
   );
 }
