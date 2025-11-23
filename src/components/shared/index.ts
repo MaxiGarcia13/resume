@@ -1,4 +1,4 @@
-export * from './call-to-action';
+export * from './actions';
 export * from './heading';
 export * from './icons';
 export * from './Img';
