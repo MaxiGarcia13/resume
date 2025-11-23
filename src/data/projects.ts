@@ -16,7 +16,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Examples React',
-      description: 'A Practical Guide to React State Management: $\text{useState}$, $\text{useEffect}$, Redux, and Redux Saga.',
+      description: 'A Practical Guide to React State Management: useState, useEffect, Context, Redux, and Redux Saga.',
       repo: 'https://github.com/MaxiGarcia13/examples-react',
       website: 'https://examples-react.vercel.app/',
     },
