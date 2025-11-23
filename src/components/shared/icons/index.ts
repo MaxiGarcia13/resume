@@ -1,4 +1,5 @@
 export * from './download';
+export * from './email';
 export * from './external-link';
 export * from './github';
 export * from './link';
