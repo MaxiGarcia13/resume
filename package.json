@@ -12,7 +12,8 @@
   },
   "keywords": [
     "resume",
-    "cv"
+    "cv",
+    "portfolio"
   ],
   "scripts": {
     "dev": "vite",
