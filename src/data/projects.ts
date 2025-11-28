@@ -26,5 +26,11 @@ export function getProjects(): Array<Project> {
       repo: 'https://github.com/MaxiGarcia13/examples-react',
       website: 'https://examples-react.vercel.app/',
     },
+    {
+      title: 'Github repository searcher',
+      description: 'Search repositories in GitHub, only filter by ID. Built with React and TypeScript.',
+      repo: 'https://github.com/MaxiGarcia13/github-repository-searcher',
+      website: 'https://github-repository-searcher.vercel.app/',
+    },
   ];
 }
