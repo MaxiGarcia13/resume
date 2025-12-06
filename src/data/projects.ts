@@ -9,6 +9,12 @@ export function getProjects(): Array<Project> {
       website: 'https://maxi-gpt.vercel.app/',
     },
     {
+      title: 'My sketch',
+      description: 'Art sketch project with React and Canvas sketch',
+      repo: 'https://github.com/MaxiGarcia13/my-sketch',
+      website: 'https://my-sketch-9000.vercel.app/',
+    },
+    {
       title: 'Bilde konverterer',
       description: 'Transform images faster and simpler. The frontend is built with React and TypeScript, while the backend is built with Node.js and Express JS.',
       repo: 'https://github.com/MaxiGarcia13/bildekonverterer/tree/main',
