@@ -7,6 +7,7 @@ export function getWorksExperience(): Array<WorkExperience> {
       company: 'Empathy.co',
       schedule: {
         startDate: '2022-05-01',
+        endDate: '2026-03-02',
       },
       website: 'https://empathy.co/products/',
       image: 'https://media.glassdoor.com/sql/2977682/empathy-co-squarelogo-1569478606360.png',

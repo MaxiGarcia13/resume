@@ -9,10 +9,10 @@ export function getProjects(): Array<Project> {
       website: 'https://maxi-gpt.vercel.app/',
     },
     {
-      title: 'My sketch',
-      description: 'Art sketch project with React and Canvas sketch',
-      repo: 'https://github.com/MaxiGarcia13/my-sketch',
-      website: 'https://my-sketch-9000.vercel.app/',
+      title: 'La casita del árbol',
+      description: 'La Casita del Árbol is a creative studio where we offer ceramic classes and sell handcrafted ceramic products.',
+      repo: 'https://github.com/MaxiGarcia13/la-casita-del-arbol',
+      website: 'https://la-casita-del-arbol.vercel.app',
     },
     {
       title: 'Bilde konverterer',
@@ -31,6 +31,12 @@ export function getProjects(): Array<Project> {
       description: 'A Practical Guide to React State Management: useState, useEffect, Context, Redux, and Redux Saga.',
       repo: 'https://github.com/MaxiGarcia13/examples-react',
       website: 'https://examples-react.vercel.app/',
+    },
+    {
+      title: 'My sketch',
+      description: 'Art sketch project with React and Canvas sketch',
+      repo: 'https://github.com/MaxiGarcia13/my-sketch',
+      website: 'https://my-sketch-9000.vercel.app/',
     },
     {
       title: 'Github repository searcher',
