@@ -14,7 +14,7 @@ export function Projects() {
             <li key={project.title} className="flex flex-col gap-4">
               <Heading tag="h3" className="flex gap-2 justify-start items-center">
                 {project.title}
-                <Link href={project.repo} icon={<GithubIcon />} />
+                <Link href={project.repo} icon={<GithubIcon />} target="_blank" />
               </Heading>
               <Text>{project.description}</Text>
               <Iframe src={project.website} title={project.title} width="100%" height={400} sandbox="allow-scripts allow-same-origin" scrolling="no" />
