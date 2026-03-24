@@ -27,6 +27,12 @@ export function getProjects(): Array<Project> {
       website: 'https://la-casita-del-arbol.vercel.app',
     },
     {
+      title: 'Pádel Cantabria',
+      description: 'I built this because on the official site of the Liga Cántabra de Pádel it was hard to see which match is next and when the league runs until. This project makes that clearer.',
+      repo: 'https://github.com/MaxiGarcia13/unofficial-fcp',
+      website: 'https://unofficial-fcp.vercel.app',
+    },
+    {
       title: 'Bilde konverterer',
       description: 'Transform images faster and simpler. The frontend is built with React and TypeScript, while the backend is built with Node.js and Express JS.',
       repo: 'https://github.com/MaxiGarcia13/bildekonverterer/tree/main',
