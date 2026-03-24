@@ -9,6 +9,12 @@ export function getProjects(): Array<Project> {
       website: 'https://fcp-chat.vercel.app/',
     },
     {
+      title: 'Bookly!',
+      description: 'Bookly is a scheduling and user management system designed to help coaches and teachers manage their calendars, bookings, and students in one place.',
+      repo: 'https://github.com/MaxiGarcia13/bookly',
+      website: 'https://bookly-class.vercel.app',
+    },
+    {
       title: 'Web Chatbot powered by Web LLM',
       description: 'Chat component integrated with web-llm (React JS)',
       repo: 'https://github.com/MaxiGarcia13/web-llm-chat',
