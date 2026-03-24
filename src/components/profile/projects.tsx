@@ -17,7 +17,16 @@ export function Projects() {
                 <Link href={project.repo} icon={<GithubIcon />} target="_blank" />
               </Heading>
               <Text>{project.description}</Text>
-              <Iframe src={project.website} title={project.title} width="100%" height={400} sandbox="allow-scripts allow-same-origin" scrolling="no" />
+              <Iframe
+                src={project.website}
+                title={project.title}
+                width="100%"
+                height={400}
+                sandbox="allow-scripts allow-same-origin"
+                scrolling="no"
+                tabIndex={-1}
+                className="pointer-events-none"
+              />
             </li>
           ))
         }

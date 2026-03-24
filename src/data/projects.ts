@@ -30,7 +30,7 @@ export function getProjects(): Array<Project> {
       title: 'Vinos LM',
       description: 'Small Marketplace for wine lovers. Features full-stack development using Next.js (React) for a server-rendered, integrated with Supabase for database management and real-time backend services.',
       repo: 'https://github.com/MaxiGarcia13/vinoslm',
-      website: 'https://vinoslm-git-main-maxigarcia13.vercel.app/',
+      website: 'https://vinoslm-git-main-maxigarcia13.vercel.app',
     },
     {
       title: 'Examples React',
