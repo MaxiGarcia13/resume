@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Liga de Padel cantabra pero con IA',
+      description: 'Find the leaderboard, a team or compare a team with other teams.',
+      repo: 'https://github.com/MaxiGarcia13/fcp-chat',
+      website: 'https://fcp-chat.vercel.app/',
+    },
+    {
       title: 'Web Chatbot powered by Web LLM',
       description: 'Chat component integrated with web-llm (React JS)',
       repo: 'https://github.com/MaxiGarcia13/web-llm-chat',
