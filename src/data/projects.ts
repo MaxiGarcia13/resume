@@ -3,7 +3,7 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
-      title: 'Liga de Padel cantabra pero con IA',
+      title: 'Chat assistant for the **Liga Cantabra de Padel**.',
       description: 'Find the leaderboard, a team or compare a team with other teams.',
       repo: 'https://github.com/MaxiGarcia13/fcp-chat',
       website: 'https://fcp-chat.vercel.app/',
