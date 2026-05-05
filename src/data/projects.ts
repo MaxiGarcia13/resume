@@ -3,7 +3,13 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
-      title: 'Chat assistant for the **Liga Cantabra de Padel**.',
+      title: 'RunJS Playground',
+      description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
+      repo: 'https://github.com/MaxiGarcia13/runjs',
+      website: 'https://runjs-playground.vercel.app/',
+    },
+    {
+      title: 'Chat assistant for the Liga Cántabra de Pádel.',
       description: 'Find the leaderboard, a team or compare a team with other teams.',
       repo: 'https://github.com/MaxiGarcia13/fcp-chat',
       website: 'https://fcp-chat.vercel.app/',
