@@ -57,12 +57,6 @@ export function getProjects(): Array<Project> {
       website: 'https://examples-react.vercel.app/',
     },
     {
-      title: 'My sketch',
-      description: 'Art sketch project with React and Canvas sketch',
-      repo: 'https://github.com/MaxiGarcia13/my-sketch',
-      website: 'https://my-sketch-9000.vercel.app/',
-    },
-    {
       title: 'Github repository searcher',
       description: 'Search repositories in GitHub, only filter by ID. Built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/github-repository-searcher',
