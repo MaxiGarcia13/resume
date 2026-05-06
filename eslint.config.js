@@ -1,15 +1,7 @@
-import antfu from '@antfu/eslint-config';
+import { eslintConfig } from '@maxigarcia/eslint-config';
 
-export default antfu({
+export default eslintConfig({
   react: true,
   typescript: true,
   jsx: true,
-  stylistic: {
-    indent: 2,
-    quotes: 'single',
-  },
-  rules: {
-    'style/semi': ['error', 'always'],
-    'max-lines': ['error', { max: 80 }],
-  },
 });
