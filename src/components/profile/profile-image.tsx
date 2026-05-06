@@ -5,7 +5,7 @@ import { cn } from '@/utils';
 import { Img } from '../shared';
 
 interface ProfileImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-  imageClassName?: string
+  imageClassName?: string;
 }
 
 export function ProfileImage({ src, alt, className, imageClassName, ...props }: ProfileImageProps) {

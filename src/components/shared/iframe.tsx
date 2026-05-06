@@ -23,15 +23,12 @@ export function Iframe({ src, title, className, ...props }: IframeProps) {
   };
 
   const resetIframeState = () => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setIframeLoaded(false);
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setIframeError(false);
   };
 
   useEffect(() => {
     if (ref.current?.src !== src) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       resetIframeState();
     }
   }, [src]);

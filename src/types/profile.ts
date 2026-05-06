@@ -1,10 +1,10 @@
 export interface Profile {
-  name: string
-  nickName: string
-  email: string
-  role: string
+  name: string;
+  nickName: string;
+  email: string;
+  role: string;
   socialMedia: {
-    linkedin: string
-    github: string
-  }
+    linkedin: string;
+    github: string;
+  };
 }

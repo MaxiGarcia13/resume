@@ -3,9 +3,9 @@ import { createElement } from 'react';
 import { cn } from '@/utils';
 
 interface HeadingProps extends HtmlHTMLAttributes<HTMLHeadingElement> {
-  children: React.ReactNode
-  tag?: HeadingTag
-  className?: string
+  children: React.ReactNode;
+  tag?: HeadingTag;
+  className?: string;
 }
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

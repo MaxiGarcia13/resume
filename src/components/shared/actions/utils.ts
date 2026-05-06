@@ -2,7 +2,7 @@ import type { BaseProps } from './types';
 import type { Variant } from '@/types';
 import { cn } from '@/utils';
 
-export function getActionStyles({ variant, children, icon, className }: BaseProps & { children?: React.ReactNode, className?: string }) {
+export function getActionStyles({ variant, children, icon, className }: BaseProps & { children?: React.ReactNode; className?: string }) {
   const variantStyles: Record<Variant, string> = {
     ghost: 'bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800',
     primary: 'bg-orange-400 hover:bg-orange-300',

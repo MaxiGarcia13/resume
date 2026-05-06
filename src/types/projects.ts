@@ -1,6 +1,6 @@
 export interface Project {
-  title: string
-  description: string
-  repo: string
-  website?: string
+  title: string;
+  description: string;
+  repo: string;
+  website?: string;
 }

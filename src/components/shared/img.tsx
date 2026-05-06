@@ -24,15 +24,12 @@ export function Img({ src, alt, className, ...props }: ImgProps) {
   };
 
   const resetImageState = () => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setImageError(false);
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setImageLoaded(false);
   };
 
   useEffect(() => {
     if (ref.current?.complete && src !== ref.current.src) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       resetImageState();
     }
   }, [src]);

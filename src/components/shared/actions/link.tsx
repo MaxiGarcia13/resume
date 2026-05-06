@@ -4,7 +4,7 @@ import { ActionText } from './action-text';
 import { getActionStyles } from './utils';
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, BaseProps {
-  noWrap?: boolean
+  noWrap?: boolean;
 }
 
 export function Link({ icon, iconPosition, noWrap, ...props }: LinkProps) {

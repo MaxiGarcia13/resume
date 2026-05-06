@@ -10,7 +10,7 @@ export function Projects() {
       <Heading tag="h2"><Link href="#projects" noWrap>Projects</Link></Heading>
       <ul className="flex flex-col gap-10">
         {
-          projects.map(project => (
+          projects.map((project) => (
             <li key={project.title} className="flex flex-col gap-4">
               <Heading tag="h3" className="flex gap-2 justify-start items-center">
                 {project.title}

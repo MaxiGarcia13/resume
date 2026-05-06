@@ -6,10 +6,10 @@ type TextTag = 'p' | 'span' | 'div' | 'code' | 'pre';
 type TextVariant = Variant | 'highlight';
 
 interface TextProps {
-  children: React.ReactNode
-  tag?: TextTag
-  className?: string
-  variant?: TextVariant
+  children: React.ReactNode;
+  tag?: TextTag;
+  className?: string;
+  variant?: TextVariant;
 }
 
 export function Text(props: TextProps) {

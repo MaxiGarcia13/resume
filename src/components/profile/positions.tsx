@@ -14,7 +14,7 @@ function PositionItem({ title, description }: Position) {
   );
 }
 
-export function Positions({ positions, className }: { positions: Array<Position>, className?: string }) {
+export function Positions({ positions, className }: { positions: Array<Position>; className?: string }) {
   return (
     <ul className={cn('flex flex-col gap-4 py-2', className)}>
       {positions.map((position, index) => <PositionItem key={`${position.title}-${index.toString()}`} {...position} />)}
