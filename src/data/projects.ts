@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Fetcher',
+      description: 'Fetcher is a lightweight and developer-friendly REST API client for testing, debugging, and managing HTTP requests.',
+      repo: 'https://github.com/MaxiGarcia13/fetcher',
+      website: 'https://fetcherapi.vercel.app/',
+    },
+    {
       title: 'RunJS Playground',
       description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/runjs',
