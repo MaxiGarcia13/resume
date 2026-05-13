@@ -1,16 +1,16 @@
 ---
-import { Header, Projects, SwitchTheme, WorksExperience } from '@/components';
+import Header from '@/components/header.astro';
+import Projects from '@/components/profile/projects.astro';
+import WorksExperience from '@/components/profile/works-experience.astro';
+import SwitchTheme from '@/components/switch-theme.astro';
 import AppLayout from '@/layouts/app.astro';
 ---
 
 <AppLayout>
   <main class="p-8 flex flex-col gap-10">
-    <SwitchTheme
-      className="absolute right-4 top-4 w-[40px]"
-      client:only="react"
-    />
-    <Header client:only="react" />
-    <WorksExperience client:only="react" />
-    <Projects client:only="react" />
+    <SwitchTheme class="absolute right-4 top-4 w-[40px]" />
+    <Header />
+    <WorksExperience />
+    <Projects />
   </main>
 </AppLayout>
