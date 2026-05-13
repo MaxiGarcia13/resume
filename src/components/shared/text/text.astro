@@ -1,0 +1,21 @@
+---
+import type { TextTag, TextVariant } from './text.shared';
+import { getTextClass } from './text.shared';
+
+interface Props {
+  tag?: TextTag;
+  variant?: TextVariant;
+  class?: string;
+}
+
+const {
+  tag: Tag = 'p',
+  variant = 'ghost',
+  class: className,
+  ...props
+} = Astro.props;
+---
+
+<Tag class={getTextClass(variant, className)} {...props}>
+  <slot />
+</Tag>
