@@ -22,7 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "postinstall": "npx simple-git-hooks",
-    "phoenix": "rm -rf dist && rm -rf node_modules && npm install"
+    "phoenix": "rm -rf dist && rm -rf node_modules && rm -rf .astro && npm install"
   },
   "dependencies": {
     "astro": "^6.3.1",
