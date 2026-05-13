@@ -1,7 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
 
 @font-face {
   font-family: 'Fira Code';
