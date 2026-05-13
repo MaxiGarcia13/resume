@@ -2,37 +2,36 @@
 import type { HTMLAttributes } from 'astro/types';
 import Img from '@/components/shared/img.astro';
 import { cn } from '@/utils';
-import {
-  glassesOverlayClass,
-  profileImageClass,
-  profileImageContainerClass,
-} from './profile-image.shared';
 
 interface Props extends HTMLAttributes<'img'> {
   class?: string;
   imageClass?: string;
 }
 
-const {
-  src,
-  alt,
-  class: className,
-  imageClass,
-  ...rest
-} = Astro.props;
+const { src, alt, class: className, imageClass, ...rest } = Astro.props;
 ---
 
-<div class={cn(profileImageContainerClass, className)}>
+<div
+  class={cn(
+    'rounded-full h-[200px] w-[200px] shrink-0 overflow-hidden border-2 border-solid border-current relative',
+    className,
+  )}
+>
   <Img
     src={src}
     alt={alt}
-    class={cn(profileImageClass, imageClass)}
+    class={cn('h-full w-full', imageClass)}
     width={200}
     height={200}
     loading="lazy"
     {...rest}
   />
-  <span class={cn(glassesOverlayClass, 'dark:hidden')}>
+  <span
+    class={cn(
+      'absolute w-[100px] h-[40px] top-[33px] left-[45px]',
+      'dark:hidden',
+    )}
+  >
     <Img src="/assets/images/sun-glasses.webp" alt={alt} />
   </span>
 </div>
