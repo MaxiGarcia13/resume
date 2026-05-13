@@ -7,13 +7,15 @@ export function Projects() {
 
   return (
     <section id="projects" className="flex flex-col gap-6">
-      <Heading tag="h2"><Link href="#projects" noWrap>Projects</Link></Heading>
+      <Heading tag="h2">
+        <Link href="#projects" noWrap>Projects</Link>
+      </Heading>
       <ul className="flex flex-col gap-10">
         {
           projects.map((project) => (
-            <li key={project.title} className="flex flex-col gap-4">
+            <li key={project.title} id={project.title} className="flex flex-col gap-4">
               <Heading tag="h3" className="flex gap-2 justify-start items-center">
-                {project.title}
+                <Link href={`#${project.title}`} noWrap>{project.title}</Link>
                 <Link href={project.repo} icon={<GithubIcon />} target="_blank" />
               </Heading>
               <Text>{project.description}</Text>
