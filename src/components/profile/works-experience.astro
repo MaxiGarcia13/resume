@@ -1,0 +1,60 @@
+---
+import Link from '@/components/shared/actions/link/link.astro';
+import Heading from '@/components/shared/heading/heading.astro';
+import ExternalLinkIcon from '@/components/shared/icons/external-link.astro';
+import Img from '@/components/shared/img.astro';
+import Text from '@/components/shared/text/text.astro';
+import { getWorksExperience } from '@/data';
+import { diffDates, formatSechedule } from '@/utils';
+import Positions from './positions.astro';
+
+const worksExperience = getWorksExperience();
+---
+
+<section id="works-experience" class="flex flex-col gap-4">
+  <Heading tag="h2">
+    <Link href="#works-experience" noWrap>Works Experience</Link>
+  </Heading>
+  <ul class="flex flex-col gap-4">
+    {
+      worksExperience.map((experience) => {
+        const { startDate, endDate } = formatSechedule(experience.schedule);
+        const { years, months } = diffDates(experience.schedule);
+
+        return (
+          <li class="flex flex-col gap-2">
+            <div class="flex gap-6 justify-start items-center">
+              <Img
+                src={experience.image}
+                alt={experience.company}
+                class="w-[60px] h-[60px] rounded bg-neutral-100"
+              />
+              <div>
+                <Heading
+                  id={experience.id}
+                  tag="h3"
+                  class="group flex gap-2 items-center justify-start"
+                >
+                  <Link href={`#${experience.id}`} noWrap>
+                    {experience.company}
+                  </Link>
+                  <Link href={experience.website} target="_blank">
+                    <ExternalLinkIcon slot="icon" width={18} height={18} />
+                  </Link>
+                </Heading>
+                <Text tag="span" class="flex gap-1">
+                  {`${startDate} - ${endDate ?? 'now'}. ${years > 0 ? `${years} years ${months > 0 ? `and ${months} months` : ''}` : `${months} months`}`}
+                </Text>
+              </div>
+            </div>
+
+            <Positions
+              positions={experience.positions}
+              class="pl-0 md:pl-[84px]"
+            />
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>
