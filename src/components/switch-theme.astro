@@ -1,0 +1,32 @@
+---
+import Button from './shared/actions/button.astro';
+import MoonIcon from './shared/icons/moon.astro';
+import SunIcon from './shared/icons/sun.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Button type="button" class={className} data-switch-theme>
+  <Fragment slot="icon">
+    <MoonIcon class="hidden dark:block" />
+    <SunIcon class="block dark:hidden" />
+  </Fragment>
+</Button>
+
+<script>
+  import { initializeThemeStore, toggleTheme } from '@/stores/theme/theme.store';
+
+  initializeThemeStore();
+
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-switch-theme]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleTheme();
+      });
+    });
+</script>
