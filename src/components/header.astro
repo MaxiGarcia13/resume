@@ -1,0 +1,44 @@
+---
+import { getProfile } from '@/data';
+import ProfileImage from './profile/profile-image/profile-image.astro';
+import Link from './shared/actions/link/link.astro';
+import Heading from './shared/heading/heading.astro';
+import DownloadIcon from './shared/icons/download.astro';
+import EmailIcon from './shared/icons/email.astro';
+import GithubIcon from './shared/icons/github.astro';
+import LinkedInIcon from './shared/icons/linkedin.astro';
+import Text from './shared/text/text.astro';
+
+const { name, role, socialMedia, email } = getProfile();
+---
+
+<header class="flex gap-8 items-center flex-col sm:flex-row">
+  <ProfileImage
+    src="assets/images/profile.png"
+    alt={`${name} Profile Picture`}
+  />
+
+  <section class="flex flex-col gap-1">
+    <Heading>{name}</Heading>
+    <Text>{role}</Text>
+    <div class="flex gap-2 mt-2">
+      <Link href={socialMedia.linkedin} target="_blank">
+        <LinkedInIcon slot="icon" />
+      </Link>
+      <Link href={socialMedia.github} target="_blank">
+        <GithubIcon slot="icon" />
+      </Link>
+      <Link href={`mailto:${email}`}>
+        <EmailIcon slot="icon" />
+      </Link>
+      <Link
+        href="/assets/cv_maximiliano_garcia.pdf"
+        download="cv_maximiliano_garcia.pdf"
+        variant="primary"
+      >
+        <DownloadIcon slot="icon" />
+        Download CV
+      </Link>
+    </div>
+  </section>
+</header>
