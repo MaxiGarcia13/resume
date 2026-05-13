@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@maxigarcia/js-utils';
 
 export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

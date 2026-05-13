@@ -1,5 +1,5 @@
 import type { Variant } from '@/types';
-import { cn } from '@/utils';
+import { cn } from '@maxigarcia/js-utils';
 
 interface GetActionStylesParams {
   variant?: Variant;

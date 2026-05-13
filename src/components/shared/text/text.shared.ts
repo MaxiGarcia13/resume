@@ -1,5 +1,5 @@
 import type { Variant } from '@/types';
-import { cn } from '@/utils';
+import { cn } from '@maxigarcia/js-utils';
 
 export type TextTag = 'p' | 'span' | 'div' | 'code' | 'pre';
 export type TextVariant = Variant | 'highlight';

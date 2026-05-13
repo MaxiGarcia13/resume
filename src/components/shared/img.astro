@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { cn } from '@/utils';
+import { cn } from '@maxigarcia/js-utils';
 import Skeleton from './skeleton.astro';
 
 interface Props extends HTMLAttributes<'img'> {
@@ -10,10 +10,7 @@ interface Props extends HTMLAttributes<'img'> {
 const { src, alt, class: className, loading = 'lazy', ...rest } = Astro.props;
 ---
 
-<figure
-  class={cn('relative overflow-hidden shrink-0', className)}
-  data-img
->
+<figure class={cn('relative overflow-hidden shrink-0', className)} data-img>
   <Skeleton class="img-skeleton" />
   <img
     src={src}
@@ -61,5 +58,7 @@ function setupImage(figure: HTMLElement) {
   img.addEventListener('error', showError, { once: true });
 }
 
-document.querySelectorAll<HTMLElement>('figure[data-img]').forEach(setupImage);
+document
+  .querySelectorAll<HTMLElement>('figure[data-img]')
+  .forEach(setupImage);
 </script>

@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { cn } from '@/utils';
+import { cn } from '@maxigarcia/js-utils';
 import Link from './actions/link/link.astro';
 import Skeleton from './skeleton.astro';
 
@@ -32,9 +32,7 @@ const {
       ></iframe>
     </div>
   </Link>
-  <span
-    class="iframe-error hidden w-full h-full justify-center items-center"
-  >
+  <span class="iframe-error hidden w-full h-full justify-center items-center">
     🚨 No iframe
   </span>
 </div>
