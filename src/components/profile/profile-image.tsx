@@ -1,6 +1,5 @@
 import type { ImgHTMLAttributes } from 'react';
-import { use } from 'react';
-import { ThemeContext } from '@/context';
+import { useTheme } from '@/stores/theme/theme.react';
 import { cn } from '@/utils';
 import { Img } from '../shared';
 
@@ -9,7 +8,7 @@ interface ProfileImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export function ProfileImage({ src, alt, className, imageClassName, ...props }: ProfileImageProps) {
-  const { theme } = use(ThemeContext);
+  const { theme } = useTheme();
   return (
     <div className={cn('rounded-full h-[200px] w-[200px] shrink-0 overflow-hidden border-2 border-solid border-current relative', className)}>
       <Img src={src} alt={alt} className={cn('h-full w-full', imageClassName)} {...props} />

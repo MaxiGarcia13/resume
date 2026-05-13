@@ -4,4 +4,5 @@ export default eslintConfig({
   react: true,
   typescript: true,
   jsx: true,
+  astro: true,
 });
