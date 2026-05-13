@@ -1,3 +1,3 @@
-export * from './header';
+export { default as Header } from './header.astro';
 export * from './profile';
-export * from './switch-theme';
+export { default as SwitchTheme } from './switch-theme.astro';

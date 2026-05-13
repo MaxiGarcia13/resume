@@ -1,7 +1,7 @@
 export * from './actions';
 export * from './heading';
 export * from './icons';
-export * from './iframe';
-export * from './img';
-export * from './skeleton';
+export { default as Iframe } from './iframe.astro';
+export { default as Img } from './img.astro';
+export { default as Skeleton } from './skeleton.astro';
 export * from './text';
