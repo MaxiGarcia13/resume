@@ -1,0 +1,45 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Variant } from '@/types';
+import ActionText from '../action-text.astro';
+import { getActionStyles } from '../utils';
+import { getLinkRel } from './link.shared';
+
+interface Props extends HTMLAttributes<'a'> {
+  variant?: Variant;
+  class?: string;
+  noWrap?: boolean;
+  iconPosition?: 'left' | 'right';
+}
+
+const {
+  target,
+  variant,
+  class: className,
+  noWrap = false,
+  iconPosition = 'left',
+  ...props
+} = Astro.props;
+
+const rel = getLinkRel(target);
+const hasChildren = Astro.slots.has('default');
+const hasIcon = Astro.slots.has('icon');
+const styles = !noWrap
+  ? getActionStyles({ variant, className, hasChildren, hasIcon })
+  : className;
+---
+
+<a target={target} rel={rel} class={styles} {...props}>
+  {
+    noWrap
+? (
+      <slot />
+    )
+: (
+      <ActionText variant={variant} iconPosition={iconPosition}>
+        <slot name="icon" slot="icon" />
+        <slot />
+      </ActionText>
+    )
+  }
+</a>
