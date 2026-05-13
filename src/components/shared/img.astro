@@ -1,0 +1,65 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/utils';
+import Skeleton from './skeleton.astro';
+
+interface Props extends HTMLAttributes<'img'> {
+  class?: string;
+}
+
+const { src, alt, class: className, loading = 'lazy', ...rest } = Astro.props;
+---
+
+<figure
+  class={cn('relative overflow-hidden shrink-0', className)}
+  data-img
+>
+  <Skeleton class="img-skeleton" />
+  <img
+    src={src}
+    alt={alt}
+    loading={loading}
+    class="object-contain w-full h-full shrink-0"
+    {...rest}
+  />
+  <span
+    class="img-error hidden w-full h-full absolute inset-0 justify-center items-center"
+  >
+    🚨 No image
+  </span>
+</figure>
+
+<script>
+function setupImage(figure: HTMLElement) {
+  const img = figure.querySelector('img');
+  const skeleton = figure.querySelector<HTMLElement>('.img-skeleton');
+  const errorEl = figure.querySelector<HTMLElement>('.img-error');
+  if (!img)
+    return;
+
+  const showLoaded = () => {
+    skeleton?.remove();
+  };
+
+  const showError = () => {
+    skeleton?.remove();
+    img.classList.add('hidden');
+    errorEl?.classList.remove('hidden');
+    errorEl?.classList.add('flex');
+  };
+
+  if (img.complete) {
+    if (img.naturalWidth > 0) {
+      showLoaded();
+    } else {
+      showError();
+    }
+    return;
+  }
+
+  img.addEventListener('load', showLoaded, { once: true });
+  img.addEventListener('error', showError, { once: true });
+}
+
+document.querySelectorAll<HTMLElement>('figure[data-img]').forEach(setupImage);
+</script>
