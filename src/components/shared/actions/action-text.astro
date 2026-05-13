@@ -1,0 +1,22 @@
+---
+import type { Variant } from '@/types';
+import Text from '../text/text.astro';
+
+interface Props {
+  iconPosition?: 'left' | 'right';
+  variant?: Variant;
+}
+
+const { iconPosition = 'left', variant } = Astro.props;
+const hasIcon = Astro.slots.has('icon');
+---
+
+<Text
+  tag="span"
+  variant={variant}
+  class="flex gap-2 justify-center items-center leading-normal"
+>
+  {iconPosition === 'left' && hasIcon && <slot name="icon" />}
+  <slot />
+  {iconPosition === 'right' && hasIcon && <slot name="icon" />}
+</Text>

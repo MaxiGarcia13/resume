@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Variant } from '@/types';
+import ActionText from './action-text.astro';
+import { getActionStyles } from './utils';
+
+interface Props extends HTMLAttributes<'button'> {
+  variant?: Variant;
+  iconPosition?: 'left' | 'right';
+  class?: string;
+}
+
+const {
+  type = 'button',
+  class: className,
+  variant,
+  iconPosition = 'left',
+  ...rest
+} = Astro.props;
+
+const hasChildren = Astro.slots.has('default');
+const hasIcon = Astro.slots.has('icon');
+
+const styles = getActionStyles({ variant, hasChildren, hasIcon, className });
+---
+
+<button type={type} class={styles} {...rest}>
+  <ActionText variant={variant} iconPosition={iconPosition}>
+    <slot name="icon" slot="icon" />
+    <slot />
+  </ActionText>
+</button>
