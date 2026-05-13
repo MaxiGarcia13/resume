@@ -10,7 +10,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<Button type="button" class={className} data-switch-theme>
+<Button type="button" id="switch-theme" class={className} data-switch-theme>
   <Fragment slot="icon">
     <MoonIcon class="hidden dark:block" />
     <SunIcon class="block dark:hidden" />
@@ -18,15 +18,14 @@ const { class: className } = Astro.props;
 </Button>
 
 <script>
-  import { initializeThemeStore, toggleTheme } from '@/stores/theme/theme.store';
+  import {
+    initializeThemeStore,
+    toggleTheme,
+  } from '@/stores/theme/theme.store';
 
   initializeThemeStore();
 
-  document
-    .querySelectorAll<HTMLButtonElement>('[data-switch-theme]')
-    .forEach((button) => {
-      button.addEventListener('click', () => {
-        toggleTheme();
-      });
-    });
+  document.getElementById('switch-theme').addEventListener('click', () => {
+    toggleTheme();
+  });
 </script>
