@@ -1,0 +1,15 @@
+---
+import type { HeadingTag } from './heading.shared';
+import { getHeadingClass } from './heading.shared';
+
+interface Props {
+  tag?: HeadingTag;
+  class?: string;
+}
+
+const { tag: Tag = 'h1', class: className, ...props } = Astro.props;
+---
+
+<Tag class={getHeadingClass(Tag, className)} {...props}>
+  <slot />
+</Tag>
