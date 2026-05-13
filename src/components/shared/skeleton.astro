@@ -1,0 +1,11 @@
+---
+import { cn } from '@/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class={cn('w-full h-full absolute animate-pulse bg-current', className)}></span>
