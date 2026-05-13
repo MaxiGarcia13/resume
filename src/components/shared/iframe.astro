@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@/utils';
+import Link from './actions/link/link.astro';
+import Skeleton from './skeleton.astro';
+
+interface Props extends HTMLAttributes<'iframe'> {
+  class?: string;
+}
+
+const {
+  src,
+  title,
+  class: className,
+  sandbox = 'allow-same-origin',
+  ...rest
+} = Astro.props;
+---
+
+<div data-iframe>
+  <Link href={src} target="_blank" noWrap>
+    <div class="relative overflow-hidden">
+      <Skeleton class="iframe-skeleton" />
+      <span class="absolute w-full h-full select-none"></span>
+      <iframe
+        src={src}
+        title={title}
+        class={cn('overflow-hidden rounded', className)}
+        loading="lazy"
+        sandbox={sandbox}
+        {...rest}
+      ></iframe>
+    </div>
+  </Link>
+  <span
+    class="iframe-error hidden w-full h-full justify-center items-center"
+  >
+    🚨 No iframe
+  </span>
+</div>
+
+<script>
+function setupIframe(container: HTMLElement) {
+  const iframe = container.querySelector('iframe');
+  const skeleton = container.querySelector<HTMLElement>('.iframe-skeleton');
+  const linkWrapper = container.querySelector<HTMLElement>('a');
+  const errorEl = container.querySelector<HTMLElement>('.iframe-error');
+  if (!iframe)
+    return;
+
+  const showLoaded = () => {
+    skeleton?.remove();
+  };
+
+  const showError = () => {
+    linkWrapper?.classList.add('hidden');
+    errorEl?.classList.remove('hidden');
+    errorEl?.classList.add('flex');
+  };
+
+  iframe.addEventListener('load', showLoaded, { once: true });
+  iframe.addEventListener('error', showError, { once: true });
+}
+
+document
+  .querySelectorAll<HTMLElement>('div[data-iframe]')
+  .forEach(setupIframe);
+</script>
