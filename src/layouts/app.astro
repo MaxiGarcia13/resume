@@ -5,6 +5,16 @@ import '../styles/global.css';
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          const theme
+            = saved === 'light' || saved === 'dark' ? saved : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <title>
       Maxi Garcia Mortigliengo – Senior Frontend Software Engineer | Portfolio &
