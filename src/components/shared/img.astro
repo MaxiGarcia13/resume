@@ -1,66 +1,25 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@maxigarcia/js-utils';
-import Skeleton from './skeleton.astro';
+import ContentLoader from './content-loader.astro';
 
 interface Props extends HTMLAttributes<'img'> {
   class?: string;
 }
 
 const { src, alt, class: className, loading = 'lazy', ...rest } = Astro.props;
-
 const imgId = `img-${src}`;
-const skeletonId = `skeleton-${src}`;
-const errorId = `error-${src}`;
 ---
 
-<figure class={cn('relative overflow-hidden shrink-0', className)} data-img>
-  <Skeleton class="img-skeleton" id={skeletonId} />
-  <img
-    id={imgId}
-    src={src}
-    alt={alt}
-    loading={loading}
-    class="object-contain w-full h-full shrink-0"
-    {...rest}
-  />
-  <span
-    id={errorId}
-    class="img-error hidden w-full h-full absolute inset-0 justify-center items-center"
-  >
-    🚨 No image
-  </span>
+<figure class={cn('relative overflow-hidden shrink-0', className)}>
+  <ContentLoader id={imgId}>
+    <img
+      id={imgId}
+      src={src}
+      alt={alt}
+      loading={loading}
+      class="object-contain w-full h-full shrink-0"
+      {...rest}
+    />
+  </ContentLoader>
 </figure>
-
-<script define:vars={{ imgId, skeletonId, errorId }} is:inline>
-const img = document.querySelector(`#${CSS.escape(imgId)}`);
-
-if (!img)
-  return;
-
-const skeletonElement = document.querySelector(`#${CSS.escape(skeletonId)}`);
-const errorElement = document.querySelector(`#${CSS.escape(errorId)}`);
-
-function showLoaded() {
-  skeletonElement?.remove();
-}
-
-function showError() {
-  skeletonElement?.remove();
-
-  img.classList.add('hidden');
-  errorElement?.classList.remove('hidden');
-  errorElement?.classList.add('flex');
-}
-
-if (img.complete) {
-  if (img.naturalWidth > 0) {
-    showLoaded();
-  } else {
-    showError();
-  }
-}
-
-img.addEventListener('load', showLoaded, { once: true });
-img.addEventListener('error', showError, { once: true });
-</script>

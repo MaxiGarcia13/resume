@@ -2,6 +2,7 @@
 import { cn } from '@maxigarcia/js-utils';
 import { Image } from 'astro:assets';
 import Link from '@/components/shared/actions/link/link.astro';
+import ContentLoader from '@/components/shared/content-loader.astro';
 
 interface Props {
   /** Public website URL (preview API source and link target). */
@@ -14,17 +15,21 @@ interface Props {
 const { src, title, class: className } = Astro.props;
 
 const previewSrc = `https://snap-website-api.vercel.app/website-to-blob-img?url=${src}`;
+const previewId = `preview-${src}`;
 ---
 
-<Link href={src} target="_blank" noWrap class="block">
-  <Image
-    src={previewSrc}
-    alt={`Preview of ${title}`}
-    width={900}
-    height={506}
-    widths={[100, 200, 300, 400, 500, 600, 700, 800, 900]}
-    loading="lazy"
-    decoding="async"
-    class={cn('w-full h-auto overflow-hidden rounded', className)}
-  />
+<Link href={src} target="_blank" noWrap class="block" class="relative">
+  <ContentLoader id={previewId}>
+    <Image
+      id={previewId}
+      src={previewSrc}
+      alt={`Preview of ${title}`}
+      width={900}
+      height={506}
+      widths={[100, 200, 300, 400, 500, 600, 700, 800, 900]}
+      loading="lazy"
+      decoding="async"
+      class={cn('w-full h-auto overflow-hidden rounded', className)}
+    />
+  </ContentLoader>
 </Link>
