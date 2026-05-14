@@ -2,7 +2,7 @@
 import { cn } from '@maxigarcia/js-utils';
 import { Image } from 'astro:assets';
 import Link from '@/components/shared/actions/link/link.astro';
-import ContentLoader from '@/components/shared/content-loader.astro';
+import ImgLoader from '@/components/shared/img-loader.astro';
 
 interface Props {
   /** Public website URL (preview API source and link target). */
@@ -19,7 +19,7 @@ const previewId = `preview-${src}`;
 ---
 
 <Link href={src} target="_blank" noWrap class="block" class="relative">
-  <ContentLoader id={previewId}>
+  <ImgLoader id={previewId}>
     <Image
       id={previewId}
       src={previewSrc}
@@ -31,5 +31,5 @@ const previewId = `preview-${src}`;
       decoding="async"
       class={cn('w-full h-auto overflow-hidden rounded', className)}
     />
-  </ContentLoader>
+  </ImgLoader>
 </Link>
