@@ -5,4 +5,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  image: {
+    domains: ['snap-website-api.vercel.app'],
+  },
 });
