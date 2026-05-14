@@ -18,6 +18,9 @@ const errorId = `error-${imgId}`;
   <span
     id={errorId}
     class="img-error hidden w-full h-full absolute inset-0 justify-center items-center"
+    role="alert"
+    aria-live="polite"
+    aria-hidden="true"
   >
     🚨 No image
   </span>
@@ -42,6 +45,7 @@ function showError() {
   img.classList.add('hidden');
   errorElement?.classList.remove('hidden');
   errorElement?.classList.add('flex');
+  errorElement?.removeAttribute('aria-hidden');
 }
 
 if (img.complete) {

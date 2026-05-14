@@ -38,7 +38,11 @@ const worksExperience = getWorksExperience();
                   <Link href={`#${experience.id}`} noWrap>
                     {experience.company}
                   </Link>
-                  <Link href={experience.website} target="_blank">
+                  <Link
+                    href={experience.website}
+                    target="_blank"
+                    aria-label={`${experience.company} website (opens in new tab)`}
+                  >
                     <ExternalLinkIcon slot="icon" width={18} height={18} />
                   </Link>
                 </Heading>

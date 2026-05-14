@@ -11,6 +11,7 @@ const { class: className, ...props } = Astro.props;
 
 <span
   class={cn('w-full h-full absolute animate-pulse bg-current', className)}
+  aria-hidden="true"
   {...props}
 >
 </span>

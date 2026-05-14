@@ -24,7 +24,11 @@ const {
             <Link href={`#${project.title}`} noWrap>
               {project.title}
             </Link>
-            <Link href={project.repo} target="_blank">
+            <Link
+              href={project.repo}
+              target="_blank"
+              aria-label={`${project.title} on GitHub (opens in new tab)`}
+            >
               <GithubIcon slot="icon" />
             </Link>
           </Heading>

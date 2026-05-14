@@ -16,7 +16,7 @@ const { positions, class: className } = Astro.props;
   {
     positions.map((position) => (
       <li class="flex gap-2">
-        <Text variant="highlight" tag="span">
+        <Text variant="highlight" tag="span" aria-hidden="true">
           {'=>'}
         </Text>
         <div>

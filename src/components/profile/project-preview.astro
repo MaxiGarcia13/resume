@@ -18,7 +18,13 @@ const previewSrc = `https://snap-website-api.vercel.app/website-to-blob-img?url=
 const previewId = `preview-${src}`;
 ---
 
-<Link href={src} target="_blank" noWrap class="block" class="relative">
+<Link
+  href={src}
+  target="_blank"
+  noWrap
+  class={cn('block relative', className)}
+  aria-label={`${title} website (opens in new tab)`}
+>
   <ImgLoader id={previewId}>
     <Image
       id={previewId}

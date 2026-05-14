@@ -22,21 +22,30 @@ const { name, role, socialMedia, email } = getProfile();
     <Heading>{name}</Heading>
     <Text>{role}</Text>
     <div class="flex gap-2 mt-2">
-      <Link href={socialMedia.linkedin} target="_blank">
+      <Link
+        href={socialMedia.linkedin}
+        target="_blank"
+        aria-label="LinkedIn profile (opens in new tab)"
+      >
         <LinkedInIcon slot="icon" />
       </Link>
-      <Link href={socialMedia.github} target="_blank">
+      <Link
+        href={socialMedia.github}
+        target="_blank"
+        aria-label="GitHub profile (opens in new tab)"
+      >
         <GithubIcon slot="icon" />
       </Link>
-      <Link href={`mailto:${email}`}>
+      <Link href={`mailto:${email}`} aria-label={`Send email to ${email}`}>
         <EmailIcon slot="icon" />
       </Link>
       <Link
         href="/assets/cv_maximiliano_garcia.pdf"
         download="cv_maximiliano_garcia.pdf"
         variant="primary"
+        aria-label="Download CV"
       >
-        <DownloadIcon slot="icon" />
+        <DownloadIcon slot="icon" aria-hidden="true" />
         Download CV
       </Link>
     </div>
