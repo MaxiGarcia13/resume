@@ -13,7 +13,7 @@ interface Props {
 
 const { src, title, class: className } = Astro.props;
 
-const previewSrc = `https://snap-website-api.vercel.app/website-to-blob-img?url=${encodeURIComponent(src)}`;
+const previewSrc = `https://snap-website-api.vercel.app/website-to-blob-img?url=${src}`;
 ---
 
 <Link href={src} target="_blank" noWrap class="block">
