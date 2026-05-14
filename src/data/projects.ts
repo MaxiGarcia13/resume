@@ -6,13 +6,13 @@ export function getProjects(): Array<Project> {
       title: 'Fetcher',
       description: 'Fetcher is a lightweight and developer-friendly REST API client for testing, debugging, and managing HTTP requests.',
       repo: 'https://github.com/MaxiGarcia13/fetcher',
-      website: 'https://fetcherapi.vercel.app/',
+      website: 'https://fetcherapi.vercel.app',
     },
     {
       title: 'RunJS Playground',
       description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/runjs',
-      website: 'https://runjs-playground.vercel.app/',
+      website: 'https://runjs-playground.vercel.app',
     },
     {
       title: 'Chat assistant for the Liga Cántabra de Pádel.',
@@ -30,7 +30,7 @@ export function getProjects(): Array<Project> {
       title: 'Web Chatbot powered by Web LLM',
       description: 'Chat component integrated with web-llm (React JS)',
       repo: 'https://github.com/MaxiGarcia13/web-llm-chat',
-      website: 'https://maxi-gpt.vercel.app/',
+      website: 'https://maxi-gpt.vercel.app',
     },
     {
       title: 'La casita del árbol',
@@ -54,19 +54,19 @@ export function getProjects(): Array<Project> {
       title: 'Vinos LM',
       description: 'Small Marketplace for wine lovers. Features full-stack development using Next.js (React) for a server-rendered, integrated with Supabase for database management and real-time backend services.',
       repo: 'https://github.com/MaxiGarcia13/vinoslm',
-      website: 'https://vinoslm-git-main-maxigarcia13.vercel.app',
+      website: 'https://vinoslm.vercel.app',
     },
     {
       title: 'Examples React',
       description: 'A Practical Guide to React State Management: useState, useEffect, Context, Redux, and Redux Saga.',
       repo: 'https://github.com/MaxiGarcia13/examples-react',
-      website: 'https://examples-react.vercel.app/',
+      website: 'https://examples-react.vercel.app',
     },
     {
       title: 'Github repository searcher',
       description: 'Search repositories in GitHub, only filter by ID. Built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/github-repository-searcher',
-      website: 'https://github-repository-searcher.vercel.app/',
+      website: 'https://github-repository-searcher.vercel.app',
     },
   ];
 }
