@@ -33,11 +33,7 @@ const {
             </Link>
           </Heading>
           <Text>{project.description}</Text>
-          <ProjectPreview
-            src={project.website}
-            title={project.title}
-            class="pointer-events-none"
-          />
+          <ProjectPreview src={project.website} title={project.title} />
         </li>
       ))
     }
