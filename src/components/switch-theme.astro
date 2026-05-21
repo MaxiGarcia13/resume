@@ -41,10 +41,32 @@ const { class: className } = Astro.props;
     );
   }
 
+  type ClickPoint = Pick<MouseEvent, 'clientX' | 'clientY'>;
+
+  function revealThemeChange(
+    applyThemeChange: () => void,
+    click: ClickPoint,
+  ): void {
+    const x = (click.clientX / window.innerWidth) * 100;
+    const y = (click.clientY / window.innerHeight) * 100;
+
+    document.documentElement.style.setProperty('--theme-reveal-x', `${x}%`);
+    document.documentElement.style.setProperty('--theme-reveal-y', `${y}%`);
+
+    if (!document.startViewTransition) {
+      applyThemeChange();
+      return;
+    }
+
+    document.startViewTransition(applyThemeChange);
+  }
+
   syncThemeToggleLabel();
 
-  switchThemeButton?.addEventListener('click', () => {
-    toggleTheme();
-    syncThemeToggleLabel();
+  switchThemeButton?.addEventListener('click', (event) => {
+    revealThemeChange(() => {
+      toggleTheme();
+      syncThemeToggleLabel();
+    }, event);
   });
 </script>
