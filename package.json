@@ -15,8 +15,16 @@
     "cv",
     "portfolio",
     "Maximiliano Garcia Mortigliengo",
+    "Maxi Garcia Mortigliengo",
     "frontend",
-    "software engineer"
+    "software engineer",
+    "Frontend Software Engineer",
+    "Senior Frontend Software Engineer",
+    "Frontend Developer",
+    "Software Engineer",
+    "Software Developer",
+    "Web Engineer",
+    "Web Developer"
   ],
   "scripts": {
     "dev": "astro dev",
@@ -28,6 +36,7 @@
     "phoenix": "rm -rf dist && rm -rf node_modules && rm -rf package-lock.json && rm -rf .astro && npm install"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@maxigarcia/js-utils": "^1.5.0",
     "astro": "^6.3.1",
     "nanostores": "^1.3.0"
