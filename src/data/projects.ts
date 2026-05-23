@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Theme Transitions',
+      description: 'mooth, dependency-free theme transitions using the native View Transitions API. Just clean, high-performance animations built straight into the browser.',
+      repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
+      website: 'https://theme-transitions.vercel.app',
+    },
+    {
       title: 'Fetcher',
       description: 'Fetcher is a lightweight and developer-friendly REST API client for testing, debugging, and managing HTTP requests.',
       repo: 'https://github.com/MaxiGarcia13/fetcher',
