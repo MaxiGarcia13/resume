@@ -24,6 +24,7 @@ const { class: className } = Astro.props;
 </Button>
 
 <script>
+  import { onSweepRevealAnimation } from '@maxigarcia/theme-transitions';
   import {
     initializeThemeStore,
     toggleTheme,
@@ -41,32 +42,15 @@ const { class: className } = Astro.props;
     );
   }
 
-  type ClickPoint = Pick<MouseEvent, 'clientX' | 'clientY'>;
-
-  function revealThemeChange(
-    applyThemeChange: () => void,
-    click: ClickPoint,
-  ): void {
-    const x = (click.clientX / window.innerWidth) * 100;
-    const y = (click.clientY / window.innerHeight) * 100;
-
-    document.documentElement.style.setProperty('--theme-reveal-x', `${x}%`);
-    document.documentElement.style.setProperty('--theme-reveal-y', `${y}%`);
-
-    if (!document.startViewTransition) {
-      applyThemeChange();
-      return;
-    }
-
-    document.startViewTransition(applyThemeChange);
-  }
-
   syncThemeToggleLabel();
 
-  switchThemeButton?.addEventListener('click', (event) => {
-    revealThemeChange(() => {
+  switchThemeButton?.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme;
+    const direction = theme === 'dark' ? 'right' : 'left';
+
+    onSweepRevealAnimation(() => {
       toggleTheme();
       syncThemeToggleLabel();
-    }, event);
+    }, direction);
   });
 </script>
