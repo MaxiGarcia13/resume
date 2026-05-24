@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@maxigarcia/theme-transitions/sweep-reveal/index.css';
+@import '@maxigarcia/theme-transitions/sweep-reveal.css';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
