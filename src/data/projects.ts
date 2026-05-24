@@ -3,10 +3,10 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
-      title: 'Theme Transitions',
-      description: 'mooth, dependency-free theme transitions using the native View Transitions API. Just clean, high-performance animations built straight into the browser.',
+      title: 'View Transitions',
+      description: 'Smooth, dependency-free transitions using the native View Transitions API. Lightweight CSS-first animations—no framework required.',
       repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
-      website: 'https://theme-transitions.vercel.app',
+      website: 'https://view-transitionsapi.vercel.app',
     },
     {
       title: 'Fetcher',
