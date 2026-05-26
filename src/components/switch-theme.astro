@@ -24,6 +24,7 @@ const { class: className } = Astro.props;
 </Button>
 
 <script>
+  import type { SweepDirection } from '@maxigarcia/view-transitions';
   import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
   import {
     initializeThemeStore,
@@ -46,11 +47,19 @@ const { class: className } = Astro.props;
 
   switchThemeButton?.addEventListener('click', () => {
     const theme = document.documentElement.dataset.theme;
-    const direction = theme === 'dark' ? 'right' : 'left';
+    const direction: SweepDirection
+      = theme === 'dark' ? 'corner-top-right' : 'corner-bottom-left';
 
-    onSweepRevealAnimation(() => {
-      toggleTheme();
-      syncThemeToggleLabel();
-    }, direction);
+    onSweepRevealAnimation(
+      () => {
+        toggleTheme();
+        syncThemeToggleLabel();
+      },
+      direction,
+      {
+        blur: true,
+        blurAmount: '20px',
+      },
+    );
   });
 </script>
