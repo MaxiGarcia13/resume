@@ -1,3 +1,4 @@
+export { default as Languages } from './languages.astro';
 export { default as Positions } from './positions.astro';
 export { default as ProfileImage } from './profile-image.astro';
 export { default as Projects } from './projects.astro';
