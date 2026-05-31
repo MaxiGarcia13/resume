@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Mockingbird',
+      description: 'Mockingbird lets you define HTTP responses — status, headers, body — and test how your frontend behaves. Pick the workflow that fits your setup: a browser extension that intercepts fetch on any page, or a local API with a web app.',
+      repo: 'https://github.com/MaxiGarcia13/mockingbird',
+      website: 'https://mockiingbird.vercel.app/',
+    },
+    {
       title: 'View Transitions',
       description: 'Smooth, dependency-free transitions using the native View Transitions API. Lightweight CSS-first animations—no framework required.',
       repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
