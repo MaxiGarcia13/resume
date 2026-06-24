@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cn } from '@maxigarcia/js-utils';
+
+interface Props extends HTMLAttributes<'textarea'> {
+  class?: string;
+}
+
+const {
+  class: className,
+  placeholder = 'Ask a question...',
+  rows = 2,
+  ...rest
+} = Astro.props;
+---
+
+<textarea
+  class={cn(
+    'border border-gray-200 bg-white p-3 field-sizing-content text-sm max-h-30 text-neutral-800 resize-none rounded-sm w-full dark:border-gray-700 dark:bg-gray-900 dark:text-neutral-100',
+    className,
+  )}
+  placeholder={placeholder}
+  rows={rows}
+  {...rest}
+>
+</textarea>
