@@ -27,35 +27,32 @@ const errorId = `error-${imgId}`;
 </>
 
 <script define:vars={{ imgId, skeletonId, errorId }} is:inline>
-const img = document.querySelector(`#${CSS.escape(imgId)}`);
+  const img = document.querySelector(`#${CSS.escape(imgId)}`);
 
-if (!img)
-  return;
+  const skeletonElement = document.querySelector(`#${CSS.escape(skeletonId)}`);
+  const errorElement = document.querySelector(`#${CSS.escape(errorId)}`);
 
-const skeletonElement = document.querySelector(`#${CSS.escape(skeletonId)}`);
-const errorElement = document.querySelector(`#${CSS.escape(errorId)}`);
-
-function showLoaded() {
-  skeletonElement?.remove();
-}
-
-function showError() {
-  skeletonElement?.remove();
-
-  img.classList.add('hidden');
-  errorElement?.classList.remove('hidden');
-  errorElement?.classList.add('flex');
-  errorElement?.removeAttribute('aria-hidden');
-}
-
-if (img.complete) {
-  if (img.naturalWidth > 0) {
-    showLoaded();
-  } else {
-    showError();
+  function showLoaded() {
+    skeletonElement?.remove();
   }
-}
 
-img.addEventListener('load', showLoaded, { once: true });
-img.addEventListener('error', showError, { once: true });
+  function showError() {
+    skeletonElement?.remove();
+
+    img.classList.add('hidden');
+    errorElement?.classList.remove('hidden');
+    errorElement?.classList.add('flex');
+    errorElement?.removeAttribute('aria-hidden');
+  }
+
+  if (img.complete) {
+    if (img.naturalWidth > 0) {
+      showLoaded();
+    } else {
+      showError();
+    }
+  }
+
+  img.addEventListener('load', showLoaded, { once: true });
+  img.addEventListener('error', showError, { once: true });
 </script>
