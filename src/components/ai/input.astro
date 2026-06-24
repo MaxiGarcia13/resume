@@ -36,10 +36,8 @@ const { class: className } = Astro.props;
     }
 
     pushMessage({
-      id: crypto.randomUUID(),
       content: trimmedValue,
       role: 'user',
-      createdAt: new Date(),
     });
 
     input.value = '';

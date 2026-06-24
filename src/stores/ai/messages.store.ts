@@ -1,11 +1,7 @@
+import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
 import { atom } from 'nanostores';
 
-export interface Message {
-  id: string;
-  content: string;
-  role: 'user' | 'assistant';
-  createdAt: Date;
-}
+export type Message = ChatCompletionMessageParam;
 
 export const $messages = atom<Array<Message>>([]);
 

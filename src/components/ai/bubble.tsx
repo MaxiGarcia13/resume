@@ -5,12 +5,14 @@ export function Bubble({ content, role }: Message) {
   return (
     <pre className={
       cn(
-        'p-2 rounded-lg text-sm',
-        role === 'user' ? 'bg-gray-200 dark:bg-gray-600 mr-auto' : 'ml-auto',
+        'p-2 rounded-lg text-sm whitespace-pre-wrap max-w-full mr-auto',
+        role === 'user' && 'bg-gray-200 dark:bg-gray-600',
       )
     }
     >
-      {content}
+      {typeof content === 'string'
+        ? content
+        : content.map((part) => part.type === 'text' ? part.text : part.type).join('')}
     </pre>
   );
 }
