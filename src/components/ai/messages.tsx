@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useAi } from '@/hooks/useAi';
 import { useMessages } from '@/stores/ai/messages.react';
 import { Bubble } from './bubble';
+import { DownloadModel } from './download-model';
 
 export function Messages(props: { className?: string }) {
   const messages = useMessages();
@@ -26,6 +27,8 @@ export function Messages(props: { className?: string }) {
       ))}
 
       {replying && <Bubble {...replying} />}
+
+      <DownloadModel />
     </div>
   );
 }

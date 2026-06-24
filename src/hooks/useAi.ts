@@ -1,25 +1,48 @@
 import type { MLCEngine } from '@mlc-ai/web-llm';
 import type { Message } from '@/stores/ai/messages.store';
-import { CreateMLCEngine } from '@mlc-ai/web-llm';
+import { CreateMLCEngine, hasModelInCache } from '@mlc-ai/web-llm';
 import { useEffect } from 'react';
 import { useReplying } from '@/stores/ai/messages.react';
-import { pushMessage, setReplying } from '@/stores/ai/messages.store';
+import {
+  $downloadProgress,
+  $modelCached,
+  $modelDownloading,
+  pushMessage,
+  setReplying,
+} from '@/stores/ai/messages.store';
 
 let engine: MLCEngine | null = null;
+let cacheChecked = false;
 const selectedModel = 'Llama-3.2-1B-Instruct-q4f32_1-MLC';
 
 export function useAi() {
   const replying = useReplying();
 
   const loadEngine = async () => {
-    engine = await CreateMLCEngine(
-      selectedModel,
-      {
-        initProgressCallback: (progress) => {
-          console.warn('Progress:', progress);
+    if (engine) {
+      return;
+    }
+
+    $modelDownloading.set(true);
+    $downloadProgress.set({ text: '', value: 0 });
+
+    try {
+      engine = await CreateMLCEngine(
+        selectedModel,
+        {
+          initProgressCallback: (progress) => {
+            $downloadProgress.set({ text: progress.text, value: progress.progress });
+          },
         },
-      },
-    );
+      );
+      $modelCached.set(true);
+    } finally {
+      $modelDownloading.set(false);
+    }
+  };
+
+  const downloadModel = () => {
+    loadEngine();
   };
 
   const loadAiResponse = async (userMessages: Message[]) => {
@@ -54,14 +77,24 @@ export function useAi() {
   };
 
   useEffect(() => {
-    if (engine)
+    if (cacheChecked) {
       return;
+    }
 
-    loadEngine();
+    cacheChecked = true;
+
+    hasModelInCache(selectedModel).then((cached) => {
+      $modelCached.set(cached);
+
+      if (cached) {
+        loadEngine();
+      }
+    });
   }, []);
 
   return {
     replying,
     loadAiResponse,
+    downloadModel,
   };
 }
