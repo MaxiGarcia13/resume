@@ -20,7 +20,8 @@ export function getActionStyles({
   };
 
   return cn(
-    'py-2 rounded cursor-pointer',
+    'py-2 rounded',
+    'disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer',
     variantStyles[variant ?? 'ghost'],
     hasChildren && 'px-4',
     !hasChildren && hasIcon && 'flex justify-center items-center px-2',

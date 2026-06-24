@@ -1,12 +1,56 @@
 ---
+import { cn } from '@maxigarcia/js-utils';
 import Button from '../shared/actions/button.astro';
 import SendIcon from '../shared/icons/send.astro';
 import Textbox from '../shared/textbox.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
-<div class="flex items-center justify-between w-full">
-  <Textbox />
-  <Button class="h-full">
+<div class={cn('flex items-center justify-between w-full', className)}>
+  <Textbox id="ai-input" />
+  <Button id="ai-input-submit" class="h-full" disabled>
     <SendIcon />
   </Button>
 </div>
+
+<script>
+  import { pushMessage } from '@/stores/ai/messages.store';
+
+  const input = document.getElementById('ai-input') as HTMLTextAreaElement;
+  const inputSubmit = document.getElementById(
+    'ai-input-submit',
+  ) as HTMLButtonElement;
+
+  inputSubmit?.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const trimmedValue = input.value.trim();
+
+    if (!trimmedValue) {
+      return;
+    }
+
+    pushMessage({
+      id: crypto.randomUUID(),
+      content: trimmedValue,
+      role: 'user',
+      createdAt: new Date(),
+    });
+
+    input.value = '';
+  });
+
+  input.addEventListener('keyup', (event: KeyboardEvent) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      inputSubmit.click();
+    }
+
+    inputSubmit.disabled = input.value.trim() === '';
+  });
+</script>

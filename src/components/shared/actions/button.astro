@@ -15,16 +15,22 @@ const {
   class: className,
   variant,
   iconPosition = 'left',
+  disabled = false,
   ...rest
 } = Astro.props;
 
 const hasChildren = Astro.slots.has('default');
 const hasIcon = Astro.slots.has('icon');
 
-const styles = getActionStyles({ variant, hasChildren, hasIcon, className });
+const styles = getActionStyles({
+  variant,
+  hasChildren,
+  hasIcon,
+  className,
+});
 ---
 
-<button type={type} class={styles} {...rest}>
+<button type={type} class={styles} {...rest} disabled={disabled}>
   <ActionText variant={variant} iconPosition={iconPosition}>
     <slot name="icon" slot="icon" />
     <slot />

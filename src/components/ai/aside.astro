@@ -1,18 +1,15 @@
 ---
 import Input from './input.astro';
+import { Messages } from './messages';
 ---
 
 <aside
   id="ai-aside"
-  class="hidden right-4 top-16 min-w-64 max-w-sm overflow-hidden fixed h-[calc(100%-64px-10px)] border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
+  class="hidden right-4 top-16 min-w-64 max-w-sm w-full overflow-hidden fixed h-[calc(100%-64px-10px)] border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
 >
   <div class="h-full flex flex-col gap-4">
-    <div class="flex-1">
-      <p class="text-sm text-gray-500">
-        This is an AI assistant that can help you with your questions.
-      </p>
-    </div>
+    <Messages client:only="react" className="flex-1 p-4" />
 
-    <Input />
+    <Input class="p-4" />
   </div>
 </aside>
