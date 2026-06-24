@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { pushMessage } from '@/stores/ai/messages.store';
 
 let engine: MLCEngine | null = null;
-const selectedModel = 'Llama-3.1-8B-Instruct-q4f32_1-MLC';
+const selectedModel = 'Llama-3.2-1B-Instruct-q4f32_1-MLC';
 
 export function useAi() {
   const [replying, setReplying] = useState<Message | null>(null);

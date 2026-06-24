@@ -1,5 +1,5 @@
 ---
-import Input from './input.astro';
+import { Input } from './input';
 import { Messages } from './messages';
 ---
 
@@ -10,6 +10,6 @@ import { Messages } from './messages';
   <div class="h-full flex flex-col gap-4">
     <Messages client:only="react" className="flex-1 p-4" />
 
-    <Input class="p-4" />
+    <Input client:only="react" className="p-4" />
   </div>
 </aside>
