@@ -1,14 +1,15 @@
 import type { MLCEngine } from '@mlc-ai/web-llm';
 import type { Message } from '@/stores/ai/messages.store';
 import { CreateMLCEngine } from '@mlc-ai/web-llm';
-import { useEffect, useState } from 'react';
-import { pushMessage } from '@/stores/ai/messages.store';
+import { useEffect } from 'react';
+import { useReplying } from '@/stores/ai/messages.react';
+import { pushMessage, setReplying } from '@/stores/ai/messages.store';
 
 let engine: MLCEngine | null = null;
 const selectedModel = 'Llama-3.2-1B-Instruct-q4f32_1-MLC';
 
 export function useAi() {
-  const [replying, setReplying] = useState<Message | null>(null);
+  const replying = useReplying();
 
   const loadEngine = async () => {
     engine = await CreateMLCEngine(

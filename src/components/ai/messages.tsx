@@ -1,29 +1,27 @@
-import type { Message } from '@/stores/ai/messages.store';
 import { cn } from '@maxigarcia/js-utils';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAi } from '@/hooks/useAi';
-import { $messages } from '@/stores/ai/messages.store';
+import { useMessages } from '@/stores/ai/messages.react';
 import { Bubble } from './bubble';
 
 export function Messages(props: { className?: string }) {
-  const [messagesState, setMessagesState] = useState<Message[]>([]);
+  const messages = useMessages();
   const { loadAiResponse, replying } = useAi();
 
   useEffect(() => {
-    $messages.subscribe((messages) => {
-      const _messages = [...messages];
-      setMessagesState(_messages);
+    if (!messages.length) {
+      return;
+    }
 
-      const lastMessage = _messages.at(-1);
-      if (lastMessage?.role === 'user') {
-        loadAiResponse(_messages);
-      }
-    });
-  }, []);
+    const lastMessage = messages.at(-1);
+    if (lastMessage?.role === 'user') {
+      loadAiResponse(messages);
+    }
+  }, [messages]);
 
   return (
     <div className={cn('flex flex-col gap-2 overflow-y-auto', props.className)}>
-      {messagesState.map((message, index) => (
+      {messages.map((message, index) => (
         <Bubble key={index} {...message} />
       ))}
 
