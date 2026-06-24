@@ -1,6 +1,6 @@
 ---
-import { Input } from './input';
-import { Messages } from './messages';
+import { LazyInput } from './lazy-input';
+import { LazyMessages } from './lazy-messages';
 ---
 
 <aside
@@ -8,8 +8,8 @@ import { Messages } from './messages';
   class="hidden right-4 top-16 min-w-64 max-w-sm w-full overflow-hidden fixed h-[calc(100%-64px-10px)] border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
 >
   <div class="h-full flex flex-col gap-4">
-    <Messages client:only="react" className="flex-1 p-4" />
+    <LazyMessages client:only="react" className="flex-1 p-4" />
 
-    <Input client:only="react" className="p-4" />
+    <LazyInput client:only="react" className="p-4" />
   </div>
 </aside>
