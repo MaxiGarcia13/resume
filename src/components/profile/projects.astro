@@ -18,24 +18,30 @@ const {
   </Heading>
   <ul class="flex flex-col gap-10">
     {
-      projects.map((project) => (
-        <li id={project.title} class="flex flex-col gap-4">
-          <Heading tag="h3" class="flex gap-2 justify-start items-center">
-            <Link href={`#${project.title}`} noWrap>
-              {project.title}
-            </Link>
-            <Link
-              href={project.repo}
-              target="_blank"
-              aria-label={`${project.title} on GitHub (opens in new tab)`}
-            >
-              <GithubIcon slot="icon" />
-            </Link>
-          </Heading>
-          <Text>{project.description}</Text>
-          <ProjectPreview src={project.website} title={project.title} />
-        </li>
-      ))
+      projects.map((project) => {
+        const id = project.title
+          .toLowerCase()
+          .replaceAll(' ', '-')
+          .replaceAll('.', '');
+        return (
+          <li id={id} class="flex flex-col gap-4">
+            <Heading tag="h3" class="flex gap-2 justify-start items-center">
+              <Link href={`#${id}`} noWrap>
+                {project.title}
+              </Link>
+              <Link
+                href={project.repo}
+                target="_blank"
+                aria-label={`${project.title} on GitHub (opens in new tab)`}
+              >
+                <GithubIcon slot="icon" />
+              </Link>
+            </Heading>
+            <Text>{project.description}</Text>
+            <ProjectPreview src={project.website} title={project.title} />
+          </li>
+        );
+      })
     }
   </ul>
   <div class="flex justify-center items-center">
