@@ -13,6 +13,7 @@ import {
   useModelDownloading,
   useReplying,
 } from '@/stores/ai';
+import { linkCvAnchors } from '@/utils/link-cv-anchors';
 
 let engine: MLCEngine | null = null;
 let cacheChecked = false;
@@ -80,14 +81,14 @@ export function useAi() {
         reply += chunk.choices[0]?.delta.content || '';
         setReplying({
           role: 'assistant',
-          content: reply,
+          content: linkCvAnchors(reply),
         });
       }
 
       setReplying(null);
       pushMessage({
         role: 'assistant',
-        content: reply,
+        content: linkCvAnchors(reply),
       });
     } catch (error) {
       console.error(error);
