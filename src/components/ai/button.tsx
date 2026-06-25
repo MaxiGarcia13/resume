@@ -24,7 +24,12 @@ export function AiButton(props: { className?: string }) {
       >
         <SparklesIcon />
       </button>
-      {isOpen && <Aside />}
+
+      {isOpen && (
+        <Aside
+          onClose={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 }
