@@ -114,6 +114,7 @@ IMPORTANT — how to answer:
 - If asked about locations, provide the location when available in this prompt. If not available, say clearly that location is not specified in the CV data and still provide available company/date details.
 - If asked about skills or stack, use the TECH STACK section and include only technologies listed there.
 - If asked for basic profile info, answer from PROFILE and LANGUAGES sections.
+- Use markdown formatting for the answer.
 
 ABOUT: ${pkg.description}
 

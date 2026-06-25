@@ -1,13 +1,13 @@
 import { getActionStyles } from '@/components/shared/actions/utils';
 import { DownloadIcon } from '@/components/shared/icons/download';
 import { useAi } from '@/hooks/useAi';
-import { useDownloadProgress, useModelCached, useModelDownloading } from '@/stores/ai/messages.react';
+import { useDownloadProgress, useModelCached, useModelDownloading } from '@/stores/ai';
 
 export function DownloadModel() {
   const modelCached = useModelCached();
   const modelDownloading = useModelDownloading();
   const downloadProgress = useDownloadProgress();
-  const { downloadModel } = useAi();
+  const { loadModel } = useAi();
 
   if (modelCached !== false) {
     return null;
@@ -23,7 +23,7 @@ export function DownloadModel() {
         <button
           type="button"
           className={getActionStyles({ variant: 'ghost', hasChildren: true, className: 'flex items-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300! dark:hover:bg-gray-600!' })}
-          onClick={downloadModel}
+          onClick={loadModel}
         >
           <DownloadIcon />
           Download model

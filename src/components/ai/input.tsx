@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 import { getActionStyles } from '@/components/shared/actions/utils';
 import { SendIcon } from '@/components/shared/icons/send';
 import { useAi } from '@/hooks/useAi';
-import { pushMessage } from '@/stores/ai/messages.store';
+import { pushMessage } from '@/stores/ai';
+import { LoadingIcon } from '../shared/icons/loading';
 
 export function Input(props: { className?: string }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [value, setValue] = useState('');
   const disabled = value.trim() === '';
-  const { replying } = useAi();
+  const { replying, modelDownloading, modelCached } = useAi();
 
   const submit = () => {
     const trimmedValue = value.trim();
@@ -36,22 +37,38 @@ export function Input(props: { className?: string }) {
   };
 
   useEffect(() => {
-    if (replying === null) {
+    if (replying === null && !modelDownloading) {
+      console.warn('focusing', textareaRef.current);
       textareaRef.current?.focus();
     }
-  }, [replying]);
+  }, [replying, modelDownloading]);
 
   return (
-    <div className={cn('flex items-center justify-between w-full', props.className)}>
+    <div
+      className={cn(
+        'flex items-center justify-between w-full p-3',
+        'border border-gray-200 bg-white text-neutral-800',
+        'dark:border-gray-700 dark:bg-gray-900 dark:text-neutral-100',
+        'focus-within:border-orange-400',
+        props.className,
+      )}
+      onClick={() => textareaRef.current?.focus()}
+    >
       <textarea
         ref={textareaRef}
-        className="border border-gray-200 bg-white p-3 field-sizing-content text-sm max-h-30 text-neutral-800 resize-none rounded-sm w-full dark:border-gray-700 dark:bg-gray-900 dark:text-neutral-100"
-        placeholder="Ask a question..."
+        className="field-sizing-content text-sm max-h-30 resize-none flex-1 h-full outline-none"
+        placeholder={
+          replying !== null
+            ? 'Thinking...'
+            : modelDownloading
+              ? 'Downloading model...'
+              : 'Ask a anything'
+        }
         rows={2}
         value={value}
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={handleKeyDown}
-        disabled={replying != null}
+        disabled={modelCached === false || replying != null || modelDownloading}
       />
       <button
         type="button"
@@ -59,7 +76,7 @@ export function Input(props: { className?: string }) {
         disabled={disabled}
         onClick={submit}
       >
-        <SendIcon />
+        {replying !== null || modelDownloading ? <LoadingIcon className="animate-spin" /> : <SendIcon />}
       </button>
     </div>
   );

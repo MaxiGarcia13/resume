@@ -1,6 +1,5 @@
 ---
-import AiAside from '@/components/ai/aside.astro';
-import AiButton from '@/components/ai/button.astro';
+import { AiButton } from '@/components/ai/button';
 import Header from '@/components/header.astro';
 import Languages from '@/components/profile/languages.astro';
 import Projects from '@/components/profile/projects.astro';
@@ -13,12 +12,11 @@ import AppLayout from '@/layouts/app.astro';
   <main class="flex flex-col gap-10 max-w-[900px] mx-auto">
     <div class="fixed right-4 top-4 flex gap-2">
       <SwitchTheme class="w-[40px]" />
-      <AiButton class="w-[40px]" />
+      <AiButton className="w-[40px]" client:only="react" />
     </div>
     <Header />
     <Languages />
     <WorksExperience />
     <Projects />
   </main>
-  <AiAside />
 </AppLayout>

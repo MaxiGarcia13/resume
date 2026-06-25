@@ -1,11 +1,13 @@
 import { cn } from '@maxigarcia/js-utils';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAi } from '@/hooks/useAi';
-import { useMessages } from '@/stores/ai/messages.react';
+import { useMessages } from '@/stores/ai';
 import { Bubble } from './bubble';
 import { DownloadModel } from './download-model';
 
 export function Messages(props: { className?: string }) {
+  const messagesRef = useRef<HTMLDivElement>(null);
+
   const messages = useMessages();
   const { loadAiResponse, replying } = useAi();
 
@@ -20,8 +22,18 @@ export function Messages(props: { className?: string }) {
     }
   }, [messages]);
 
+  useEffect(() => {
+    messagesRef.current?.scrollTo({
+      top: messagesRef.current?.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [replying, messages]);
+
   return (
-    <div className={cn('flex flex-col gap-2 overflow-y-auto', props.className)}>
+    <div
+      ref={messagesRef}
+      className={cn('flex flex-col gap-2 overflow-y-auto scrollbar-none', props.className)}
+    >
       {messages.map((message, index) => (
         <Bubble key={index} {...message} />
       ))}

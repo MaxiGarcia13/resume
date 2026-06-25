@@ -1,16 +1,19 @@
 import type { MLCEngine } from '@mlc-ai/web-llm';
-import type { Message } from '@/stores/ai/messages.store';
+import type { Message } from '@/stores/ai';
 import { CreateMLCEngine, hasModelInCache } from '@mlc-ai/web-llm';
 import { useEffect } from 'react';
 import { getAssistantSystemPrompt } from '@/data/assistant-system-prompt';
-import { useReplying } from '@/stores/ai/messages.react';
 import {
-  $downloadProgress,
-  $modelCached,
-  $modelDownloading,
   pushMessage,
+  setDownloadProgress,
+  setModelCached,
+  setModelDownloading,
   setReplying,
-} from '@/stores/ai/messages.store';
+  setThinking,
+  useModelCached,
+  useModelDownloading,
+  useReplying,
+} from '@/stores/ai';
 
 let engine: MLCEngine | null = null;
 let cacheChecked = false;
@@ -18,14 +21,16 @@ const selectedModel = 'Llama-3.1-8B-Instruct-q4f16_1-MLC';
 
 export function useAi() {
   const replying = useReplying();
+  const modelCached = useModelCached();
+  const modelDownloading = useModelDownloading();
 
-  const loadEngine = async () => {
+  const loadModel = async () => {
     if (engine) {
       return;
     }
 
-    $modelDownloading.set(true);
-    $downloadProgress.set({ text: '', value: 0 });
+    setModelDownloading(true);
+    setDownloadProgress({ text: '', value: 0 });
 
     try {
       engine = await CreateMLCEngine(
@@ -33,26 +38,24 @@ export function useAi() {
         {
 
           initProgressCallback: (progress) => {
-            $downloadProgress.set({ text: progress.text, value: progress.progress });
+            setDownloadProgress({ text: progress.text, value: progress.progress });
           },
         },
         {
           temperature: 0,
         },
       );
-      $modelCached.set(true);
+      setModelCached(true);
     } finally {
-      $modelDownloading.set(false);
+      setModelDownloading(false);
     }
-  };
-
-  const downloadModel = () => {
-    loadEngine();
   };
 
   const loadAiResponse = async (userMessages: Message[]) => {
     if (!engine)
       return;
+
+    setThinking(true);
 
     const messages: Message[] = [
       {
@@ -62,27 +65,36 @@ export function useAi() {
       ...userMessages,
     ];
 
-    const chunks = await engine.chat.completions.create({
-      messages,
-      stream: true,
-      temperature: 0,
-    });
+    try {
+      const chunks = await engine.chat.completions.create({
+        messages,
+        stream: true,
+        temperature: 0,
+      });
 
-    let reply = '';
+      let reply = '';
 
-    for await (const chunk of chunks) {
-      reply += chunk.choices[0]?.delta.content || '';
       setReplying({
+        role: 'assistant',
+        content: 'Thinking...',
+      });
+
+      for await (const chunk of chunks) {
+        reply += chunk.choices[0]?.delta.content || '';
+        setReplying({
+          role: 'assistant',
+          content: reply,
+        });
+      }
+
+      setReplying(null);
+      pushMessage({
         role: 'assistant',
         content: reply,
       });
+    } catch (error) {
+      console.error(error);
     }
-
-    setReplying(null);
-    pushMessage({
-      role: 'assistant',
-      content: reply,
-    });
   };
 
   useEffect(() => {
@@ -94,17 +106,19 @@ export function useAi() {
 
     hasModelInCache(selectedModel)
       .then((cached) => {
-        $modelCached.set(cached);
+        setModelCached(cached);
 
         if (cached) {
-          loadEngine();
+          loadModel();
         }
       });
   }, []);
 
   return {
     replying,
+    modelCached,
+    modelDownloading,
     loadAiResponse,
-    downloadModel,
+    loadModel,
   };
 }
