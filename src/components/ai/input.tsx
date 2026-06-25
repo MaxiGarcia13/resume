@@ -38,7 +38,6 @@ export function Input(props: { className?: string }) {
 
   useEffect(() => {
     if (replying === null && !modelDownloading) {
-      console.warn('focusing', textareaRef.current);
       textareaRef.current?.focus();
     }
   }, [replying, modelDownloading]);
