@@ -12,6 +12,12 @@ export function AiButton(props: { className?: string }) {
     setIsOpen(!isOpen);
   };
 
+  const hasGpuSupport = 'gpu' in window.navigator;
+
+  if (!hasGpuSupport) {
+    return null;
+  }
+
   return (
     <>
       <button
