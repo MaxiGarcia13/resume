@@ -2,6 +2,7 @@ import type { MLCEngine } from '@mlc-ai/web-llm';
 import type { Message } from '@/stores/ai/messages.store';
 import { CreateMLCEngine, hasModelInCache } from '@mlc-ai/web-llm';
 import { useEffect } from 'react';
+import { getAssistantSystemPrompt } from '@/data/assistant-system-prompt';
 import { useReplying } from '@/stores/ai/messages.react';
 import {
   $downloadProgress,
@@ -13,7 +14,7 @@ import {
 
 let engine: MLCEngine | null = null;
 let cacheChecked = false;
-const selectedModel = 'Llama-3.2-1B-Instruct-q4f32_1-MLC';
+const selectedModel = 'Llama-3.1-8B-Instruct-q4f16_1-MLC';
 
 export function useAi() {
   const replying = useReplying();
@@ -30,9 +31,13 @@ export function useAi() {
       engine = await CreateMLCEngine(
         selectedModel,
         {
+
           initProgressCallback: (progress) => {
             $downloadProgress.set({ text: progress.text, value: progress.progress });
           },
+        },
+        {
+          temperature: 0,
         },
       );
       $modelCached.set(true);
@@ -50,13 +55,17 @@ export function useAi() {
       return;
 
     const messages: Message[] = [
-      { role: 'system', content: 'You are a helpful AI assistant.' },
+      {
+        role: 'system',
+        content: getAssistantSystemPrompt(),
+      },
       ...userMessages,
     ];
 
     const chunks = await engine.chat.completions.create({
       messages,
       stream: true,
+      temperature: 0,
     });
 
     let reply = '';
@@ -83,13 +92,14 @@ export function useAi() {
 
     cacheChecked = true;
 
-    hasModelInCache(selectedModel).then((cached) => {
-      $modelCached.set(cached);
+    hasModelInCache(selectedModel)
+      .then((cached) => {
+        $modelCached.set(cached);
 
-      if (cached) {
-        loadEngine();
-      }
-    });
+        if (cached) {
+          loadEngine();
+        }
+      });
   }, []);
 
   return {
