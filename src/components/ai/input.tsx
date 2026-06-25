@@ -68,12 +68,14 @@ export function Input(props: { className?: string }) {
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={handleKeyDown}
         disabled={modelCached === false || replying != null || modelDownloading}
+        aria-label="AI assistant input"
       />
       <button
         type="button"
         className={getActionStyles({ hasIcon: true, className: 'h-full' })}
         disabled={disabled}
         onClick={submit}
+        aria-label="Send message"
       >
         {replying !== null || modelDownloading ? <LoadingIcon className="animate-spin" /> : <SendIcon />}
       </button>

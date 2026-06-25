@@ -24,6 +24,7 @@ export function DownloadModel() {
           type="button"
           className={getActionStyles({ variant: 'ghost', hasChildren: true, className: 'flex items-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300! dark:hover:bg-gray-600!' })}
           onClick={loadModel}
+          aria-label="Download model"
         >
           <DownloadIcon />
           Download model

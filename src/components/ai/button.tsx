@@ -22,6 +22,7 @@ export function AiButton(props: { className?: string }) {
           getActionStyles({ ...props, variant: 'ghost', hasIcon: true }),
         )}
         onClick={toggle}
+        aria-label="Toggle AI assistant"
       >
         <SparklesIcon />
       </button>

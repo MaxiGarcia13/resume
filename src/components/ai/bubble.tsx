@@ -9,6 +9,7 @@ export function Bubble({ content, role }: Message) {
         'p-2 rounded-lg text-sm whitespace-pre-wrap max-w-full mr-auto wrap-break-word',
         role === 'user' && 'bg-gray-200 dark:bg-gray-600',
       )}
+      aria-label={role === 'user' ? 'User message' : 'AI assistant message'}
     >
       <Markdown>
         {typeof content === 'string'
