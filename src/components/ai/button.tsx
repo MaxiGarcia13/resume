@@ -15,6 +15,7 @@ export function AiButton(props: { className?: string }) {
   return (
     <>
       <button
+        id="ai-button"
         type="button"
         className={cn(
           getTextClass('ghost'),

@@ -15,8 +15,13 @@ export function Aside({ onClose, ...props }: AsideProps) {
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
 
-      if (asideRef.current?.contains(target))
+      if (
+        asideRef.current?.contains(target)
+        || document.getElementById('switch-theme').contains(target)
+        || document.getElementById('ai-button').contains(target)
+      ) {
         return;
+      }
 
       onClose();
     };
