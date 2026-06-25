@@ -59,7 +59,7 @@ export function Input(props: { className?: string }) {
         className="field-sizing-content text-sm max-h-30 resize-none flex-1 h-full outline-none"
         placeholder={
           replying !== null
-            ? 'Thinking...'
+            ? '...'
             : modelDownloading
               ? 'Downloading model...'
               : 'Ask a anything'

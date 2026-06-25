@@ -9,7 +9,6 @@ import {
   setModelCached,
   setModelDownloading,
   setReplying,
-  setThinking,
   useModelCached,
   useModelDownloading,
   useReplying,
@@ -55,8 +54,6 @@ export function useAi() {
     if (!engine)
       return;
 
-    setThinking(true);
-
     const messages: Message[] = [
       {
         role: 'system',
@@ -76,7 +73,7 @@ export function useAi() {
 
       setReplying({
         role: 'assistant',
-        content: 'Thinking...',
+        content: '...',
       });
 
       for await (const chunk of chunks) {

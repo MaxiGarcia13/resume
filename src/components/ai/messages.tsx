@@ -1,9 +1,12 @@
 import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
+import { getProfile } from '@/data/profile';
 import { useAi } from '@/hooks/useAi';
 import { useMessages } from '@/stores/ai';
 import { Bubble } from './bubble';
 import { DownloadModel } from './download-model';
+
+const profile = getProfile();
 
 export function Messages(props: { className?: string }) {
   const messagesRef = useRef<HTMLDivElement>(null);
@@ -29,11 +32,28 @@ export function Messages(props: { className?: string }) {
     });
   }, [replying, messages]);
 
+  const isEmpty = messages.length === 0 && !replying;
+
   return (
     <div
       ref={messagesRef}
-      className={cn('flex flex-col gap-2 overflow-y-auto scrollbar-none', props.className)}
+      className={cn(
+        'flex flex-col gap-2 overflow-y-auto scrollbar-none',
+        isEmpty && 'justify-center',
+        props.className,
+      )}
     >
+      {isEmpty && (
+        <div className="flex flex-col gap-2 items-center text-center px-4 py-6 self-center max-w-xs">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {`Ask about ${profile.nickName}'s career, work experience, projects, and tech stack. The assistant answers from this CV and runs locally in your browser.`}
+          </p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-500">
+            Replies in English or Spanish, depending on your question.
+          </p>
+        </div>
+      )}
+
       {messages.map((message, index) => (
         <Bubble key={index} {...message} />
       ))}

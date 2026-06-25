@@ -9,7 +9,6 @@ export const $modelCached = atom<boolean | null>(null);
 export const $modelDownloading = atom(false);
 export const $downloadProgress = atom({ text: '', value: 0 });
 
-export const $thinking = atom(false);
 export const $replying = atom<Message | null>(null);
 
 export function pushMessage(message: Message): void {
@@ -18,10 +17,6 @@ export function pushMessage(message: Message): void {
 
 export function setReplying(message: Message | null): void {
   $replying.set(message);
-}
-
-export function setThinking(thinking: boolean): void {
-  $thinking.set(thinking);
 }
 
 export function setDownloadProgress(progress: { text: string; value: number }): void {
