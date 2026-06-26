@@ -5,6 +5,7 @@ import Heading from '@/components/shared/heading/heading.astro';
 import GithubIcon from '@/components/shared/icons/github.astro';
 import Text from '@/components/shared/text/text.astro';
 import { getProfile, getProjects } from '@/data';
+import { getCvAnchorId } from '@/utils/link-cv-anchors';
 
 const projects = getProjects();
 const {
@@ -19,10 +20,8 @@ const {
   <ul class="flex flex-col gap-10">
     {
       projects.map((project) => {
-        const id = project.title
-          .toLowerCase()
-          .replaceAll(' ', '-')
-          .replaceAll('.', '');
+        const id = getCvAnchorId(project.title);
+
         return (
           <li id={id} class="flex flex-col gap-4">
             <Heading tag="h3" class="flex gap-2 justify-start items-center">

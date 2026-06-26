@@ -6,7 +6,7 @@ interface CvAnchorTerm {
   names: string[];
 }
 
-function getProjectAnchorId(title: string) {
+export function getCvAnchorId(title: string) {
   return title.toLowerCase().replaceAll(' ', '-').replaceAll('.', '');
 }
 
@@ -18,7 +18,7 @@ function getCompanyAnchorTerms(): CvAnchorTerm[] {
       names.add(firstWord);
     }
     return {
-      anchorId: work.id,
+      anchorId: getCvAnchorId(work.company),
       names: [...names].sort((a, b) => b.length - a.length),
     };
   });
@@ -26,7 +26,7 @@ function getCompanyAnchorTerms(): CvAnchorTerm[] {
 
 function getProjectAnchorTerms(): CvAnchorTerm[] {
   return getProjects().map((project) => ({
-    anchorId: getProjectAnchorId(project.title),
+    anchorId: getCvAnchorId(project.title),
     names: [project.title],
   }));
 }

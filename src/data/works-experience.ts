@@ -3,7 +3,6 @@ import type { WorkExperience } from '@/types/experiences';
 export function getWorksExperience(): Array<WorkExperience> {
   return [
     {
-      id: 'empathy-co',
       company: 'Empathy.co',
       schedule: {
         startDate: '2022-05-01',
@@ -23,7 +22,6 @@ export function getWorksExperience(): Array<WorkExperience> {
       ],
     },
     {
-      id: 'capitole-consulting',
       company: 'Capitole Consulting',
       schedule: {
         startDate: '2021-09-01',
@@ -39,7 +37,6 @@ export function getWorksExperience(): Array<WorkExperience> {
       ],
     },
     {
-      id: 'leadtech',
       company: 'Leadtech group',
       schedule: {
         startDate: '2020-10-01',
@@ -55,7 +52,6 @@ export function getWorksExperience(): Array<WorkExperience> {
       ],
     },
     {
-      id: 'global-think-technology',
       company: 'Global think technology',
       schedule: {
         startDate: '2018-7-01',

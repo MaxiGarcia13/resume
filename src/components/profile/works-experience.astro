@@ -6,6 +6,7 @@ import Img from '@/components/shared/img.astro';
 import Text from '@/components/shared/text/text.astro';
 import { getWorksExperience } from '@/data';
 import { diffDates, formatSechedule } from '@/utils';
+import { getCvAnchorId } from '@/utils/link-cv-anchors';
 import Positions from './positions.astro';
 
 const worksExperience = getWorksExperience();
@@ -20,6 +21,7 @@ const worksExperience = getWorksExperience();
       worksExperience.map((experience) => {
         const { startDate, endDate } = formatSechedule(experience.schedule);
         const { years, months } = diffDates(experience.schedule);
+        const id = getCvAnchorId(experience.company);
 
         return (
           <li class="flex flex-col gap-2">
@@ -31,11 +33,11 @@ const worksExperience = getWorksExperience();
               />
               <div>
                 <Heading
-                  id={experience.id}
+                  id={id}
                   tag="h3"
                   class="group flex gap-2 items-center justify-start"
                 >
-                  <Link href={`#${experience.id}`} noWrap>
+                  <Link href={`#${id}`} noWrap>
                     {experience.company}
                   </Link>
                   <Link
