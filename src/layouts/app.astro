@@ -10,7 +10,8 @@ const title = `${name} – ${role} | Portfolio & CV`;
 const keywords = `${name}, ${role}, frontend, software engineer, portfolio, cv, resume`;
 const description = pkg.description;
 const webSite = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
-const image = `${webSite}/assets/android/mipmap-xxxhdpi/ic_launcher.png`;
+const faviconPath = `/assets/images/favicon.png`;
+const image = `${webSite}${faviconPath}`;
 ---
 
 <!doctype html>
@@ -31,7 +32,7 @@ const image = `${webSite}/assets/android/mipmap-xxxhdpi/ic_launcher.png`;
       type="font/woff2"
       crossorigin
     />
-    <link rel="icon" type="image/svg+xml" href="/assets/images/profile.png" />
+    <link rel="icon" type="image/png" href={faviconPath} />
 
     <title>{title}</title>
 
