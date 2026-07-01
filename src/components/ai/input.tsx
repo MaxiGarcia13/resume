@@ -61,7 +61,7 @@ export function Input(props: { className?: string }) {
             ? '...'
             : modelDownloading
               ? 'Downloading model...'
-              : 'Ask a anything'
+              : 'Ask anything'
         }
         rows={2}
         value={value}
