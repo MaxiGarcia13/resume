@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Iconify',
+      description: 'High-performance icon set generator. Generate favicons, PWA icons, iOS, and Android assets in seconds.',
+      repo: 'https://github.com/MaxiGarcia13/iconify',
+      website: 'https://icon-sets-generator.vercel.app',
+    },
+    {
       title: 'Mockingbird',
       description: 'Mockingbird lets you define HTTP responses — status, headers, body — and test how your frontend behaves. Pick the workflow that fits your setup: a browser extension that intercepts fetch on any page, or a local API with a web app.',
       repo: 'https://github.com/MaxiGarcia13/mockingbird',
