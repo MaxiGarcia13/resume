@@ -6,7 +6,7 @@ export function getProjects(): Array<Project> {
       title: 'Iconify',
       description: 'High-performance icon set generator. Generate favicons, PWA icons, iOS, and Android assets in seconds.',
       repo: 'https://github.com/MaxiGarcia13/iconify',
-      website: 'https://icon-sets-generator.vercel.app',
+      website: 'https://iconset-generator.vercel.app',
     },
     {
       title: 'Mockingbird',
