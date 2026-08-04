@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Playtiva',
+      description: 'Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats',
+      repo: 'https://github.com/MaxiGarcia13/playtiva',
+      website: 'https://playtva.vercel.app',
+    },
+    {
       title: 'Iconify',
       description: 'High-performance icon set generator. Generate favicons, PWA icons, iOS, and Android assets in seconds.',
       repo: 'https://github.com/MaxiGarcia13/iconify',
