@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Maxi\'s Photo Gallery',
+      description: 'Immersive personal photo gallery. Visitors arrive at an entrance, then walk a 3D corridor past framed photographs — one work per stop — using arrow keys or swipe.',
+      repo: 'https://github.com/MaxiGarcia13/my-gallery',
+      website: 'https://maxi-photo-gallery.vercel.app',
+    },
+    {
       title: 'Playtiva',
       description: 'Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats',
       repo: 'https://github.com/MaxiGarcia13/playtiva',
