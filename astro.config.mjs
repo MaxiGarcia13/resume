@@ -13,6 +13,6 @@ export default defineConfig({
   image: {
     domains: ['snap-website-api.vercel.app'],
   },
-  site: 'https://maxi-garcia-mortigliengo-cv.vercel.app/',
+  site: 'https://maxi-garcia-mortigliengo-cv.vercel.app',
   integrations: [sitemap(), react()],
 });
