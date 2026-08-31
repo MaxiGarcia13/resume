@@ -3,6 +3,12 @@ import type { Project } from '@/types/projects';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Conter Strai',
+      description: 'Browser tactical shooter — Civilians vs Soldiers, round-based team elimination. Astro, React Three Fiber, and Colyseus.',
+      repo: 'https://github.com/MaxiGarcia13/conter-strai',
+      website: 'https://conter-strai.onrender.com',
+    },
+    {
       title: 'Maxi\'s Photo Gallery',
       description: 'Immersive personal photo gallery. Visitors arrive at an entrance, then walk a 3D corridor past framed photographs — one work per stop — using arrow keys or swipe.',
       repo: 'https://github.com/MaxiGarcia13/my-gallery',
