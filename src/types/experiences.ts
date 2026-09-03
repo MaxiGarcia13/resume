@@ -1,3 +1,5 @@
+import type { Skill } from './skills';
+
 export interface WorkExperience {
   company: string;
   website: string;
@@ -5,6 +7,7 @@ export interface WorkExperience {
   description?: string;
   schedule: Schedule;
   positions: Array<Position>;
+  skills?: Array<Skill>;
 }
 
 export interface Schedule {
