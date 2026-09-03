@@ -28,7 +28,15 @@ function MarkdownLink({
 export function Bubble({ content, role }: Message) {
   const text = typeof content === 'string'
     ? content
-    : content.map((part) => part.type === 'text' ? part.text : part.type).join('');
+    : content?.map((part) => part.type === 'text' ? part.text : part.type).join('');
+
+  const removeThinkingText = (text?: string) => {
+    return text
+      ?.replace('```thinking', '')
+      .replace('```', '')
+      .replace('<think>', '')
+      .replace('</think>', '');
+  };
 
   return (
     <div
@@ -43,7 +51,7 @@ export function Bubble({ content, role }: Message) {
           a: (props) => <MarkdownLink {...props} />,
         }}
       >
-        {text}
+        {removeThinkingText(text)}
       </Markdown>
     </div>
   );

@@ -17,7 +17,7 @@ import { linkCvAnchors } from '@/utils/link-cv-anchors';
 
 let engine: MLCEngine | null = null;
 let cacheChecked = false;
-const selectedModel = 'Llama-3.1-8B-Instruct-q4f16_1-MLC';
+const selectedModel = 'Qwen3.5-2B-q4f16_1-MLC';
 
 export function useAi() {
   const replying = useReplying();
