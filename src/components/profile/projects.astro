@@ -6,6 +6,7 @@ import GithubIcon from '@/components/shared/icons/github.astro';
 import Text from '@/components/shared/text/text.astro';
 import { getProfile, getProjects } from '@/data';
 import { getCvAnchorId } from '@/utils/link-cv-anchors';
+import Skills from './skills.astro';
 
 const projects = getProjects();
 const {
@@ -33,7 +34,8 @@ const {
               </Link>
             </Heading>
             <Text>{project.description}</Text>
-            <ProjectPreview src={project.website} title={project.title} />
+            <Skills skills={project.skills} />
+            {project.website && <ProjectPreview src={project.website} title={project.title} />}
           </li>
         );
       })
