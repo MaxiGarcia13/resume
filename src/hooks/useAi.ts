@@ -42,7 +42,8 @@ export function useAi() {
           },
         },
         {
-          temperature: 0,
+          temperature: 0.2,
+          repetition_penalty: 1.1,
           context_window_size: 30000,
         },
       );
