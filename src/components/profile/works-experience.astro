@@ -8,6 +8,7 @@ import { getWorksExperience } from '@/data';
 import { diffDates, formatSechedule } from '@/utils';
 import { getCvAnchorId } from '@/utils/link-cv-anchors';
 import Positions from './positions.astro';
+import Skills from './skills.astro';
 
 const worksExperience = getWorksExperience();
 ---
@@ -40,13 +41,16 @@ const worksExperience = getWorksExperience();
                     <ExternalLinkIcon slot="icon" width={18} height={18} />
                   </Link>
                 </Heading>
+
                 <Text tag="span" class="flex gap-1">
                   {`${startDate} - ${endDate ?? 'now'}. ${years > 0 ? `${years} years ${months > 0 ? `and ${months} months` : ''}` : `${months} months`}`}
                 </Text>
+
+                <Skills skills={experience.skills} class="mt-2" />
               </div>
             </div>
 
-            <Positions positions={experience.positions} class="pl-0 md:pl-[84px]" />
+            <Positions positions={experience.positions} class="pl-0 md:pl-21" />
           </li>
         );
       })
