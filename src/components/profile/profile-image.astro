@@ -17,22 +17,8 @@ const { src, alt, class: className, imageClass, ...rest } = Astro.props;
     className,
   )}
 >
-  <Img
-    src={src}
-    alt={alt}
-    class={cn('h-full w-full', imageClass)}
-    width={200}
-    height={200}
-    loading="lazy"
-    {...rest}
-  />
-  <span
-    class={cn(
-      'absolute w-[100px] h-[40px] top-[33px] left-[45px]',
-      'dark:hidden',
-    )}
-    aria-hidden="true"
-  >
+  <Img src={src} alt={alt} class={cn('h-full w-full', imageClass)} width={200} height={200} loading="lazy" {...rest} />
+  <span class={cn('absolute w-[100px] h-[40px] top-[33px] left-[45px]', 'dark:hidden')} aria-hidden="true">
     <Img src="/assets/images/sun-glasses.webp" alt="" />
   </span>
 </div>

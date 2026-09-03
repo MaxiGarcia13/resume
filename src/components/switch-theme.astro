@@ -10,13 +10,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<Button
-  type="button"
-  id="switch-theme"
-  class={className}
-  data-switch-theme
-  aria-label="Toggle color theme"
->
+<Button type="button" id="switch-theme" class={className} data-switch-theme aria-label="Toggle color theme">
   <Fragment slot="icon">
     <MoonIcon class="hidden dark:block" />
     <SunIcon class="block dark:hidden" />
@@ -26,10 +20,7 @@ const { class: className } = Astro.props;
 <script>
   import type { SweepDirection } from '@maxigarcia/view-transitions';
   import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
-  import {
-    initializeThemeStore,
-    toggleTheme,
-  } from '@/stores/theme/theme.store';
+  import { initializeThemeStore, toggleTheme } from '@/stores/theme/theme.store';
 
   initializeThemeStore();
 
@@ -37,18 +28,14 @@ const { class: className } = Astro.props;
 
   function syncThemeToggleLabel() {
     const theme = document.documentElement.dataset.theme;
-    switchThemeButton?.setAttribute(
-      'aria-label',
-      theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
-    );
+    switchThemeButton?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   }
 
   syncThemeToggleLabel();
 
   switchThemeButton?.addEventListener('click', () => {
     const theme = document.documentElement.dataset.theme;
-    const direction: SweepDirection
-      = theme === 'dark' ? 'corner-top-right' : 'corner-bottom-left';
+    const direction: SweepDirection = theme === 'dark' ? 'corner-top-right' : 'corner-bottom-left';
 
     onSweepRevealAnimation(
       () => {

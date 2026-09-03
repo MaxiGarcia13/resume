@@ -28,11 +28,7 @@ const {
               <Link href={`#${id}`} noWrap>
                 {project.title}
               </Link>
-              <Link
-                href={project.repo}
-                target="_blank"
-                aria-label={`${project.title} on GitHub (opens in new tab)`}
-              >
+              <Link href={project.repo} target="_blank" aria-label={`${project.title} on GitHub (opens in new tab)`}>
                 <GithubIcon slot="icon" />
               </Link>
             </Heading>
@@ -44,11 +40,7 @@ const {
     }
   </ul>
   <div class="flex justify-center items-center">
-    <Link
-      href={`${githubUrl}?tab=repositories`}
-      target="_blank"
-      iconPosition="right"
-    >
+    <Link href={`${githubUrl}?tab=repositories`} target="_blank" iconPosition="right">
       <GithubIcon slot="icon" />
       See More Code
     </Link>

@@ -26,17 +26,9 @@ const worksExperience = getWorksExperience();
         return (
           <li class="flex flex-col gap-2">
             <div class="flex gap-6 justify-start items-center">
-              <Img
-                src={experience.image}
-                alt={experience.company}
-                class="w-[60px] h-[60px] rounded bg-neutral-100"
-              />
+              <Img src={experience.image} alt={experience.company} class="w-[60px] h-[60px] rounded bg-neutral-100" />
               <div>
-                <Heading
-                  id={id}
-                  tag="h3"
-                  class="group flex gap-2 items-center justify-start"
-                >
+                <Heading id={id} tag="h3" class="group flex gap-2 items-center justify-start">
                   <Link href={`#${id}`} noWrap>
                     {experience.company}
                   </Link>
@@ -54,10 +46,7 @@ const worksExperience = getWorksExperience();
               </div>
             </div>
 
-            <Positions
-              positions={experience.positions}
-              class="pl-0 md:pl-[84px]"
-            />
+            <Positions positions={experience.positions} class="pl-0 md:pl-[84px]" />
           </li>
         );
       })

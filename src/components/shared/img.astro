@@ -13,13 +13,6 @@ const imgId = `img-${src}`;
 
 <figure class={cn('relative overflow-hidden shrink-0', className)}>
   <ImgLoader id={imgId}>
-    <img
-      id={imgId}
-      src={src}
-      alt={alt}
-      loading={loading}
-      class="object-contain w-full h-full shrink-0"
-      {...rest}
-    />
+    <img id={imgId} src={src} alt={alt} loading={loading} class="object-contain w-full h-full shrink-0" {...rest} />
   </ImgLoader>
 </figure>

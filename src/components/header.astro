@@ -13,27 +13,16 @@ const { name, role, socialMedia, email } = getProfile();
 ---
 
 <header class="flex gap-8 items-center flex-col sm:flex-row">
-  <ProfileImage
-    src="assets/images/profile.png"
-    alt={`${name} Profile Picture`}
-  />
+  <ProfileImage src="assets/images/profile.png" alt={`${name} Profile Picture`} />
 
   <section class="flex flex-col gap-1">
     <Heading>{name}</Heading>
     <Text>{role}</Text>
     <div class="flex gap-2 mt-2">
-      <Link
-        href={socialMedia.linkedin}
-        target="_blank"
-        aria-label="LinkedIn profile (opens in new tab)"
-      >
+      <Link href={socialMedia.linkedin} target="_blank" aria-label="LinkedIn profile (opens in new tab)">
         <LinkedInIcon slot="icon" />
       </Link>
-      <Link
-        href={socialMedia.github}
-        target="_blank"
-        aria-label="GitHub profile (opens in new tab)"
-      >
+      <Link href={socialMedia.github} target="_blank" aria-label="GitHub profile (opens in new tab)">
         <GithubIcon slot="icon" />
       </Link>
       <Link href={`mailto:${email}`} aria-label={`Send email to ${email}`}>

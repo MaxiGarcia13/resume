@@ -10,14 +10,7 @@ interface Props extends HTMLAttributes<'button'> {
   class?: string;
 }
 
-const {
-  type = 'button',
-  class: className,
-  variant,
-  iconPosition = 'left',
-  disabled = false,
-  ...rest
-} = Astro.props;
+const { type = 'button', class: className, variant, iconPosition = 'left', disabled = false, ...rest } = Astro.props;
 
 const hasChildren = Astro.slots.has('default');
 const hasIcon = Astro.slots.has('icon');

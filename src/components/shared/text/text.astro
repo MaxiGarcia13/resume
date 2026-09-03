@@ -8,12 +8,7 @@ interface Props {
   class?: string;
 }
 
-const {
-  tag: Tag = 'p',
-  variant = 'ghost',
-  class: className,
-  ...props
-} = Astro.props;
+const { tag: Tag = 'p', variant = 'ghost', class: className, ...props } = Astro.props;
 ---
 
 <Tag class={getTextClass(variant, className)} {...props}>
