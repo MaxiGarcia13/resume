@@ -1,5 +1,6 @@
+import pkg from '@root/package.json';
 import { diffDates, formatDate } from '@/utils/date';
-import pkg from '../../package.json';
+import { formatSkills, uniqueSkills } from '@/utils/skills';
 import { getLanguages } from './languages';
 import { getProfile } from './profile';
 import { getProjects } from './projects';
@@ -16,46 +17,11 @@ export function getAssistantSystemPrompt(): string {
     0,
     (now.getTime() - firstFrontendStart.getTime()) / (1000 * 60 * 60 * 24 * 365.25),
   );
-  const frontendYearsRounded = frontendYears.toFixed(1);
-  const stack = {
-    languages: ['TypeScript', 'JavaScript', 'Sass', 'CSS'],
-    frameworks: [
-      'React',
-      'Vue',
-      'Next.js',
-      'Astro',
-      'Node JS',
-      'Zustand',
-      'Tailwind',
-      'shadcn',
-      'Vuex',
-      'Redux',
-      'Redux-saga',
-      'Gatsby JS',
-      'Styled components',
-      'Angular JS',
-      'Leaflet.js',
-    ],
-    databasesAndTools: [
-      'Mongo DB',
-      'SQL lite',
-      'My SQL',
-      'Vitest',
-      'Playwright',
-      'Storybook',
-      'GitHub CI/CD',
-      'Copilot',
-      'Cursor',
-      'Lerna',
-      'Jest',
-      'Cypress',
-      'Redux',
-      'Electron',
-      'Apache Cordova',
-      'Puppeteer',
-    ],
-    practices: ['Clean Architecture', 'Monorepo', 'CI/CD'],
-  };
+  const frontendYearsRounded = Math.trunc(frontendYears);
+  const stack = uniqueSkills(
+    ...workExperience.map((work) => work.skills),
+    ...projects.map((project) => project.skills),
+  );
 
   const careerSummary = workExperience.map((work) => {
     const start = formatDate(new Date(work.schedule.startDate));
@@ -77,20 +43,24 @@ export function getAssistantSystemPrompt(): string {
    Period: ${start} – ${end}
    years working: ${yearsWorking.years} years ${yearsWorking.months} months
    Website: ${work.website}
+   Stack: ${formatSkills(work.skills)}
 ${positions}`;
   }).join('\n\n');
 
-  const projectsText = projects
-    .map((project) => `- ${project.title}: ${project.description}`)
-    .join('\n');
+  const projectsText = projects.map((project, index) => {
+    const websiteLine = project.website ? `\n   Website: ${project.website}` : '';
+
+    return `${index + 1}. Title: ${project.title}
+   Description: ${project.description}
+   Stack: ${formatSkills(project.skills)}
+   Repo: ${project.repo}${websiteLine}`;
+  }).join('\n\n');
 
   const languagesText = languages
     .map((language) => `- ${language.name}: ${language.proficiency}`)
     .join('\n');
-  const stackLanguagesText = stack.languages.map((technology) => `- ${technology}`).join('\n');
-  const stackFrameworksText = stack.frameworks.map((technology) => `- ${technology}`).join('\n');
-  const stackDatabasesAndToolsText = stack.databasesAndTools.map((technology) => `- ${technology}`).join('\n');
-  const stackPracticesText = stack.practices.map((practice) => `- ${practice}`).join('\n');
+
+  const stackText = stack.map((skill) => `- ${skill.name}`).join('\n');
 
   return `IDENTITY
 - Person in this CV: ${profile.name} (${profile.nickName})
@@ -102,7 +72,7 @@ IMPORTANT — how to answer:
 - Scope lock: ONLY answer questions directly related to ${profile.nickName}'s CV (profile, experience, projects, skills, stack, languages, links, dates).
 - If a question is partially related, answer ONLY the CV-related part and politely refuse the rest.
 - If a question is not about the CV, refuse briefly and ask the user to ask about ${profile.nickName}'s CV.
-- When asked about a job, company, or project, ALWAYS search the WORK EXPERIENCE and PROJECTS sections and answer with the details you find.
+- When asked about a job, company, or project, ALWAYS search the WORK EXPERIENCE and PROJECTS sections and answer with the details you find, including that item's Stack.
 - Company names can be shortened by users (e.g. "Empathy" = "Empathy.co", "Leadtech" = "Leadtech group"). Match flexibly.
 - NEVER say "there is no information" if the answer exists in the sections below. Quote the relevant details.
 - Decline questions unrelated to ${profile.nickName} or this CV (general knowledge, other people, unrelated topics).
@@ -112,7 +82,9 @@ IMPORTANT — how to answer:
 - Use third person for the CV owner: "${profile.nickName} worked at...", never "I worked at...".
 - If asked about total frontend experience, answer with the exact value in FRONTEND EXPERIENCE SUMMARY (${frontendYearsRounded} years as of today), and mention it is calculated from the first work start date (${formatDate(firstFrontendStart)}).
 - If asked about locations, provide the location when available in this prompt. If not available, say clearly that location is not specified in the CV data and still provide available company/date details.
-- If asked about skills or stack, use the TECH STACK section and include only technologies listed there.
+- If asked about overall skills or tech stack, use the TECH STACK section (unique union of skills from work experience and projects). Include only technologies listed there.
+- If asked which stack ${profile.nickName} used at a company or on a project, use that item's Stack line. Do not attribute a skill to a company or project unless it appears in that item's Stack.
+- If asked which companies or projects used a technology, search the Stack lines in WORK EXPERIENCE and PROJECTS.
 - If asked for basic profile info, answer from PROFILE and LANGUAGES sections.
 - Use markdown formatting for the answer.
 
@@ -133,7 +105,7 @@ LANGUAGES:
 ${languagesText}
 
 WHAT ${profile.nickName.toUpperCase()} BRINGS TO A TEAM:
-- Strong Frontend Expertise: Over 7 years building modern web apps with React, Vue, and TypeScript, with focus on clean, maintainable, scalable code.
+- Strong Frontend Expertise: ${frontendYearsRounded} years building modern web apps with React, Vue, and TypeScript, with focus on clean, maintainable, scalable code.
 - Modern Frameworks: Hands-on with Next.js and Astro to build high-performance applications and improve SEO.
 - Automation & CI/CD: Experience designing and managing GitHub Actions workflows for testing, deployment, and development automation.
 - Attention to Detail: Product mindset with a pixel-perfect approach to UI implementation and code quality.
@@ -144,18 +116,8 @@ ${careerSummary}
 WORK EXPERIENCE (full details):
 ${workExperienceText}
 
-TECH STACK:
-Languages:
-${stackLanguagesText}
-
-Frameworks and Libraries:
-${stackFrameworksText}
-
-Databases and Tools:
-${stackDatabasesAndToolsText}
-
-Practices:
-${stackPracticesText}
+TECH STACK (unique, from work experience and projects):
+${stackText}
 
 PROJECTS:
 ${projectsText}`;

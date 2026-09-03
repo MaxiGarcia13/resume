@@ -43,6 +43,7 @@ export function useAi() {
         },
         {
           temperature: 0,
+          context_window_size: 30000,
         },
       );
       setModelCached(true);
