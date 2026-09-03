@@ -1,0 +1,28 @@
+---
+import type { IconProps } from '@/components/shared/icons/type';
+import { DEFAULT_ICON_SIZE } from '../../constans';
+
+const { class: className, width = DEFAULT_ICON_SIZE, height = DEFAULT_ICON_SIZE, ...props }: IconProps = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  width={width}
+  height={height}
+  {...props}
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <path d="M8 22l-5 -19l19 5.5l-14 13.5"></path>
+  <path d="M12.573 17.58l-6.152 -1.576l8.796 -9.466l1.914 6.64"></path>
+  <path d="M12.573 17.58l-1.573 -6.58l6.13 2.179"></path>
+  <path d="M9.527 4.893l1.473 6.107l-6.31 -1.564l4.837 -4.543"></path>
+</svg>
