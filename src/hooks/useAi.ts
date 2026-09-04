@@ -2,7 +2,7 @@ import type { MLCEngine } from '@mlc-ai/web-llm';
 import type { Message } from '@/stores/ai';
 import { CreateMLCEngine, hasModelInCache } from '@mlc-ai/web-llm';
 import { useEffect } from 'react';
-import { getAssistantSystemPrompt } from '@/data/assistant-system-prompt';
+import { ASSISTANT_SYSTEM_PROMPT } from '@/data/assistant-system-prompt';
 import {
   pushMessage,
   setDownloadProgress,
@@ -17,7 +17,45 @@ import { linkCvAnchors } from '@/utils/link-cv-anchors';
 
 let engine: MLCEngine | null = null;
 let cacheChecked = false;
-const selectedModel = 'Qwen3.5-2B-q4f16_1-MLC';
+
+const MODEL_NAME = 'Qwen3.5-2B-q4f16_1-MLC';
+const CONTEXT_WINDOW_SIZE = 4096;
+const TEMPERATURE = 0.2;
+const CHARS_PER_TOKEN = 4;
+const MAX_OUTPUT_TOKENS = 512;
+const CHAT_TEMPLATE_OVERHEAD_CHARS = 32;
+
+function getMessageCharCount(message: Message): number {
+  const content = typeof message.content === 'string' ? message.content : '';
+  return content.length + CHAT_TEMPLATE_OVERHEAD_CHARS;
+}
+
+function sliceMessagesByContextWindowSize(messages: Message[]): Message[] {
+  const maxInputChars = (CONTEXT_WINDOW_SIZE - MAX_OUTPUT_TOKENS) * CHARS_PER_TOKEN;
+  let remainingChars = maxInputChars - ASSISTANT_SYSTEM_PROMPT.length - CHAT_TEMPLATE_OVERHEAD_CHARS;
+
+  const kept: Message[] = [];
+
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const message = messages[i];
+    const size = getMessageCharCount(message);
+
+    if (kept.length > 0 && size > remainingChars) {
+      break;
+    }
+
+    kept.push(message);
+    remainingChars -= size;
+  }
+
+  kept.reverse();
+
+  if (kept.length > 1 && kept[0]?.role === 'assistant') {
+    kept.shift();
+  }
+
+  return kept;
+}
 
 export function useAi() {
   const replying = useReplying();
@@ -34,7 +72,7 @@ export function useAi() {
 
     try {
       engine = await CreateMLCEngine(
-        selectedModel,
+        MODEL_NAME,
         {
 
           initProgressCallback: (progress) => {
@@ -42,15 +80,32 @@ export function useAi() {
           },
         },
         {
-          temperature: 0.2,
+          temperature: TEMPERATURE,
           repetition_penalty: 1.1,
-          context_window_size: 30000,
+          context_window_size: CONTEXT_WINDOW_SIZE,
+          max_history_size: 1,
         },
       );
       setModelCached(true);
     } finally {
       setModelDownloading(false);
     }
+  };
+
+  const removeThinkingText = (text: string) => {
+    return text
+      ?.replace('```thinking', '')
+      .replace('```', '')
+      .replace('<think>', '')
+      .replace('</think>', '');
+  };
+
+  const removeMultipleNewlines = (text: string) => {
+    return text.replace(/\n{2,}/g, '\n');
+  };
+
+  const sanitizeReply = (reply: string) => {
+    return removeThinkingText(removeMultipleNewlines(reply));
   };
 
   const loadAiResponse = async (userMessages: Message[]) => {
@@ -60,16 +115,17 @@ export function useAi() {
     const messages: Message[] = [
       {
         role: 'system',
-        content: getAssistantSystemPrompt(),
+        content: ASSISTANT_SYSTEM_PROMPT,
       },
-      ...userMessages,
+      ...sliceMessagesByContextWindowSize(userMessages),
     ];
 
     try {
       const chunks = await engine.chat.completions.create({
         messages,
         stream: true,
-        temperature: 0,
+        temperature: TEMPERATURE,
+        max_tokens: MAX_OUTPUT_TOKENS,
       });
 
       let reply = '';
@@ -83,14 +139,14 @@ export function useAi() {
         reply += chunk.choices[0]?.delta.content || '';
         setReplying({
           role: 'assistant',
-          content: linkCvAnchors(reply),
+          content: linkCvAnchors(sanitizeReply(reply)),
         });
       }
 
       setReplying(null);
       pushMessage({
         role: 'assistant',
-        content: linkCvAnchors(reply),
+        content: linkCvAnchors(sanitizeReply(reply)),
       });
     } catch (error) {
       console.error(error);
@@ -104,7 +160,7 @@ export function useAi() {
 
     cacheChecked = true;
 
-    hasModelInCache(selectedModel)
+    hasModelInCache(MODEL_NAME)
       .then((cached) => {
         setModelCached(cached);
 

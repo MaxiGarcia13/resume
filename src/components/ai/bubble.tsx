@@ -30,14 +30,6 @@ export function Bubble({ content, role }: Message) {
     ? content
     : content?.map((part) => part.type === 'text' ? part.text : part.type).join('');
 
-  const removeThinkingText = (text?: string) => {
-    return text
-      ?.replace('```thinking', '')
-      .replace('```', '')
-      .replace('<think>', '')
-      .replace('</think>', '');
-  };
-
   return (
     <div
       className={cn(
@@ -51,7 +43,7 @@ export function Bubble({ content, role }: Message) {
           a: (props) => <MarkdownLink {...props} />,
         }}
       >
-        {removeThinkingText(text)}
+        {text}
       </Markdown>
     </div>
   );
