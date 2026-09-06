@@ -23,9 +23,11 @@ export default defineConfig({
       }),
       VERCEL_URL: envField.string({
         context: 'server',
+        access: 'public',
       }),
       SITE: envField.string({
         context: 'server',
+        access: 'public',
       }),
     },
   },
