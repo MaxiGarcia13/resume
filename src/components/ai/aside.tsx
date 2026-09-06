@@ -35,7 +35,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
     <aside
       {...props}
       ref={asideRef}
-      className="right-4 top-16 min-w-64 max-w-sm w-full overflow-hidden fixed h-[calc(100%-64px-10px)] border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
+      className="right-6 top-16 min-w-64 max-w-[calc(100%-48px)]  w-full overflow-hidden fixed h-[calc(100%-64px-10px)]  border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
       aria-label="AI assistant chat"
     >
       <div className="h-full flex flex-col gap-4">
