@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import { ReasoningFormat } from '@openrouter/sdk/models';
 import { readLlmMessages, requireSecret } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, sseToNdjson } from '@/modules/ai/services/stream';
 
