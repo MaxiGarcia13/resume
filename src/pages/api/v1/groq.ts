@@ -12,6 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
       model: 'groq/compound',
       messages,
       stream: true,
+      reasoning_format: 'hidden',
     });
 
     return new Response(withStreamErrors(response.toReadableStream()), {
