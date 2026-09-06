@@ -3,6 +3,8 @@ import { applyCorsHeaders, ensureSessionCookie, guardLlmApiRequest } from '@/mod
 
 export const onRequest = defineMiddleware(async (context, next) => {
   if (context.url.pathname.startsWith('/api/v1/')) {
+    ensureSessionCookie(context.cookies);
+
     const blocked = guardLlmApiRequest(context);
 
     if (blocked) {
