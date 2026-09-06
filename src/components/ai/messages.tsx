@@ -1,8 +1,9 @@
 import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
+import { getActionStyles } from '@/components/shared/actions/utils';
 import { getProfile } from '@/data/profile';
 import { useAi } from '@/hooks/useAi';
-import { useMessages, useModelCached } from '@/modules/ai';
+import { $awaitingLocalDownload, $error, useAwaitingLocalDownload, useError, useMessages, useModelCached } from '@/modules/ai';
 import { Bubble } from './bubble';
 import { DownloadModel } from './download-model';
 
@@ -13,10 +14,12 @@ export function Messages(props: { className?: string }) {
 
   const messages = useMessages();
   const modelCached = useModelCached();
-  const { loadAiResponse, replying } = useAi();
+  const error = useError();
+  const awaitingLocalDownload = useAwaitingLocalDownload();
+  const { loadAiResponse, retryLastResponse, replying } = useAi();
 
   useEffect(() => {
-    if (!messages.length) {
+    if (!messages.length || $awaitingLocalDownload.get() || $error.get()) {
       return;
     }
 
@@ -31,7 +34,7 @@ export function Messages(props: { className?: string }) {
       top: messagesRef.current?.scrollHeight,
       behavior: 'smooth',
     });
-  }, [replying, messages]);
+  }, [replying, messages, error, awaitingLocalDownload]);
 
   const showEmptyMessage = messages.length === 0 && !replying && modelCached === true;
 
@@ -60,6 +63,23 @@ export function Messages(props: { className?: string }) {
       ))}
 
       {replying && <Bubble {...replying} />}
+
+      {error && !awaitingLocalDownload && (
+        <div className="flex flex-col gap-3 items-center text-center px-4 py-3 self-center max-w-xs">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {error.message}
+          </p>
+          <button
+            type="button"
+            className={getActionStyles({ variant: 'ghost', hasChildren: true, className: 'flex items-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300! dark:hover:bg-gray-600!' })}
+            onClick={retryLastResponse}
+            disabled={replying != null}
+            aria-label="Retry last message"
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
       <DownloadModel />
     </div>
