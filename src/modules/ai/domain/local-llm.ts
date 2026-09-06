@@ -7,8 +7,8 @@ const MODEL_NAME = 'Qwen3.5-2B-q4f16_1-MLC';
 const TEMPERATURE = 0.2;
 const CONTEXT_WINDOW_SIZE = 4096;
 const MAX_OUTPUT_TOKENS = 512;
-const CHARS_PER_TOKEN = 4;
-const CHAT_TEMPLATE_OVERHEAD_CHARS = 32;
+const CHARS_PER_TOKEN = 3;
+const CHAT_TEMPLATE_OVERHEAD_CHARS = 128;
 
 export class LocalLLM extends BaseLLM {
   private engine: MLCEngine | null = null;
@@ -50,7 +50,7 @@ export class LocalLLM extends BaseLLM {
 
   async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse | undefined> {
     if (!this.engine) {
-      return;
+      throw new Error('Local model is not loaded');
     }
 
     return this.engine.chat.completions.create({
