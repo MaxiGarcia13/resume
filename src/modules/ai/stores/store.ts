@@ -1,4 +1,4 @@
-import type { LLMMessage } from '@/modules/ai/types';
+import type { LLMError, LLMMessage } from '@/modules/ai/types';
 import { atom } from 'nanostores';
 
 export const $messages = atom<Array<LLMMessage>>([]);
@@ -6,7 +6,8 @@ export const $messages = atom<Array<LLMMessage>>([]);
 export const $modelCached = atom<boolean | null>(null);
 export const $modelDownloading = atom(false);
 export const $downloadProgress = atom({ text: '', value: 0 });
-export const $error = atom<Error | null>(null);
+export const $awaitingLocalDownload = atom(false);
+export const $error = atom<LLMError | null>(null);
 
 export const $replying = atom<LLMMessage | null>(null);
 
@@ -30,6 +31,10 @@ export function setModelDownloading(downloading: boolean): void {
   $modelDownloading.set(downloading);
 }
 
-export function setError(error: Error | null): void {
+export function setAwaitingLocalDownload(awaiting: boolean): void {
+  $awaitingLocalDownload.set(awaiting);
+}
+
+export function setError(error: LLMError | null): void {
   $error.set(error);
 }
