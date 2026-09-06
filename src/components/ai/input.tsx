@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getActionStyles } from '@/components/shared/actions/utils';
 import { SendIcon } from '@/components/shared/icons/send';
 import { useAi } from '@/hooks/useAi';
-import { pushMessage } from '@/modules/ai';
+import { pushMessage, setError } from '@/modules/ai';
 import { LoadingIcon } from '../shared/icons/loading';
 
 export function Input(props: { className?: string }) {
@@ -13,14 +13,16 @@ export function Input(props: { className?: string }) {
   const [value, setValue] = useState('');
   const disabled = value.trim() === '';
   const { replying, modelDownloading, modelCached } = useAi();
+  const inputLocked = modelCached === false || replying != null || modelDownloading;
 
   const submit = () => {
     const trimmedValue = value.trim();
 
-    if (!trimmedValue) {
+    if (!trimmedValue || inputLocked) {
       return;
     }
 
+    setError(null);
     pushMessage({
       content: trimmedValue,
       role: 'user',
@@ -67,13 +69,13 @@ export function Input(props: { className?: string }) {
         value={value}
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={handleKeyDown}
-        disabled={modelCached === false || replying != null || modelDownloading}
+        disabled={inputLocked}
         aria-label="AI assistant input"
       />
       <button
         type="button"
         className={getActionStyles({ hasIcon: true, className: 'h-full' })}
-        disabled={disabled}
+        disabled={disabled || inputLocked}
         onClick={submit}
         aria-label="Send message"
       >
