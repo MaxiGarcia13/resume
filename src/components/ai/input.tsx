@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getActionStyles } from '@/components/shared/actions/utils';
 import { SendIcon } from '@/components/shared/icons/send';
 import { useAi } from '@/hooks/useAi';
-import { pushMessage } from '@/stores/ai';
+import { pushMessage } from '@/modules/ai';
 import { LoadingIcon } from '../shared/icons/loading';
 
 export function Input(props: { className?: string }) {

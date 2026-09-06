@@ -2,7 +2,7 @@ import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
 import { getProfile } from '@/data/profile';
 import { useAi } from '@/hooks/useAi';
-import { useMessages, useModelCached } from '@/stores/ai';
+import { useMessages, useModelCached } from '@/modules/ai';
 import { Bubble } from './bubble';
 import { DownloadModel } from './download-model';
 

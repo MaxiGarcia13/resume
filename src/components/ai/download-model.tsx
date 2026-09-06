@@ -1,7 +1,7 @@
 import { getActionStyles } from '@/components/shared/actions/utils';
 import { DownloadIcon } from '@/components/shared/icons/download';
 import { useAi } from '@/hooks/useAi';
-import { useDownloadProgress, useModelCached, useModelDownloading } from '@/stores/ai';
+import { useDownloadProgress, useModelCached, useModelDownloading } from '@/modules/ai';
 
 export function DownloadModel() {
   const modelCached = useModelCached();

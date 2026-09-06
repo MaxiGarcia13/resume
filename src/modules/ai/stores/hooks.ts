@@ -1,5 +1,12 @@
 import { useStore } from '@nanostores/react';
-import { $downloadProgress, $messages, $modelCached, $modelDownloading, $replying } from './store';
+import {
+  $downloadProgress,
+  $error,
+  $messages,
+  $modelCached,
+  $modelDownloading,
+  $replying,
+} from './store';
 
 export function useMessages() {
   return useStore($messages);
@@ -19,4 +26,8 @@ export function useModelDownloading() {
 
 export function useDownloadProgress() {
   return useStore($downloadProgress);
+}
+
+export function useError() {
+  return useStore($error);
 }

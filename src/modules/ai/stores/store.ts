@@ -1,21 +1,20 @@
-import type { ChatCompletionMessageParam } from '@mlc-ai/web-llm';
+import type { LLMMessage } from '@/modules/ai/types';
 import { atom } from 'nanostores';
 
-export type Message = ChatCompletionMessageParam;
-
-export const $messages = atom<Array<Message>>([]);
+export const $messages = atom<Array<LLMMessage>>([]);
 
 export const $modelCached = atom<boolean | null>(null);
 export const $modelDownloading = atom(false);
 export const $downloadProgress = atom({ text: '', value: 0 });
+export const $error = atom<Error | null>(null);
 
-export const $replying = atom<Message | null>(null);
+export const $replying = atom<LLMMessage | null>(null);
 
-export function pushMessage(message: Message): void {
+export function pushMessage(message: LLMMessage): void {
   $messages.set([...$messages.get(), message]);
 }
 
-export function setReplying(message: Message | null): void {
+export function setReplying(message: LLMMessage | null): void {
   $replying.set(message);
 }
 
@@ -29,4 +28,8 @@ export function setModelCached(cached: boolean): void {
 
 export function setModelDownloading(downloading: boolean): void {
   $modelDownloading.set(downloading);
+}
+
+export function setError(error: Error | null): void {
+  $error.set(error);
 }

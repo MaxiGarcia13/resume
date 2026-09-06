@@ -17,8 +17,8 @@ export function Aside({ onClose, ...props }: AsideProps) {
 
       if (
         asideRef.current?.contains(target)
-        || document.getElementById('switch-theme').contains(target)
-        || document.getElementById('ai-button').contains(target)
+        || document.getElementById('switch-theme')?.contains(target)
+        || document.getElementById('ai-button')?.contains(target)
       ) {
         return;
       }
