@@ -1,6 +1,8 @@
 import type { ComponentPropsWithoutRef } from 'react';
+import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { CloseIcon } from '../shared/icons/close';
 import { LazyInput } from './lazy-input';
 import { LazyMessages } from './lazy-messages';
 
@@ -39,14 +41,26 @@ export function Aside({ onClose, ...props }: AsideProps) {
     <aside
       {...props}
       ref={asideRef}
-      className="right-6 top-16 min-w-64 max-w-[calc(100%-48px)] sm:max-w-96  w-full overflow-hidden fixed h-[calc(100%-64px-10px)]  border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800"
+      className={
+        cn(
+          'overflow-hidden fixed flex flex-col',
+          'right-0 top-0 sm:right-6 sm:top-16',
+          'min-w-64 sm:max-w-96 w-full h-full sm:h-[calc(100%-64px-10px)]',
+          'border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800',
+          props.className,
+        )
+      }
       aria-label="AI assistant chat"
     >
-      <div className="h-full flex flex-col gap-4">
-        <LazyMessages className="flex-1 p-4" />
+      <header className="flex flex-col overflow-hidden items-end p-4">
+        <button onClick={onClose}>
+          <CloseIcon />
+        </button>
+      </header>
 
-        <LazyInput className="p-4" />
-      </div>
+      <LazyMessages className="flex-1 p-4" />
+
+      <LazyInput className="p-4" />
     </aside>,
     document.body,
   );
