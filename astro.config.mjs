@@ -12,17 +12,14 @@ export default defineConfig({
       GROQ_API_KEY: envField.string({
         context: 'server',
         access: 'secret',
-        default: import.meta.env.GROQ_API_KEY,
       }),
       OPEN_ROUTER_API_KEY: envField.string({
         context: 'server',
         access: 'secret',
-        default: import.meta.env.OPEN_ROUTER_API_KEY,
       }),
       SESSION_SECRET: envField.string({
         context: 'server',
         access: 'secret',
-        default: import.meta.env.SESSION_SECRET,
       }),
       VERCEL_URL: envField.string({
         context: 'server',
