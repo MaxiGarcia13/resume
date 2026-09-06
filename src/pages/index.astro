@@ -6,13 +6,15 @@ import Projects from '@/components/profile/projects.astro';
 import WorksExperience from '@/components/profile/works-experience.astro';
 import SwitchTheme from '@/components/switch-theme.astro';
 import AppLayout from '@/layouts/app.astro';
+
+export const prerender = true;
 ---
 
 <AppLayout>
-  <main class="flex flex-col gap-10 max-w-[900px] mx-auto">
+  <main class="flex flex-col gap-10 max-w-225 mx-auto">
     <div class="fixed right-4 top-4 flex gap-2">
-      <SwitchTheme class="w-[40px]" />
-      <AiButton className="w-[40px] hidden md:block" client:only="react" />
+      <SwitchTheme class="w-10" />
+      <AiButton className="w-10 hidden md:block" client:only="react" />
     </div>
     <Header />
     <Languages />
