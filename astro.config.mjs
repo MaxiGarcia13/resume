@@ -3,10 +3,17 @@ import sitemap from '@astrojs/sitemap';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 export default defineConfig({
   output: 'server',
+  env: {
+    schema: {
+      GROQ_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      OPEN_ROUTER_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      SESSION_SECRET: envField.string({ context: 'server', access: 'secret' }),
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
