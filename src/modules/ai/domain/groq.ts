@@ -27,4 +27,19 @@ export class GroqService extends BaseLLM {
   async isModelCached(): Promise<boolean> {
     return true;
   }
+
+  sanitizeReply(reply: string) {
+    return super.sanitizeReply(this.removeReasoning(reply));
+  }
+
+  private removeReasoning(text: string) {
+    // eslint-disable-next-line regexp/no-trivially-nested-quantifier
+    const match = text.match(/(?:^|\n)[ \t]*(?:\|[ \t]*)?(?:\*{1,2})?Reasoning:(?:\*{1,2})?/i);
+
+    if (match?.index === undefined) {
+      return text;
+    }
+
+    return text.slice(0, match.index).trimEnd();
+  }
 }
