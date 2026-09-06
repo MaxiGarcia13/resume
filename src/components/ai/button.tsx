@@ -1,9 +1,10 @@
 import { cn } from '@maxigarcia/js-utils';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { getActionStyles } from '../shared/actions/utils';
 import { SparklesIcon } from '../shared/icons/sparkles';
 import { getTextClass } from '../shared/text/text.shared';
-import { Aside } from './aside';
+
+const LazyAside = lazy(() => import('./aside').then((module) => ({ default: module.Aside })));
 
 export function AiButton(props: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,9 +38,11 @@ export function AiButton(props: { className?: string }) {
       </button>
 
       {isOpen && (
-        <Aside
-          onClose={() => setIsOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <LazyAside
+            onClose={() => setIsOpen(false)}
+          />
+        </Suspense>
       )}
     </>
   );
