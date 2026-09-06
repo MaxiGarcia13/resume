@@ -22,11 +22,9 @@ const styles = !noWrap ? getActionStyles({ variant, className, hasChildren, hasI
 
 <a target={target} rel={rel} class={styles} {...props}>
   {
-    noWrap
-? (
+    noWrap ? (
       <slot />
-    )
-: (
+    ) : (
       <ActionText variant={variant} iconPosition={iconPosition}>
         <slot name="icon" slot="icon" />
         <slot />
