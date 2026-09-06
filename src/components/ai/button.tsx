@@ -8,8 +8,11 @@ import { Aside } from './aside';
 export function AiButton(props: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => {
+  const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     setIsOpen(!isOpen);
+    event.stopPropagation();
   };
 
   const hasGpuSupport = 'gpu' in window.navigator;
