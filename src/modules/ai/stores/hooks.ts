@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/react';
 import {
+  $awaitingLocalDownload,
   $downloadProgress,
   $error,
   $messages,
@@ -30,4 +31,8 @@ export function useDownloadProgress() {
 
 export function useError() {
   return useStore($error);
+}
+
+export function useAwaitingLocalDownload() {
+  return useStore($awaitingLocalDownload);
 }
