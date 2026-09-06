@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { ReasoningFormat } from '@openrouter/sdk/models';
 import { readLlmMessages, requireSecret } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, sseToNdjson } from '@/modules/ai/services/stream';
 
@@ -18,6 +19,9 @@ export const POST: APIRoute = async ({ request }) => {
         model: 'openai/gpt-4o-mini',
         messages,
         stream: true,
+        reasoning: {
+          exclude: true,
+        },
       }),
     });
 
