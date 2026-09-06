@@ -9,9 +9,29 @@ export default defineConfig({
 
   env: {
     schema: {
-      GROQ_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      OPEN_ROUTER_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      SESSION_SECRET: envField.string({ context: 'server', access: 'secret' }),
+      GROQ_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: import.meta.env.GROQ_API_KEY,
+      }),
+      OPEN_ROUTER_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: import.meta.env.OPEN_ROUTER_API_KEY,
+      }),
+      SESSION_SECRET: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: import.meta.env.SESSION_SECRET,
+      }),
+      VERCEL_URL: envField.string({
+        context: 'server',
+        default: import.meta.env.VERCEL_URL,
+      }),
+      SITE: envField.string({
+        context: 'server',
+        default: import.meta.env.SITE,
+      }),
     },
   },
 
@@ -25,5 +45,6 @@ export default defineConfig({
 
   site: 'https://maxi-garcia-mortigliengo-cv.vercel.app',
   integrations: [sitemap(), react()],
+
   adapter: vercel(),
 });
