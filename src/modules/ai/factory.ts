@@ -5,8 +5,8 @@ import { LocalLLM } from './domain/local-llm';
 import { OpenRouterService } from './domain/open-router';
 
 const SERVICE_ORDER: LLMServiceType[] = [
-  'groq',
   'open-router',
+  'groq',
   'local',
 ];
 
