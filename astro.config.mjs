@@ -23,11 +23,9 @@ export default defineConfig({
       }),
       VERCEL_URL: envField.string({
         context: 'server',
-        default: import.meta.env.VERCEL_URL,
       }),
       SITE: envField.string({
         context: 'server',
-        default: import.meta.env.SITE,
       }),
     },
   },
