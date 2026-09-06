@@ -27,25 +27,4 @@ export class GroqService extends BaseLLM {
   async isModelCached(): Promise<boolean> {
     return true;
   }
-
-  sanitizeReply(reply: string) {
-    return super.sanitizeReply(this.removeReasoning(reply));
-  }
-
-  private removeReasoning(text: string) {
-    const lines = text.split(/\r?\n/);
-    const index = lines.findIndex((line) => this.isReasoningHeading(line));
-
-    if (index === -1) {
-      return text;
-    }
-
-    return lines.slice(0, index).join('\n').trimEnd();
-  }
-
-  private isReasoningHeading(line: string) {
-    const stripped = line.replace(/[#|*_`>~]/g, ' ').trim();
-
-    return /^reasoning\s*:/i.test(stripped) || /^reasoning\s*$/i.test(stripped);
-  }
 }
