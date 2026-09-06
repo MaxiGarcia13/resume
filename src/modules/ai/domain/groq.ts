@@ -33,13 +33,19 @@ export class GroqService extends BaseLLM {
   }
 
   private removeReasoning(text: string) {
-    // eslint-disable-next-line regexp/no-trivially-nested-quantifier
-    const match = text.match(/(?:^|\n)[ \t]*(?:\|[ \t]*)?(?:\*{1,2})?Reasoning:(?:\*{1,2})?/i);
+    const lines = text.split(/\r?\n/);
+    const index = lines.findIndex((line) => this.isReasoningHeading(line));
 
-    if (match?.index === undefined) {
+    if (index === -1) {
       return text;
     }
 
-    return text.slice(0, match.index).trimEnd();
+    return lines.slice(0, index).join('\n').trimEnd();
+  }
+
+  private isReasoningHeading(line: string) {
+    const stripped = line.replace(/[#|*_`>~]/g, ' ').trim();
+
+    return /^reasoning\s*:/i.test(stripped) || /^reasoning\s*$/i.test(stripped);
   }
 }
