@@ -4,7 +4,7 @@ export type LLMMessage = ChatCompletionMessageParam;
 
 export type LocalLLMResponse = Promise<AsyncIterable<ChatCompletionChunk> | undefined>;
 
-export type LLMServiceType = 'local' | 'groq';
+export type LLMServiceType = 'local' | 'groq' | 'open-router';
 
 export class LLMError extends Error {
   readonly status?: number;

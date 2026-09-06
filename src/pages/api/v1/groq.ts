@@ -1,37 +1,8 @@
 import type { APIRoute } from 'astro';
 import Groq, { APIError } from 'groq-sdk';
+import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
 
 const groq = new Groq({ apiKey: import.meta.env.PUBLIC_GROQ_API_KEY });
-
-function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : 'Groq request failed';
-}
-
-function withStreamErrors(stream: ReadableStream<Uint8Array>): ReadableStream<Uint8Array> {
-  const reader = stream.getReader();
-  const encoder = new TextEncoder();
-
-  return new ReadableStream({
-    async pull(controller) {
-      try {
-        const { done, value } = await reader.read();
-
-        if (done) {
-          controller.close();
-          return;
-        }
-
-        controller.enqueue(value);
-      } catch (error) {
-        controller.enqueue(encoder.encode(`${JSON.stringify({ error: getErrorMessage(error) })}\n`));
-        controller.close();
-      }
-    },
-    cancel() {
-      return reader.cancel();
-    },
-  });
-}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -50,7 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
       },
     });
   } catch (error) {
-    const status = error instanceof APIError ? error.status ?? 500 : 500;
+    const status = error instanceof APIError ? error.status ?? 500 : getErrorStatus(error);
 
     return new Response(JSON.stringify({ error: getErrorMessage(error) }), {
       status,
