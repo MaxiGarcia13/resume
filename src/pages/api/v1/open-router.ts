@@ -1,14 +1,15 @@
 import type { APIRoute } from 'astro';
+import { readLlmMessages, requireSecret } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, sseToNdjson } from '@/modules/ai/services/stream';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { messages } = await request.json();
+    const messages = await readLlmMessages(request);
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${import.meta.env.PUBLIC_OPEN_ROUTER_API_KEY}`,
+        'Authorization': `Bearer ${requireSecret('OPEN_ROUTER_API_KEY')}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': new URL(request.url).origin,
         'X-Title': 'Maxi Garcia CV',

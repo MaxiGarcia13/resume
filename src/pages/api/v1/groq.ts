@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
 import Groq, { APIError } from 'groq-sdk';
+import { readLlmMessages, requireSecret } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
-
-const groq = new Groq({ apiKey: import.meta.env.PUBLIC_GROQ_API_KEY });
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { messages } = await request.json();
+    const messages = await readLlmMessages(request);
+    const groq = new Groq({ apiKey: requireSecret('GROQ_API_KEY') });
 
     const response = await groq.chat.completions.create({
       model: 'groq/compound',
