@@ -32,6 +32,7 @@
     "preview": "astro preview",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "test": "vitest run",
     "postinstall": "npx simple-git-hooks",
     "phoenix": "rm -rf node_modules .astro dist package-lock.json && npm install"
   },
