@@ -31,6 +31,10 @@ export class BaseLLM {
     throw new Error('Not implemented');
   }
 
+  async isModelCached(): Promise<boolean> {
+    throw new Error('Not implemented');
+  }
+
   private removeThinkingText(text: string) {
     return text
       ?.replace('```thinking', '')
@@ -53,14 +57,31 @@ export class BaseLLM {
     );
   }
 
+  private getMessageContent(message: LLMMessage): string {
+    return typeof message.content === 'string' ? message.content : '';
+  }
+
   private getMessageCharCount(message: LLMMessage): number {
-    const content = typeof message.content === 'string' ? message.content : '';
-    return content.length + this.CHAT_TEMPLATE_OVERHEAD_CHARS;
+    return this.getMessageContent(message).length + this.CHAT_TEMPLATE_OVERHEAD_CHARS;
+  }
+
+  private truncateMessage(message: LLMMessage, maxChars: number): LLMMessage {
+    const maxContent = Math.max(0, maxChars - this.CHAT_TEMPLATE_OVERHEAD_CHARS);
+
+    return {
+      ...message,
+      content: this.getMessageContent(message).slice(-maxContent),
+    };
   }
 
   sliceMessagesByContextWindowSize(messages: LLMMessage[]): LLMMessage[] {
     const maxInputChars = (this.CONTEXT_WINDOW_SIZE - this.MAX_OUTPUT_TOKENS) * this.CHARS_PER_TOKEN;
     let remainingChars = maxInputChars - ASSISTANT_SYSTEM_PROMPT.length - this.CHAT_TEMPLATE_OVERHEAD_CHARS;
+
+    if (remainingChars <= this.CHAT_TEMPLATE_OVERHEAD_CHARS) {
+      const lastUserMessage = messages.findLast((message) => message.role === 'user');
+      return lastUserMessage ? [this.truncateMessage(lastUserMessage, remainingChars)] : [];
+    }
 
     const kept: LLMMessage[] = [];
 
@@ -68,12 +89,17 @@ export class BaseLLM {
       const message = messages[i];
       const size = this.getMessageCharCount(message);
 
-      if (kept.length > 0 && size > remainingChars) {
-        break;
+      if (size <= remainingChars) {
+        kept.push(message);
+        remainingChars -= size;
+        continue;
       }
 
-      kept.push(message);
-      remainingChars -= size;
+      if (kept.length === 0) {
+        kept.push(this.truncateMessage(message, remainingChars));
+      }
+
+      break;
     }
 
     kept.reverse();
