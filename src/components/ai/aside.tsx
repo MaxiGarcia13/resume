@@ -12,7 +12,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
   const asideRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
+    const handler = (event: PointerEvent | TouchEvent) => {
       const target = event.target as Node;
 
       if (
@@ -26,9 +26,13 @@ export function Aside({ onClose, ...props }: AsideProps) {
       onClose();
     };
 
-    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('pointerdown', handler);
+    document.addEventListener('touchend', handler);
 
-    return () => document.removeEventListener('pointerdown', handlePointerDown);
+    return () => {
+      document.removeEventListener('pointerdown', handler);
+      document.removeEventListener('touchend', handler);
+    };
   }, [onClose]);
 
   return createPortal(
