@@ -43,7 +43,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
       ref={asideRef}
       className={
         cn(
-          'overflow-hidden absolute sm:fixed flex flex-col z-10',
+          'overflow-hidden fixed flex flex-col',
           'right-0 top-0 sm:right-6 sm:top-16',
           'min-w-64 sm:max-w-96 w-full h-full sm:h-[calc(100%-64px-10px)]',
           'border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800',
