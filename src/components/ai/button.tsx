@@ -9,16 +9,16 @@ import { Aside } from './aside';
 export function AiButton(props: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const toggle = (event?: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
     const open = !isOpen;
     setIsOpen(open);
 
     if (isMobile()) {
-      document.body.style.overflowY = open ? 'hidden' : 'auto';
+      document.body.classList.toggle('overflow-y-hidden', open);
     }
 
-    event.stopPropagation();
+    event?.stopPropagation();
   };
 
   const hasGpuSupport = 'gpu' in window.navigator;
@@ -43,7 +43,7 @@ export function AiButton(props: { className?: string }) {
       </button>
 
       {isOpen && (
-        <Aside onClose={() => setIsOpen(false)} className="rounded-sm" />
+        <Aside onClose={toggle} className="rounded-sm" />
       )}
     </>
   );
