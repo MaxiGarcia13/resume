@@ -2,7 +2,6 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { isMobile } from '@/utils/device';
 import { CloseIcon } from '../shared/icons/close';
 import { LazyInput } from './lazy-input';
 import { LazyMessages } from './lazy-messages';
@@ -15,11 +14,6 @@ export function Aside({ onClose, ...props }: AsideProps) {
   const asideRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (isMobile()) {
-      document.body.style.overflowY = 'hidden';
-      return;
-    }
-
     const handler = (event: PointerEvent | TouchEvent) => {
       const target = event.target as Node;
 
@@ -37,10 +31,6 @@ export function Aside({ onClose, ...props }: AsideProps) {
     document.addEventListener('pointerdown', handler);
 
     return () => {
-      if (isMobile()) {
-        document.body.style.overflowY = 'auto';
-      }
-
       document.removeEventListener('pointerdown', handler);
     };
   }, [onClose]);
