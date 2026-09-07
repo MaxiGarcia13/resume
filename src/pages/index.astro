@@ -11,8 +11,8 @@ export const prerender = true;
 ---
 
 <AppLayout>
-  <main class="flex flex-col gap-10 max-w-225 mx-auto">
-    <div class="fixed right-4 top-4 flex gap-2">
+  <main class="flex flex-col gap-10 max-w-225 mx-auto min-h-screen">
+    <div class="fixed z-10 right-8 top-4 flex gap-2 backdrop-blur-sm rounded-sm">
       <SwitchTheme class="w-10" />
       <AiButton className="w-10" client:only="react" />
     </div>
