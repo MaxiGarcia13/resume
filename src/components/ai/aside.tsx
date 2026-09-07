@@ -29,11 +29,9 @@ export function Aside({ onClose, ...props }: AsideProps) {
     };
 
     document.addEventListener('pointerdown', handler);
-    document.addEventListener('touchend', handler);
 
     return () => {
       document.removeEventListener('pointerdown', handler);
-      document.removeEventListener('touchend', handler);
     };
   }, [onClose]);
 

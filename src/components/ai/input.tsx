@@ -40,9 +40,7 @@ export function Input(props: { className?: string }) {
 
   useEffect(() => {
     if (replying === null && !modelDownloading) {
-      setTimeout(() => {
-        textareaRef.current?.focus();
-      }, 500);
+      textareaRef.current?.focus();
     }
   }, [replying, modelDownloading]);
 
@@ -73,6 +71,7 @@ export function Input(props: { className?: string }) {
         onKeyDown={handleKeyDown}
         disabled={inputLocked}
         aria-label="AI assistant input"
+        autoFocus
       />
       <button
         type="button"
