@@ -13,8 +13,8 @@ export function Bubble({ content, role }: LLMMessage) {
   return (
     <div
       className={cn(
-        'p-2 rounded-lg text-sm whitespace-pre-wrap max-w-full mr-auto wrap-break-word',
-        role === 'user' && 'bg-gray-200 dark:bg-gray-600',
+        'p-2 rounded-sm text-sm whitespace-pre-wrap max-w-full wrap-break-word',
+        role === 'user' && 'bg-gray-200 dark:bg-gray-600 ml-auto',
       )}
       aria-label={role === 'user' ? 'User message' : 'AI assistant message'}
     >

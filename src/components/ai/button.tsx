@@ -37,7 +37,7 @@ export function AiButton(props: { className?: string }) {
       </button>
 
       {isOpen && (
-        <Aside onClose={() => setIsOpen(false)} />
+        <Aside onClose={() => setIsOpen(false)} className="rounded-sm" />
       )}
     </>
   );

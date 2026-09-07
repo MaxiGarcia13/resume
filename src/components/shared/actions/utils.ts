@@ -20,7 +20,7 @@ export function getActionStyles({
   };
 
   return cn(
-    'py-2 rounded',
+    'py-2 rounded-sm',
     'disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer',
     variantStyles[variant ?? 'ghost'],
     hasChildren && 'px-4',

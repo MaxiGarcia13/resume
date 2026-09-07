@@ -12,13 +12,10 @@ const { src, alt, class: className, imageClass, ...rest } = Astro.props;
 ---
 
 <div
-  class={cn(
-    'rounded-full h-[200px] w-[200px] shrink-0 overflow-hidden border-2 border-solid border-current relative',
-    className,
-  )}
+  class={cn('rounded-full h-50 w-50 shrink-0 overflow-hidden border-2 border-solid border-current relative', className)}
 >
   <Img src={src} alt={alt} class={cn('h-full w-full', imageClass)} width={200} height={200} loading="lazy" {...rest} />
-  <span class={cn('absolute w-[100px] h-[40px] top-[33px] left-[45px]', 'dark:hidden')} aria-hidden="true">
+  <span class={cn('absolute w-25 h-10 top-8.25 left-11.25', 'dark:hidden')} aria-hidden="true">
     <Img src="/assets/images/sun-glasses.webp" alt="" />
   </span>
 </div>
