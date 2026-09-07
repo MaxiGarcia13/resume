@@ -52,7 +52,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
       onClick={(event) => event.stopPropagation()}
     >
       <header className="flex flex-col overflow-hidden items-end p-4">
-        <button onClick={onClose}>
+        <button onClick={onClose} className="cursor-pointer">
           <CloseIcon />
         </button>
       </header>
