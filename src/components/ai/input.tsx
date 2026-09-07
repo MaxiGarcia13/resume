@@ -5,12 +5,10 @@ import { getActionStyles } from '@/components/shared/actions/utils';
 import { SendIcon } from '@/components/shared/icons/send';
 import { useAi } from '@/hooks/useAi';
 import { pushMessage, setError } from '@/modules/ai';
-import { isMobile } from '@/utils/device';
 import { LoadingIcon } from '../shared/icons/loading';
 
 export function Input(props: { className?: string }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const mobile = isMobile();
 
   const [value, setValue] = useState('');
   const disabled = value.trim() === '';
@@ -46,7 +44,7 @@ export function Input(props: { className?: string }) {
     }
 
     textareaRef.current?.focus({ preventScroll: true });
-  }, [mobile, replying, modelDownloading]);
+  }, [replying, modelDownloading]);
 
   return (
     <div
