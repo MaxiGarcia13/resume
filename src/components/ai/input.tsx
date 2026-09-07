@@ -41,7 +41,7 @@ export function Input(props: { className?: string }) {
   };
 
   useEffect(() => {
-    if (mobile || replying !== null || modelDownloading) {
+    if (replying !== null || modelDownloading) {
       return;
     }
 
@@ -75,7 +75,6 @@ export function Input(props: { className?: string }) {
         onKeyDown={handleKeyDown}
         disabled={inputLocked}
         aria-label="AI assistant input"
-        autoFocus={!mobile}
       />
       <button
         type="button"
