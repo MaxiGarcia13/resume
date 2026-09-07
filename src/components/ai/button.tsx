@@ -1,6 +1,5 @@
 import { cn } from '@maxigarcia/js-utils';
 import { useState } from 'react';
-import { isMobile } from '@/utils/device';
 import { getActionStyles } from '../shared/actions/utils';
 import { SparklesIcon } from '../shared/icons/sparkles';
 import { getTextClass } from '../shared/text/text.shared';
@@ -11,13 +10,7 @@ export function AiButton(props: { className?: string }) {
 
   const toggle = (event?: React.MouseEvent<HTMLButtonElement>) => {
     event?.preventDefault();
-    const open = !isOpen;
-    setIsOpen(open);
-
-    if (isMobile()) {
-      document.body.classList.toggle('overflow-y-hidden', open);
-    }
-
+    setIsOpen((open) => !open);
     event?.stopPropagation();
   };
 

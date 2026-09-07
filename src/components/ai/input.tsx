@@ -5,10 +5,16 @@ import { getActionStyles } from '@/components/shared/actions/utils';
 import { SendIcon } from '@/components/shared/icons/send';
 import { useAi } from '@/hooks/useAi';
 import { pushMessage, setError } from '@/modules/ai';
+import { isMobile } from '@/utils/device';
 import { LoadingIcon } from '../shared/icons/loading';
+
+function focusInput(textarea: HTMLTextAreaElement | null) {
+  textarea?.focus({ preventScroll: true });
+}
 
 export function Input(props: { className?: string }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const mobile = isMobile();
 
   const [value, setValue] = useState('');
   const disabled = value.trim() === '';
@@ -39,10 +45,12 @@ export function Input(props: { className?: string }) {
   };
 
   useEffect(() => {
-    if (replying === null && !modelDownloading) {
-      textareaRef.current?.focus();
+    if (mobile || replying !== null || modelDownloading) {
+      return;
     }
-  }, [replying, modelDownloading]);
+
+    focusInput(textareaRef.current);
+  }, [mobile, replying, modelDownloading]);
 
   return (
     <div
@@ -53,7 +61,7 @@ export function Input(props: { className?: string }) {
         'focus-within:border-orange-400',
         props.className,
       )}
-      onClick={() => textareaRef.current?.focus()}
+      onClick={() => focusInput(textareaRef.current)}
     >
       <textarea
         ref={textareaRef}
@@ -71,7 +79,7 @@ export function Input(props: { className?: string }) {
         onKeyDown={handleKeyDown}
         disabled={inputLocked}
         aria-label="AI assistant input"
-        autoFocus
+        autoFocus={!mobile}
       />
       <button
         type="button"
