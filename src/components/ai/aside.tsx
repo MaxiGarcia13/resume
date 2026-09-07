@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { isMobile } from '@/utils/device';
 import { CloseIcon } from '../shared/icons/close';
-import { LazyInput } from './lazy-input';
+import { Input } from './input';
 import { LazyMessages } from './lazy-messages';
 
 type AsideProps = ComponentPropsWithoutRef<'aside'> & {
@@ -70,7 +70,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
 
       <LazyMessages className="flex-1 p-4" />
 
-      <LazyInput className="p-4" />
+      <Input className="p-4" />
     </aside>,
     document.body,
   );
