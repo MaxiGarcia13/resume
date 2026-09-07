@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@maxigarcia/js-utils';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { isMobile, lockBodyScroll, unlockBodyScroll } from '@/utils/device';
+import { isMobile } from '@/utils/device';
 import { CloseIcon } from '../shared/icons/close';
 import { LazyInput } from './lazy-input';
 import { LazyMessages } from './lazy-messages';
@@ -13,38 +13,6 @@ type AsideProps = ComponentPropsWithoutRef<'aside'> & {
 
 export function Aside({ onClose, ...props }: AsideProps) {
   const asideRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!isMobile()) {
-      return;
-    }
-
-    lockBodyScroll();
-
-    const syncToVisualViewport = () => {
-      const aside = asideRef.current;
-      const viewport = window.visualViewport;
-
-      if (!aside || !viewport) {
-        return;
-      }
-
-      aside.style.top = `${viewport.offsetTop}px`;
-      aside.style.left = `${viewport.offsetLeft}px`;
-      aside.style.width = `${viewport.width}px`;
-      aside.style.height = `${viewport.height}px`;
-    };
-
-    syncToVisualViewport();
-    window.visualViewport?.addEventListener('resize', syncToVisualViewport);
-    window.visualViewport?.addEventListener('scroll', syncToVisualViewport);
-
-    return () => {
-      window.visualViewport?.removeEventListener('resize', syncToVisualViewport);
-      window.visualViewport?.removeEventListener('scroll', syncToVisualViewport);
-      unlockBodyScroll();
-    };
-  }, []);
 
   useEffect(() => {
     if (isMobile()) {

@@ -8,10 +8,6 @@ import { pushMessage, setError } from '@/modules/ai';
 import { isMobile } from '@/utils/device';
 import { LoadingIcon } from '../shared/icons/loading';
 
-function focusInput(textarea: HTMLTextAreaElement | null) {
-  textarea?.focus({ preventScroll: true });
-}
-
 export function Input(props: { className?: string }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const mobile = isMobile();
@@ -49,7 +45,7 @@ export function Input(props: { className?: string }) {
       return;
     }
 
-    focusInput(textareaRef.current);
+    textareaRef.current?.focus({ preventScroll: true });
   }, [mobile, replying, modelDownloading]);
 
   return (
@@ -61,7 +57,7 @@ export function Input(props: { className?: string }) {
         'focus-within:border-orange-400',
         props.className,
       )}
-      onClick={() => focusInput(textareaRef.current)}
+      onClick={() => textareaRef.current?.focus({ preventScroll: true })}
     >
       <textarea
         ref={textareaRef}
