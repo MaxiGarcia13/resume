@@ -51,6 +51,7 @@ export function Aside({ onClose, ...props }: AsideProps) {
         )
       }
       aria-label="AI assistant chat"
+      onClick={(event) => event.stopPropagation()}
     >
       <header className="flex flex-col overflow-hidden items-end p-4">
         <button onClick={onClose}>
