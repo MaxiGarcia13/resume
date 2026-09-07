@@ -20,7 +20,7 @@ const { class: className } = Astro.props;
 <script>
   import type { SweepDirection } from '@maxigarcia/view-transitions';
   import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
-  import { initializeThemeStore, toggleTheme } from '@/stores/theme/theme.store';
+  import { initializeThemeStore, toggleTheme } from '@/modules/theme';
 
   initializeThemeStore();
 
