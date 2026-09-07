@@ -40,7 +40,9 @@ export function Input(props: { className?: string }) {
 
   useEffect(() => {
     if (replying === null && !modelDownloading) {
-      textareaRef.current?.focus();
+      setTimeout(() => {
+        textareaRef.current?.focus();
+      }, 500);
     }
   }, [replying, modelDownloading]);
 
