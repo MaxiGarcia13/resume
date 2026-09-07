@@ -55,7 +55,7 @@ export function Input(props: { className?: string }) {
   return (
     <div
       className={cn(
-        'flex items-center justify-between w-full p-3',
+        'flex items-center justify-between w-full p-3 rounded-sm',
         'border border-gray-200 bg-white text-neutral-800',
         'dark:border-gray-700 dark:bg-gray-900 dark:text-neutral-100',
         'focus-within:border-orange-400',
