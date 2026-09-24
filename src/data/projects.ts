@@ -4,6 +4,26 @@ import { getSkills } from '@/utils/skills';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Glb studio',
+      description: 'GLB Studio — a browser-native GLB character & animation editor. Load or build characters, shape their motion, and ship clean GLBs without leaving the tab.',
+      repo: 'https://github.com/MaxiGarcia13/glb-studio',
+      website: 'https://glb-studio-beta.vercel.app',
+      skills: getSkills([
+        'threejs',
+        'astro',
+        'react',
+        'nanostores',
+        'vercel',
+        'tailwind',
+        'typescript',
+        'vitest',
+        'html',
+        'css',
+        'eslint',
+        'github-actions',
+      ]),
+    },
+    {
       title: 'Conter Strai',
       description: 'Browser tactical shooter — Civilians vs Soldiers, round-based team elimination. Astro, React Three Fiber, and Colyseus.',
       repo: 'https://github.com/MaxiGarcia13/conter-strai',
