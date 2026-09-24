@@ -1,5 +1,5 @@
 import type { LLMMessage, LocalLLMResponse } from '../types';
-import { postMessageToOpenRouter } from '../services/open-router';
+import { postMessageToLlmEndpoint } from '../services/stream';
 import { BaseLLM } from './base-llm';
 
 const CONTEXT_WINDOW_SIZE = 128000;
@@ -21,7 +21,7 @@ export class OpenRouterService extends BaseLLM {
   async loadModel(_callback: (progress: { text: string; value: number }) => void) {}
 
   async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse> {
-    return postMessageToOpenRouter(messages);
+    return postMessageToLlmEndpoint('/api/v1/ai/provider/open-router', messages);
   }
 
   async isModelCached(): Promise<boolean> {

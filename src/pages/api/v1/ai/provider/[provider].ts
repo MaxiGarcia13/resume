@@ -1,21 +1,25 @@
 import type { APIRoute } from 'astro';
 import OpenAI, { APIError } from 'openai';
-import { readLlmMessages, requireSecret } from '@/modules/ai/security';
+import { getAiProvider } from '@/modules/ai/providers';
+import { readLlmMessages } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, params }) => {
+  const provider = getAiProvider(params.provider);
+
+  if (!provider) {
+    return new Response(JSON.stringify({ error: 'Unknown AI provider' }), {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
   try {
     const messages = await readLlmMessages(request);
-    const groq = new OpenAI({
-      apiKey: requireSecret('GROQ_API_KEY'),
-      baseURL: 'https://api.groq.com/openai/v1',
-    });
-
-    const response = await groq.chat.completions.create({
-      model: 'openai/gpt-oss-120b',
-      messages,
-      stream: true,
-    });
+    const client = new OpenAI(provider.getClientOptions(request));
+    const response = await client.chat.completions.create(provider.getCreateParams(messages));
 
     return new Response(withStreamErrors(response.toReadableStream()), {
       headers: {
