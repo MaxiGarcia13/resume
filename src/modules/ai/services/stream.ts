@@ -1,4 +1,5 @@
 import type { ChatCompletionChunk } from '@mlc-ai/web-llm';
+import type { AiProviderName } from '../providers/types';
 import type { LLMMessage } from '@/modules/ai/types';
 import { LLMError } from '@/modules/ai/types';
 
@@ -98,8 +99,8 @@ async function* readNdjsonStream(
   }
 }
 
-export async function postMessageToLlmEndpoint(url: string, messages: LLMMessage[]) {
-  const response = await fetch(url, {
+export async function postMessageToLlmEndpoint(provider: AiProviderName, messages: LLMMessage[]) {
+  const response = await fetch(getEndpointUrl(provider), {
     method: 'POST',
     body: JSON.stringify({ messages }),
     headers: {
@@ -128,4 +129,8 @@ export async function postMessageToLlmEndpoint(url: string, messages: LLMMessage
   }
 
   return readNdjsonStream(response.body);
+}
+
+export function getEndpointUrl(provider: AiProviderName) {
+  return `/api/v1/ai/provider/${provider}`;
 }

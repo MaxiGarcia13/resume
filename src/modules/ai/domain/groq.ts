@@ -21,7 +21,7 @@ export class GroqService extends BaseLLM {
   async loadModel(_callback: (progress: { text: string; value: number }) => void) {}
 
   async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse> {
-    return postMessageToLlmEndpoint('/api/v1/ai/provider/groq', messages);
+    return postMessageToLlmEndpoint('groq', messages);
   }
 
   async isModelCached(): Promise<boolean> {

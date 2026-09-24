@@ -21,7 +21,7 @@ export class OpenRouterService extends BaseLLM {
   async loadModel(_callback: (progress: { text: string; value: number }) => void) {}
 
   async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse> {
-    return postMessageToLlmEndpoint('/api/v1/ai/provider/open-router', messages);
+    return postMessageToLlmEndpoint('open-router', messages);
   }
 
   async isModelCached(): Promise<boolean> {
