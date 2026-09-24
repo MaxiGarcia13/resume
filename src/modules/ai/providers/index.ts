@@ -7,10 +7,10 @@ const providers: Record<AiProviderName, AiProviderConfig> = {
   'open-router': openRouterProvider,
 };
 
-export function getAiProvider(name: string | undefined): AiProviderConfig | null {
+export function getAiProvider(name?: AiProviderName): AiProviderConfig | null {
   if (!name || !(name in providers)) {
     return null;
   }
 
-  return providers[name as AiProviderName];
+  return providers[name];
 }

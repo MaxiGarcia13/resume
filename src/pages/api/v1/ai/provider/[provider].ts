@@ -1,10 +1,17 @@
 import type { APIRoute } from 'astro';
+import type { AiProviderName } from '@/modules/ai/providers/types';
 import OpenAI, { APIError } from 'openai';
 import { getAiProvider } from '@/modules/ai/providers';
 import { readLlmMessages } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
 
-export const POST: APIRoute = async ({ request, params }) => {
+interface ApiProps {}
+
+interface ApiParams extends Record<string, string | undefined> {
+  provider?: AiProviderName;
+}
+
+export const POST: APIRoute<ApiProps, ApiParams> = async ({ request, params }) => {
   const provider = getAiProvider(params.provider);
 
   if (!provider) {
