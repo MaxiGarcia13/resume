@@ -2,10 +2,8 @@ import type { AiProviderConfig, AiProviderName } from './types';
 import { groqProvider } from './groq';
 import { openRouterProvider } from './open-router';
 
-export type { AiProviderConfig, AiProviderName } from './types';
-
 const providers: Record<AiProviderName, AiProviderConfig> = {
-  groq: groqProvider,
+  'groq': groqProvider,
   'open-router': openRouterProvider,
 };
 
