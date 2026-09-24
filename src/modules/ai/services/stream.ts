@@ -46,69 +46,6 @@ export function withStreamErrors(stream: ReadableStream<Uint8Array>): ReadableSt
   });
 }
 
-export function sseToNdjson(stream: ReadableStream<Uint8Array>): ReadableStream<Uint8Array> {
-  const reader = stream.getReader();
-  const decoder = new TextDecoder();
-  const encoder = new TextEncoder();
-  let buffer = '';
-
-  return new ReadableStream({
-    async pull(controller) {
-      try {
-        while (true) {
-          const newline = buffer.indexOf('\n');
-
-          if (newline !== -1) {
-            const line = buffer.slice(0, newline).trim();
-            buffer = buffer.slice(newline + 1);
-
-            if (enqueueSseDataLine(line, controller, encoder)) {
-              return;
-            }
-
-            continue;
-          }
-
-          const { done, value } = await reader.read();
-
-          if (done) {
-            enqueueSseDataLine(buffer.trim(), controller, encoder);
-            controller.close();
-            return;
-          }
-
-          buffer += decoder.decode(value, { stream: true });
-        }
-      } catch (error) {
-        controller.enqueue(encoder.encode(`${JSON.stringify({ error: getErrorMessage(error) })}\n`));
-        controller.close();
-      }
-    },
-    cancel() {
-      return reader.cancel();
-    },
-  });
-}
-
-function enqueueSseDataLine(
-  line: string,
-  controller: ReadableStreamDefaultController<Uint8Array>,
-  encoder: TextEncoder,
-) {
-  if (!line.startsWith('data:')) {
-    return false;
-  }
-
-  const payload = line.slice(5).trim();
-
-  if (!payload || payload === '[DONE]') {
-    return false;
-  }
-
-  controller.enqueue(encoder.encode(`${payload}\n`));
-  return true;
-}
-
 function parseLlmStreamLine(line: string): ChatCompletionChunk {
   const parsed = JSON.parse(line) as ChatCompletionChunk | { error?: string | { message?: string } };
 

@@ -1,65 +1,39 @@
 import type { APIRoute } from 'astro';
+import OpenAI, { APIError } from 'openai';
 import { readLlmMessages, requireSecret } from '@/modules/ai/security';
-import { getErrorMessage, getErrorStatus, sseToNdjson } from '@/modules/ai/services/stream';
+import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const messages = await readLlmMessages(request);
-
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${requireSecret('OPEN_ROUTER_API_KEY')}`,
-        'Content-Type': 'application/json',
+    const openRouter = new OpenAI({
+      apiKey: requireSecret('OPEN_ROUTER_API_KEY'),
+      baseURL: 'https://openrouter.ai/api/v1',
+      defaultHeaders: {
         'HTTP-Referer': new URL(request.url).origin,
         'X-Title': 'Maxi Garcia CV',
       },
-      body: JSON.stringify({
-        model: 'openai/gpt-4o-mini',
-        messages,
-        stream: true,
-        reasoning: {
-          exclude: true,
-        },
-      }),
     });
 
-    if (!response.ok) {
-      let message = `OpenRouter request failed: ${response.status}`;
+    const response = await openRouter.chat.completions.create({
+      model: 'openrouter/free',
+      messages,
+      stream: true,
+      // OpenRouter-specific: omit reasoning tokens from the stream.
+      reasoning: { exclude: true },
+    } as OpenAI.Chat.ChatCompletionCreateParamsStreaming);
 
-      try {
-        const body = await response.json() as { error?: string | { message?: string } };
-
-        if (typeof body.error === 'string') {
-          message = body.error;
-        } else if (body.error?.message) {
-          message = body.error.message;
-        }
-      } catch {
-        // Keep the status fallback when the body is not JSON.
-      }
-
-      return new Response(JSON.stringify({ error: message }), {
-        status: response.status,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    }
-
-    if (!response.body) {
-      throw new Error('OpenRouter response has no body');
-    }
-
-    return new Response(sseToNdjson(response.body), {
+    return new Response(withStreamErrors(response.toReadableStream()), {
       headers: {
         'Content-Type': 'application/x-ndjson',
         'Cache-Control': 'no-cache',
       },
     });
   } catch (error) {
+    const status = error instanceof APIError ? error.status ?? 500 : getErrorStatus(error);
+
     return new Response(JSON.stringify({ error: getErrorMessage(error) }), {
-      status: getErrorStatus(error),
+      status,
       headers: {
         'Content-Type': 'application/json',
       },

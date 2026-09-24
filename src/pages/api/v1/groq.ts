@@ -1,15 +1,18 @@
 import type { APIRoute } from 'astro';
-import Groq, { APIError } from 'groq-sdk';
+import OpenAI, { APIError } from 'openai';
 import { readLlmMessages, requireSecret } from '@/modules/ai/security';
 import { getErrorMessage, getErrorStatus, withStreamErrors } from '@/modules/ai/services/stream';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const messages = await readLlmMessages(request);
-    const groq = new Groq({ apiKey: requireSecret('GROQ_API_KEY') });
+    const groq = new OpenAI({
+      apiKey: requireSecret('GROQ_API_KEY'),
+      baseURL: 'https://api.groq.com/openai/v1',
+    });
 
     const response = await groq.chat.completions.create({
-      model: 'groq/compound',
+      model: 'openai/gpt-oss-120b',
       messages,
       stream: true,
     });
