@@ -8,6 +8,7 @@ export function getProjects(): Array<Project> {
       description: 'GLB Studio — a browser-native GLB character & animation editor. Load or build characters, shape their motion, and ship clean GLBs without leaving the tab.',
       repo: 'https://github.com/MaxiGarcia13/glb-studio',
       website: 'https://glb-studio-beta.vercel.app',
+      showInCv: true,
       skills: getSkills([
         'threejs',
         'astro',
@@ -61,6 +62,7 @@ export function getProjects(): Array<Project> {
       description: 'Immersive personal photo gallery. Visitors arrive at an entrance, then walk a 3D corridor past framed photographs — one work per stop — using arrow keys or swipe.',
       repo: 'https://github.com/MaxiGarcia13/my-gallery',
       website: 'https://maxi-photo-gallery.vercel.app',
+      showInCv: true,
       skills: getSkills([
         'react',
         'javascript',
@@ -84,6 +86,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Playtiva',
+      showInCv: true,
       description: 'Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats',
       repo: 'https://github.com/MaxiGarcia13/playtiva',
       website: 'https://playtva.vercel.app',
@@ -111,6 +114,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Iconify',
+      showInCv: true,
       description: 'High-performance icon set generator. Generate favicons, PWA icons, iOS, and Android assets in seconds.',
       repo: 'https://github.com/MaxiGarcia13/iconify',
       website: 'https://iconset-generator.vercel.app',
@@ -133,6 +137,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Mockingbird',
+      showInCv: true,
       description: 'Mockingbird lets you define HTTP responses — status, headers, body — and test how your frontend behaves. Pick the workflow that fits your setup: a browser extension that intercepts fetch on any page, or a local API with a web app.',
       repo: 'https://github.com/MaxiGarcia13/mockingbird',
       website: 'https://mockiingbird.vercel.app/',
@@ -156,6 +161,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'View Transitions',
+      showInCv: true,
       description: 'Smooth, dependency-free transitions using the native View Transitions API. Lightweight CSS-first animations—no framework required.',
       repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
       website: 'https://view-transitionsapi.vercel.app',
@@ -177,6 +183,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Fetcher',
+      showInCv: true,
       description: 'Fetcher is a lightweight and developer-friendly REST API client for testing, debugging, and managing HTTP requests.',
       repo: 'https://github.com/MaxiGarcia13/fetcher',
       website: 'https://fetcherapi.vercel.app',
@@ -200,6 +207,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'RunJS Playground',
+      showInCv: true,
       description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/runjs',
       website: 'https://runjs-playground.vercel.app',
@@ -381,4 +389,8 @@ export function getProjects(): Array<Project> {
       ]),
     },
   ];
+}
+
+export function getCvProjects(): Array<Project> {
+  return getProjects().filter((project) => project.showInCv);
 }
