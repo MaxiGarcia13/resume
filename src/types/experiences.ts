@@ -17,5 +17,5 @@ export interface Schedule {
 
 export interface Position {
   title: string;
-  description: string;
+  description: Array<string>;
 }

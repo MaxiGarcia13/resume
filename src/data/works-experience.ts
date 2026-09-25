@@ -14,11 +14,22 @@ export function getWorksExperience(): Array<WorkExperience> {
       positions: [
         {
           title: 'Senior Frontend Software Engineer',
-          description: 'Developed and maintained web applications using React JS, Vue JS, Next JS, TypeScript; implemented unit tests with Jest and Vitest; collaborated on end-to-end testing with Playwright and Cypress; worked to improve the developer experience by enhancing internal tools and workflows; implemented continuous-integration pipelines using GitHub Actions; collaborated with the migration from Vue JS to React JS.',
+          description: [
+            'Developed and maintained web applications using React JS, Vue JS, Next JS, TypeScript',
+            'Implemented unit tests with Jest and Vitest',
+            'Collaborated on end-to-end testing with Playwright and Cypress',
+            'Worked to improve the developer experience by enhancing internal tools and workflows',
+            'Implemented continuous-integration pipelines using GitHub Actions',
+            'Collaborated with the migration from Vue JS to React JS',
+          ],
         },
         {
           title: 'Frontend Software Engineer',
-          description: 'Developed and maintained web applications using Vue JS, TypeScript; implemented unit tests with Jest and Vitest; collaborated with the migration from Vue 2.7 to Vue 3.',
+          description: [
+            'Developed and maintained web applications using Vue JS, TypeScript',
+            'Implemented unit tests with Jest and Vitest',
+            'Collaborated with the migration from Vue 2.7 to Vue 3',
+          ],
         },
       ],
       skills: getSkills(
@@ -70,7 +81,10 @@ export function getWorksExperience(): Array<WorkExperience> {
       positions: [
         {
           title: 'Frontend Developer',
-          description: 'Developed and maintained web applications using React JS, TypeScript; implemented unit tests with Jest.',
+          description: [
+            'Developed and maintained web applications using React JS, TypeScript',
+            'Implemented unit tests with Jest',
+          ],
         },
       ],
       skills: getSkills([
@@ -104,7 +118,9 @@ export function getWorksExperience(): Array<WorkExperience> {
       positions: [
         {
           title: 'Frontend Developer',
-          description: 'Developed and maintained web applications using React JS, TypeScript and Gatsby JS.',
+          description: [
+            'Developed and maintained web applications using React JS, TypeScript and Gatsby JS',
+          ],
         },
       ],
       skills: getSkills([
@@ -139,11 +155,15 @@ export function getWorksExperience(): Array<WorkExperience> {
       positions: [
         {
           title: 'Associate Frontend Developer',
-          description: 'Developed and maintained web applications using React JS, Angular JS, Electron JS and Node JS.',
+          description: [
+            'Developed and maintained web applications using React JS, Angular JS, Electron JS and Node JS',
+          ],
         },
         {
           title: 'Junior Frontend Developer',
-          description: 'Developed and maintained web applications using Angular JS.',
+          description: [
+            'Developed and maintained web applications using Angular JS',
+          ],
         },
       ],
       skills: getSkills([

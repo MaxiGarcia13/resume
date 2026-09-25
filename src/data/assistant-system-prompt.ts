@@ -26,7 +26,7 @@ const workExperienceText = workExperience.map((work, index) => {
   const end = work.schedule.endDate ? formatDate(new Date(work.schedule.endDate)) : 'Present';
   const yearsWorking = diffDates(work.schedule);
   const positions = work.positions
-    .map((position) => `${position.title} — ${position.description}`)
+    .map((position) => `${position.title} — ${position.description.join('; ')}`)
     .join('; ');
 
   return `${index + 1}. ${work.company} | ${start} – ${end} | ${yearsWorking.years}y ${yearsWorking.months}m

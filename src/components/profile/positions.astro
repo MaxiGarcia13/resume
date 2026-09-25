@@ -21,7 +21,16 @@ const { positions, class: className } = Astro.props;
         </Text>
         <div>
           <Heading tag="h4">{position.title}</Heading>
-          <Text>{position.description}</Text>
+          <ul class="mt-1 flex flex-col gap-1">
+            {position.description.map((item) => (
+              <li class="flex gap-2">
+                <Text tag="span" aria-hidden="true">
+                  •
+                </Text>
+                <Text>{item}</Text>
+              </li>
+            ))}
+          </ul>
         </div>
       </li>
     ))
