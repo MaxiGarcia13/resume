@@ -15,20 +15,9 @@ export function getWorksExperience(): Array<WorkExperience> {
         {
           title: 'Senior Frontend Software Engineer',
           description: [
-            'Developed and maintained web applications using React JS, Vue JS, Next JS, TypeScript',
-            'Implemented unit tests with Jest and Vitest',
-            'Collaborated on end-to-end testing with Playwright and Cypress',
-            'Worked to improve the developer experience by enhancing internal tools and workflows',
-            'Implemented continuous-integration pipelines using GitHub Actions',
-            'Collaborated with the migration from Vue JS to React JS',
-          ],
-        },
-        {
-          title: 'Frontend Software Engineer',
-          description: [
-            'Developed and maintained web applications using Vue JS, TypeScript',
-            'Implemented unit tests with Jest and Vitest',
-            'Collaborated with the migration from Vue 2.7 to Vue 3',
+            'Drove Playboard’s zero-downtime migration from Vue to React/Next.js (2025–2026) for Kroger merchandisers, using AI-assisted development to keep parallel feature delivery across internal and client teams',
+            'Led a front-end squad (2022–2024) shipping Playboard features that optimized search and conversions for Kroger digital merchandisers; drove cross-functional alignment and Clean Architecture for scalable code',
+            'Strengthened quality and delivery with Jest/Vitest, Playwright/Cypress, and GitHub Actions CI, while improving internal developer tools and workflows',
           ],
         },
       ],
@@ -82,8 +71,8 @@ export function getWorksExperience(): Array<WorkExperience> {
         {
           title: 'Frontend Developer',
           description: [
-            'Developed and maintained web applications using React JS, TypeScript',
-            'Implemented unit tests with Jest',
+            'Delivered web features and performance improvements for Viajes El Corte Inglés in React and TypeScript, improving the user experience',
+            'Covered new functionality with Jest unit tests to keep delivery reliable',
           ],
         },
       ],
@@ -119,7 +108,8 @@ export function getWorksExperience(): Array<WorkExperience> {
         {
           title: 'Frontend Developer',
           description: [
-            'Developed and maintained web applications using React JS, TypeScript and Gatsby JS',
+            'Developed and deployed web features and performance improvements for a US passport assistance platform using React, TypeScript, and Gatsby',
+            'Restructured the project to support multiple templates and themes with Sass',
           ],
         },
       ],
@@ -156,13 +146,15 @@ export function getWorksExperience(): Array<WorkExperience> {
         {
           title: 'Associate Frontend Developer',
           description: [
-            'Developed and maintained web applications using React JS, Angular JS, Electron JS and Node JS',
+            'Built from scratch a messaging app that aggregated messages from multiple applications using React, Node.js, and real-time updates',
+            'Built from scratch a real-time car rental tracking and management app',
+            'Delivered hybrid mobile apps with Apache Cordova and desktop apps with Electron',
           ],
         },
         {
           title: 'Junior Frontend Developer',
           description: [
-            'Developed and maintained web applications using Angular JS',
+            'Developed and maintained web applications with AngularJS',
           ],
         },
       ],
