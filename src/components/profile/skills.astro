@@ -1,5 +1,6 @@
 ---
 import type { Skill } from '@/types/skills';
+import { getSkillIcon } from '@/utils/skills/skill-icons';
 import Text from '../shared/text/text.astro';
 
 const { skills = [], class: className }: { skills?: Skill[]; class?: string } = Astro.props;
@@ -8,7 +9,7 @@ const { skills = [], class: className }: { skills?: Skill[]; class?: string } = 
 <div class:list={[className, 'flex flex-wrap gap-2']}>
   {
     skills.map((skill) => {
-      const Icon = skill.icon;
+      const Icon = getSkillIcon(skill.id);
 
       return (
         <Text variant="ghost" tag="span" class="text-xs flex gap-1 items-center justify-start">

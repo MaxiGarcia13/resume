@@ -21,13 +21,12 @@ const SKILL_NAME_MAP: Partial<Record<SkillId, string>> = {
 };
 
 export function getSkill(id: SkillId): Skill {
-  const { icon, category } = SKILLS_REGISTRY[id];
+  const { category } = SKILLS_REGISTRY[id];
 
   const name = SKILL_NAME_MAP[id] ?? capitalize(id.replace(/-/g, ' '));
 
   return {
     id,
-    icon,
     name,
     category,
   };
