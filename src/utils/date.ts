@@ -1,4 +1,4 @@
-import type { Schedule } from '@/types/experiences';
+import type { Schedule } from '@/types/schedule';
 
 export function formatSechedule(schedule: Schedule) {
   const startDate = new Date(schedule.startDate);
@@ -27,3 +27,15 @@ export function diffDates(schedule: Schedule) {
 
   return { years, months };
 };
+
+export function formatScheduleDuration(schedule: Schedule) {
+  const { startDate, endDate } = formatSechedule(schedule);
+  const { years, months } = diffDates(schedule);
+
+  const duration
+    = years > 0
+      ? `${years} years${months > 0 ? ` and ${months} months` : ''}`
+      : `${months} months`;
+
+  return `${startDate} - ${endDate ?? 'now'}. ${duration}`;
+}

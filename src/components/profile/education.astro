@@ -3,7 +3,7 @@ import Link from '@/components/shared/actions/link/link.astro';
 import Heading from '@/components/shared/heading/heading.astro';
 import ExternalLinkIcon from '@/components/shared/icons/external-link.astro';
 import Text from '@/components/shared/text/text.astro';
-import { diffDates, formatSechedule } from '@/utils';
+import { formatScheduleDuration } from '@/utils';
 import { getCvAnchorId } from '@/utils/link-cv-anchors';
 import { getEducation } from '@/data/education';
 
@@ -17,9 +17,6 @@ const education = getEducation();
   <ul class="flex flex-col gap-4">
     {
       education.map(({ institution, degree, url, schedule }) => {
-        const { startDate, endDate } = formatSechedule(schedule);
-        const { years, months } = diffDates(schedule);
-
         const id = getCvAnchorId(degree);
 
         return (
@@ -35,7 +32,7 @@ const education = getEducation();
             </Heading>
 
             <Text tag="span" class="flex gap-1">
-              {`${startDate} - ${endDate ?? 'now'}. ${years > 0 ? `${years} years ${months > 0 ? `and ${months} months` : ''}` : `${months} months`}`}
+              {formatScheduleDuration(schedule)}
             </Text>
           </li>
         );
