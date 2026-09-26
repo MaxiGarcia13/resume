@@ -3,6 +3,7 @@ import {
   Document,
   Page,
 } from '@react-pdf/renderer';
+import { Education } from './education';
 import { Header } from './header';
 import { Languages } from './languages';
 import { ProfilePicture } from './profile-picture';
@@ -17,7 +18,7 @@ export interface CvDocumentProps {
 }
 
 export function CvDocument({ data, photoSrc }: CvDocumentProps) {
-  const { profile, spokenLanguages, works, projects, skills } = data;
+  const { profile, spokenLanguages, education, works, projects, skills } = data;
 
   return (
     <Document
@@ -52,6 +53,8 @@ export function CvDocument({ data, photoSrc }: CvDocumentProps) {
           <Skills skills={skills} />
 
           <WorkExperience works={works} />
+
+          <Education education={education} />
 
           <Projects projects={projects} />
         </Wrapper>

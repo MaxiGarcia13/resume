@@ -1,6 +1,6 @@
 import type { CvData } from '@/data/cv';
 import { formatSechedule } from '@/utils/date';
-import { Link, Section, Text, Wrapper } from './shared';
+import { Section, Text, Wrapper } from './shared';
 
 interface WorkExperienceProps {
   works: CvData['works'];
@@ -18,9 +18,9 @@ export function WorkExperience({ works }: WorkExperienceProps) {
               flexDirection="row"
               style={{ justifyContent: 'space-between', alignItems: 'center' }}
             >
-              <Link src={experience.website} size="md" color="secondary" weight="bold">
+              <Text size="md" color="secondary" weight="bold">
                 {experience.company}
-              </Link>
+              </Text>
               <Text size="xs" color="tertiary" weight="oblique">
                 {`${startDate} – ${endDate ?? 'Present'}`}
               </Text>
