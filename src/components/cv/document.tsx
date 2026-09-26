@@ -18,8 +18,6 @@ export interface CvDocumentProps {
 
 export function CvDocument({ data, photoSrc }: CvDocumentProps) {
   const { profile, spokenLanguages, works, projects, skills } = data;
-  const portfolioUrl = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
-  const telephoneNumber = '+34643761326';
 
   return (
     <Document
@@ -46,8 +44,6 @@ export function CvDocument({ data, photoSrc }: CvDocumentProps) {
             <ProfilePicture src={photoSrc} />
             <Header
               profile={profile}
-              telephoneNumber={telephoneNumber}
-              portfolioUrl={portfolioUrl}
             />
           </Wrapper>
 
