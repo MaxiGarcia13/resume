@@ -30,15 +30,15 @@ export function Skills({ skills }: SkillsProps) {
         const list = skills[category];
 
         const titles: Record<SkillCategory, string> = {
-          'language': 'Languages',
-          'state-management': 'State Management',
+          'language': 'Languages & Web',
+          'state-management': 'State & Data',
           'tool': 'Tools',
           'testing': 'Testing',
           'database': 'Databases/BaaS/CMS',
-          'frontend-framework': 'Frontend Frameworks',
-          'backend-framework': 'Backend Frameworks',
-          'css-framework': 'Styling/CSS',
-          'ai': 'AI/Tools/Agents/Providers',
+          'frontend-framework': 'Frontend',
+          'backend-framework': 'Backend',
+          'css-framework': 'Styling',
+          'ai': 'AI',
           'cloud': 'Cloud',
           'devops': 'DevOps',
           'other': 'Others',

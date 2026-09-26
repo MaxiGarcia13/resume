@@ -8,6 +8,16 @@ const SKILL_NAME_MAP: Partial<Record<SkillId, string>> = {
   'html': 'HTML',
   'css': 'CSS',
   'react-pdf': 'React PDF Renderer',
+  'javascript': 'JavaScript',
+  'typescript': 'TypeScript',
+  'graphql': 'GraphQL',
+  'next': 'Next.js',
+  'react-native': 'React Native',
+  'nodejs': 'Node.js',
+  'threejs': 'Three.js',
+  'pwa': 'PWA',
+  'mcp': 'MCP',
+  'ci': 'CI/CD',
 };
 
 export function getSkill(id: SkillId): Skill {
