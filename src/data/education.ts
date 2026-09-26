@@ -13,7 +13,7 @@ export function getEducation(): Array<Education> {
     },
     {
       institution: 'Coderhouse',
-      degree: 'Course of UX/UI Design',
+      degree: 'UX/UI Design Course',
       schedule: {
         startDate: '2020-02-01',
         endDate: '2020-07-01',
@@ -22,7 +22,7 @@ export function getEducation(): Array<Education> {
     },
     {
       institution: 'La Metro escuela de diseño y comunicación audiovisual',
-      degree: 'Course in Graphic design',
+      degree: 'Graphic design Course',
       schedule: {
         startDate: '2016-03-01',
         endDate: '2017-03-01',
