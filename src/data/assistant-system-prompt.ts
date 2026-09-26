@@ -1,5 +1,6 @@
 import { diffDates, formatDate } from '@/utils/date';
 import { formatSkills, uniqueSkills } from '@/utils/skills';
+import { getEducation } from './education';
 import { getLanguages } from './languages';
 import { getProfile } from './profile';
 import { getProjects } from './projects';
@@ -8,6 +9,7 @@ import { getWorksExperience } from './works-experience';
 const profile = getProfile();
 const languages = getLanguages();
 const projects = getProjects();
+const education = getEducation();
 const workExperience = getWorksExperience();
 const firstFrontendStart = new Date(workExperience[workExperience.length - 1].schedule.startDate);
 const now = new Date();
@@ -38,6 +40,15 @@ const projectsText = projects
   .map((project) => `- ${project.title} | ${formatSkills(project.skills)}`)
   .join('\n');
 
+const educationText = education
+  .map((item) => {
+    const start = formatDate(new Date(item.schedule.startDate));
+    const end = item.schedule.endDate ? formatDate(new Date(item.schedule.endDate)) : 'Present';
+
+    return `- ${item.degree} | ${item.institution} | ${start} – ${end} | ${item.url}`;
+  })
+  .join('\n');
+
 const languagesText = languages
   .map((language) => `${language.name} (${language.proficiency})`)
   .join(', ');
@@ -47,7 +58,7 @@ const stackText = formatSkills(stack);
 export const ASSISTANT_SYSTEM_PROMPT = `You are ${profile.nickName}'s CV assistant. Answer ONLY from CV DATA below. No outside knowledge.
 
 Rules:
-- CV topics only (profile, jobs, projects, skills, dates, links, languages). Else refuse briefly and ask about the CV.
+- CV topics only (profile, jobs, projects, education, skills, dates, links, languages). Else refuse briefly and ask about the CV.
 - Never invent. If missing: "That detail is not present in the available CV data." / "Ese dato no aparece en el CV disponible."
 - Third person ("${profile.nickName} worked…"). Same language as the user. Markdown. Concise.
 - Company aliases: Empathy = Empathy.co, Leadtech = Leadtech group. Match flexibly.
@@ -62,4 +73,6 @@ STACK: ${stackText}
 WORK:
 ${workExperienceText}
 PROJECTS:
-${projectsText}`;
+${projectsText}
+EDUCATION:
+${educationText}`;
