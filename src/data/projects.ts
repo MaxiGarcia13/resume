@@ -22,6 +22,7 @@ export function getProjects(): Array<Project> {
         'eslint',
         'github-actions',
       ]),
+      showInCv: true,
     },
     {
       title: 'Conter Strai',
@@ -81,6 +82,7 @@ export function getProjects(): Array<Project> {
         'vercel',
         'react-query',
       ]),
+      showInCv: true,
     },
     {
       title: 'Playtiva',
@@ -108,6 +110,7 @@ export function getProjects(): Array<Project> {
         'github-actions',
         'vercel',
       ]),
+      showInCv: true,
     },
     {
       title: 'Iconify',
@@ -130,9 +133,11 @@ export function getProjects(): Array<Project> {
         'github-actions',
         'vercel',
       ]),
+      showInCv: true,
     },
     {
       title: 'Mockingbird',
+      showInCv: true,
       description: 'Mockingbird lets you define HTTP responses — status, headers, body — and test how your frontend behaves. Pick the workflow that fits your setup: a browser extension that intercepts fetch on any page, or a local API with a web app.',
       repo: 'https://github.com/MaxiGarcia13/mockingbird',
       website: 'https://mockiingbird.vercel.app/',
@@ -156,6 +161,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'View Transitions',
+      showInCv: true,
       description: 'Smooth, dependency-free transitions using the native View Transitions API. Lightweight CSS-first animations—no framework required.',
       repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
       website: 'https://view-transitionsapi.vercel.app',
@@ -177,6 +183,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Fetcher',
+      showInCv: true,
       description: 'Fetcher is a lightweight and developer-friendly REST API client for testing, debugging, and managing HTTP requests.',
       repo: 'https://github.com/MaxiGarcia13/fetcher',
       website: 'https://fetcherapi.vercel.app',
@@ -203,6 +210,7 @@ export function getProjects(): Array<Project> {
       description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/runjs',
       website: 'https://runjs-playground.vercel.app',
+      showInCv: true,
       skills: getSkills([
         'react',
         'javascript',

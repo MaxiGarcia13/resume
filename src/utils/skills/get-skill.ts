@@ -1,14 +1,25 @@
-import type { Skill, SkillId } from '@/types/skills';
+import type { Skill, SkillCategory, SkillId } from '@/types/skills';
 import { capitalize } from '@maxigarcia/js-utils';
-import { SKILLS_ICONS_REGISTRY } from './registry';
+import { SKILLS_REGISTRY } from './registry';
+
+const SKILL_NAME_MAP: Partial<Record<SkillId, string>> = {
+  'aws': 'AWS',
+  'cloudflare-r2': 'Cloudflare R2',
+  'html': 'HTML',
+  'css': 'CSS',
+  'react-pdf': 'React PDF Renderer',
+};
 
 export function getSkill(id: SkillId): Skill {
-  const icon = SKILLS_ICONS_REGISTRY[id];
+  const { icon, category } = SKILLS_REGISTRY[id];
+
+  const name = SKILL_NAME_MAP[id] ?? capitalize(id.replace(/-/g, ' '));
 
   return {
     id,
     icon,
-    name: capitalize(id.replace(/-/g, ' ')),
+    name,
+    category,
   };
 }
 
@@ -37,4 +48,17 @@ export function formatSkills(skills?: Skill[]): string {
   }
 
   return skills.map((skill) => skill.name).join(', ');
+}
+
+export function groupSkillsByCategory(skills: Skill[]): Record<SkillCategory, Skill[]> {
+  return skills.reduce((acc, skill) => {
+    const category = skill.category;
+
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+
+    acc[category].push(skill);
+    return acc;
+  }, {} as Record<SkillCategory, Skill[]>);
 }

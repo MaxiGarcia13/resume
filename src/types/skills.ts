@@ -4,7 +4,22 @@ export interface Skill {
   id: SkillId;
   name: string;
   icon?: AstroComponentFactory;
+  category: SkillCategory;
 }
+
+export type SkillCategory
+  = 'language'
+    | 'state-management'
+    | 'tool'
+    | 'testing'
+    | 'database'
+    | 'ai'
+    | 'cloud'
+    | 'devops'
+    | 'other'
+    | 'frontend-framework'
+    | 'backend-framework'
+    | 'css-framework';
 
 export type SkillId
   = FrameworkSkillId
@@ -76,7 +91,9 @@ type ToolSkillId
     | 'styled-components'
     | 'angularjs'
     | 'nanostores'
-    | 'monaco-editor';
+    | 'monaco-editor'
+    | 'leaflet'
+    | 'react-pdf';
 
 type CloudSkillId = 'cloudflare'
   | 'cloudflare-workers'
@@ -94,7 +111,12 @@ type AISkillId
     | 'cursor'
     | 'groq'
     | 'ollama'
-    | 'opencode';
+    | 'opencode'
+    | 'claude'
+    | 'openai'
+    | 'anthropic'
+    | 'gemini'
+    | 'openrouter';
 
 type TestingSkillId
   = 'jest'
@@ -112,4 +134,8 @@ type OtherSkillId
     | 'pwa'
     | 'ssr'
     | 'websockets'
-    | 'i18n';
+    | 'i18n'
+    | 'solid'
+    | 'kiss'
+    | 'dry'
+    | 'clean-architecture';

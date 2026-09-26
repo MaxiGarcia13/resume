@@ -6,4 +6,5 @@ export interface Project {
   repo: string;
   website?: string;
   skills?: Array<Skill>;
+  showInCv?: boolean;
 }

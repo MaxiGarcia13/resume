@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
+import { generateCvIntegration } from './integrations/generate-cv';
 
 export default defineConfig({
   output: 'server',
@@ -41,7 +42,7 @@ export default defineConfig({
   },
 
   site: 'https://maxi-garcia-mortigliengo-cv.vercel.app',
-  integrations: [sitemap(), react()],
+  integrations: [sitemap(), react(), generateCvIntegration()],
 
   adapter: vercel(),
 });
