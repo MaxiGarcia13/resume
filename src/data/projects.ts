@@ -8,7 +8,6 @@ export function getProjects(): Array<Project> {
       description: 'GLB Studio — a browser-native GLB character & animation editor. Load or build characters, shape their motion, and ship clean GLBs without leaving the tab.',
       repo: 'https://github.com/MaxiGarcia13/glb-studio',
       website: 'https://glb-studio-beta.vercel.app',
-      showInCv: true,
       skills: getSkills([
         'threejs',
         'astro',
@@ -23,6 +22,7 @@ export function getProjects(): Array<Project> {
         'eslint',
         'github-actions',
       ]),
+      showInCv: true,
     },
     {
       title: 'Conter Strai',
@@ -62,7 +62,6 @@ export function getProjects(): Array<Project> {
       description: 'Immersive personal photo gallery. Visitors arrive at an entrance, then walk a 3D corridor past framed photographs — one work per stop — using arrow keys or swipe.',
       repo: 'https://github.com/MaxiGarcia13/my-gallery',
       website: 'https://maxi-photo-gallery.vercel.app',
-      showInCv: true,
       skills: getSkills([
         'react',
         'javascript',
@@ -83,10 +82,10 @@ export function getProjects(): Array<Project> {
         'vercel',
         'react-query',
       ]),
+      showInCv: true,
     },
     {
       title: 'Playtiva',
-      showInCv: true,
       description: 'Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats',
       repo: 'https://github.com/MaxiGarcia13/playtiva',
       website: 'https://playtva.vercel.app',
@@ -111,10 +110,10 @@ export function getProjects(): Array<Project> {
         'github-actions',
         'vercel',
       ]),
+      showInCv: true,
     },
     {
       title: 'Iconify',
-      showInCv: true,
       description: 'High-performance icon set generator. Generate favicons, PWA icons, iOS, and Android assets in seconds.',
       repo: 'https://github.com/MaxiGarcia13/iconify',
       website: 'https://iconset-generator.vercel.app',
@@ -134,6 +133,7 @@ export function getProjects(): Array<Project> {
         'github-actions',
         'vercel',
       ]),
+      showInCv: true,
     },
     {
       title: 'Mockingbird',
@@ -207,10 +207,10 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'RunJS Playground',
-      showInCv: true,
       description: 'RunJS Playground is a playground for running JavaScript code in the browser. It is built with React and TypeScript.',
       repo: 'https://github.com/MaxiGarcia13/runjs',
       website: 'https://runjs-playground.vercel.app',
+      showInCv: true,
       skills: getSkills([
         'react',
         'javascript',
@@ -389,8 +389,4 @@ export function getProjects(): Array<Project> {
       ]),
     },
   ];
-}
-
-export function getCvProjects(): Array<Project> {
-  return getProjects().filter((project) => project.showInCv);
 }

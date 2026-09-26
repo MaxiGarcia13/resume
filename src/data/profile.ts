@@ -5,7 +5,7 @@ export function getProfile(): Profile {
     name: 'Maximiliano Garcia Mortigliengo',
     nickName: 'Maxi',
     email: 'maxig8@hotmail.com',
-    role: 'Senior Frontend Software Engineer',
+    role: 'Senior Frontend Software Engineer & Full Stack Developer',
     socialMedia: {
       linkedin: 'https://www.linkedin.com/in/maximilianogarcia13',
       github: 'https://github.com/MaxiGarcia13',
