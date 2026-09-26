@@ -1,9 +1,11 @@
+import type { Education } from '@/types/education';
 import type { WorkExperience } from '@/types/experiences';
 import type { Language } from '@/types/languages';
 import type { Profile } from '@/types/profile';
 import type { Project } from '@/types/projects';
 import type { Skill, SkillCategory } from '@/types/skills';
 import { getCvSkills, groupSkillsByCategory } from '@/utils/skills';
+import { getEducation } from './education';
 import { getLanguages } from './languages';
 import { getProfile } from './profile';
 import { getProjects } from './projects';
@@ -18,6 +20,7 @@ export interface CvData {
   works: WorkExperience[];
   projects: Project[];
   skills: Record<SkillCategory, Skill[]>;
+  education: Education[];
   photoPath: string;
   filename: string;
 }
@@ -36,6 +39,7 @@ export function getCvData(): CvData {
     profile: getProfile(),
     spokenLanguages: getLanguages(),
     works: getWorksExperience(),
+    education: getEducation(),
     projects: projects.filter((project) => project.showInCv),
     skills: skillsByCategory,
     photoPath: CV_PHOTO_PATH,

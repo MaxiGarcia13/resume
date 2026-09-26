@@ -1,3 +1,4 @@
+import type { Schedule } from './schedule';
 import type { Skill } from './skills';
 
 export interface WorkExperience {
@@ -8,11 +9,6 @@ export interface WorkExperience {
   schedule: Schedule;
   positions: Array<Position>;
   skills?: Array<Skill>;
-}
-
-export interface Schedule {
-  startDate: string;
-  endDate?: string;
 }
 
 export interface Position {
