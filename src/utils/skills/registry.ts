@@ -2,13 +2,10 @@ import type { Skill, SkillCategory, SkillId } from '@/types/skills';
 
 const ICONS_PATH = '../../components/shared/icons/skills';
 
-const modules
-  = typeof import.meta.glob === 'function'
-    ? import.meta.glob<{ default: Skill['icon'] }>(
-        '../../components/shared/icons/skills/**/*.astro',
-        { eager: true },
-      )
-    : {};
+const modules = import.meta.glob<{ default: Skill['icon'] }>(
+  '../../components/shared/icons/skills/**/*.astro',
+  { eager: true },
+);
 
 const getIconPath = (type: string, skill: SkillId) => `${ICONS_PATH}/${type}/${skill}.astro`;
 function getSkillData(type: SkillCategory, skill: SkillId) {
