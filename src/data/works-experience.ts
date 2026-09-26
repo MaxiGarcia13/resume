@@ -179,6 +179,7 @@ export function getWorksExperience(): Array<WorkExperience> {
         'webpack',
         'websockets',
         'mongodb',
+        'leaflet',
       ]),
     },
   ];
