@@ -1,0 +1,36 @@
+name: Export CV PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      telephone_number:
+        description: Phone number (shown on CV)
+        required: false
+        type: string
+      location:
+        description: Location (shown on CV)
+        required: false
+        type: string
+        default: Spain
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+
+      - run: npm ci
+
+      - name: Generate CV PDF
+        env:
+          TELEPHONE_NUMBER: ${{ inputs.telephone_number }}
+          LOCATION: ${{ inputs.location }}
+        run: npm run generate:cv
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdf
+          path: public/assets/maxi_garcia_mortigliengo_cv.pdf
