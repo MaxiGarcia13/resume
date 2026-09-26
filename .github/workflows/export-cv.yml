@@ -32,5 +32,5 @@ jobs:
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: cv-pdf
+          name: maxi_garcia_mortigliengo_cv
           path: public/assets/maxi_garcia_mortigliengo_cv.pdf
