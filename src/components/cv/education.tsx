@@ -9,7 +9,7 @@ interface EducationProps {
 export function Education({ education }: EducationProps) {
   return (
     <Section title="Education" flexDirection="column" gap="md">
-      {education.map(({ institution, degree, url, schedule }) => {
+      {education.map(({ institution, degree, schedule }) => {
         const { startDate, endDate } = formatSechedule(schedule);
 
         return (
@@ -37,10 +37,6 @@ export function Education({ education }: EducationProps) {
                 {`${startDate} – ${endDate ?? 'Present'}`}
               </Text>
             </Wrapper>
-
-            <Text size="xs" color="tertiary">
-              {url}
-            </Text>
           </Wrapper>
         );
       })}
