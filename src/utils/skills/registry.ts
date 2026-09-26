@@ -15,8 +15,13 @@ function getSkillData(type: SkillCategory, skill: SkillId) {
   const folderByCategory: Partial<Record<SkillCategory, string>> = {
     'language': 'languages',
     'frontend-framework': 'frameworks',
+    'backend-framework': 'frameworks',
     'tool': 'tools',
     'database': 'databases',
+    'devops': 'devops',
+    'testing': 'testing',
+    'state-management': 'tools',
+    'css-framework': 'tools',
   };
 
   const folder = folderByCategory[type] ?? type;
