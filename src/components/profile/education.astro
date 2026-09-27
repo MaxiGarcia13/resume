@@ -16,7 +16,7 @@ const education = getEducation();
   </Heading>
   <ul class="flex flex-col gap-4">
     {
-      education.map(({ institution, degree, url, schedule }) => {
+      education.map(({ institution, degree, url, schedule, location }) => {
         const id = getCvAnchorId(degree);
 
         return (
@@ -39,7 +39,7 @@ const education = getEducation();
             </Heading>
 
             <Text tag="span" class="flex gap-1">
-              {formatScheduleDuration(schedule)}
+              {location} - {formatScheduleDuration(schedule)}
             </Text>
           </li>
         );

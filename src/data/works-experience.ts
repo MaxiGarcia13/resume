@@ -9,6 +9,8 @@ export function getWorksExperience(): Array<WorkExperience> {
         startDate: '2022-05-01',
         endDate: '2026-03-02',
       },
+      location: 'Gijón, Spain',
+      modality: 'remote',
       website: 'https://empathy.co/products/',
       image: 'https://media.glassdoor.com/sql/2977682/empathy-co-squarelogo-1569478606360.png',
       positions: [
@@ -61,6 +63,8 @@ export function getWorksExperience(): Array<WorkExperience> {
     },
     {
       company: 'Capitole Consulting',
+      location: 'Madrid, Spain',
+      modality: 'remote',
       schedule: {
         startDate: '2021-09-01',
         endDate: '2022-05-01',
@@ -98,6 +102,8 @@ export function getWorksExperience(): Array<WorkExperience> {
     },
     {
       company: 'Leadtech group',
+      location: 'Barcelona, Spain',
+      modality: 'remote',
       schedule: {
         startDate: '2020-10-01',
         endDate: '2021-09-01',
@@ -140,6 +146,8 @@ export function getWorksExperience(): Array<WorkExperience> {
         startDate: '2018-7-01',
         endDate: '2020-08-01',
       },
+      location: 'Córdoba, Argentina',
+      modality: 'hybrid',
       website: 'https://globalthink.io/es/',
       image: 'https://media.glassdoor.com/sql/3026242/global-think-technology-squarelogo-1717155359680.png',
       positions: [

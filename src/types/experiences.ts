@@ -8,7 +8,9 @@ export interface WorkExperience {
   description?: string;
   schedule: Schedule;
   positions: Array<Position>;
-  skills?: Array<Skill>;
+  skills: Array<Skill>;
+  location: string;
+  modality: 'remote' | 'hybrid' | 'onsite';
 }
 
 export interface Position {

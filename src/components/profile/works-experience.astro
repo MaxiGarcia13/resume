@@ -41,12 +41,13 @@ const worksExperience = getWorksExperience();
                 </Heading>
 
                 <Text tag="span" class="flex gap-1">
-                  {formatScheduleDuration(experience.schedule)}
+                  {experience.location} ({experience.modality}) - {formatScheduleDuration(experience.schedule)}
                 </Text>
 
                 <Skills skills={experience.skills} class="mt-2 hidden md:flex" />
               </div>
             </div>
+
             <Skills skills={experience.skills} class="mt-2 flex md:hidden" />
 
             <Positions positions={experience.positions} class="pl-0 md:pl-21" />

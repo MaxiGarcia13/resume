@@ -5,4 +5,5 @@ export interface Education {
   degree: string;
   schedule: Schedule;
   url: string;
+  location: string;
 }
