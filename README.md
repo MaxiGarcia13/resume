@@ -70,20 +70,70 @@
 
 ## Projects
 
-- **Glb studio** — Browser-native GLB character & animation editor. Load or build characters, shape their motion, and ship clean GLBs without leaving the tab. [Repo](https://github.com/MaxiGarcia13/glb-studio) | [Website](https://glb-studio-beta.vercel.app)
-- **Conter Strai** — Browser tactical shooter — Civilians vs Soldiers, round-based team elimination. Astro, React Three Fiber, and Colyseus. [Repo](https://github.com/MaxiGarcia13/conter-strai) | [Website](https://conter-strai.onrender.com)
-- **Maxi's Photo Gallery** — Immersive personal photo gallery with a 3D corridor of framed photographs. [Repo](https://github.com/MaxiGarcia13/my-gallery) | [Website](https://maxi-photo-gallery.vercel.app)
-- **Playtiva** — Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats. [Repo](https://github.com/MaxiGarcia13/playtiva) | [Website](https://playtva.vercel.app)
-- **Iconify** — High-performance icon set generator for favicons, PWA icons, iOS, and Android assets. [Repo](https://github.com/MaxiGarcia13/iconify) | [Website](https://iconset-generator.vercel.app)
-- **Mockingbird** — Define HTTP responses and test frontend behavior via a browser extension or local API with a web app. [Repo](https://github.com/MaxiGarcia13/mockingbird) | [Website](https://mockiingbird.vercel.app/)
-- **View Transitions** — Smooth, dependency-free transitions using the native View Transitions API. [Repo](https://github.com/MaxiGarcia13/js-theme-animation-monorepo) | [Website](https://view-transitionsapi.vercel.app)
-- **Fetcher** — Lightweight REST API client for testing, debugging, and managing HTTP requests. [Repo](https://github.com/MaxiGarcia13/fetcher) | [Website](https://fetcherapi.vercel.app)
-- **RunJS Playground** — Run JavaScript in the browser (React, TypeScript). [Repo](https://github.com/MaxiGarcia13/runjs) | [Website](https://runjs-playground.vercel.app)
-- **Chat assistant for the Liga Cántabra de Pádel** — Find the leaderboard, a team, or compare teams head-to-head. [Repo](https://github.com/MaxiGarcia13/fcp-chat) | [Website](https://fcp-chat.vercel.app/)
-- **Bookly!** — Scheduling and user management for coaches and teachers. [Repo](https://github.com/MaxiGarcia13/bookly) | [Website](https://bookly-class.vercel.app)
-- **Web Chatbot powered by Web LLM** — Chat component integrated with web-llm (React). [Repo](https://github.com/MaxiGarcia13/web-llm-chat) | [Website](https://maxi-gpt.vercel.app)
-- **La casita del árbol** — Ceramic studio offering classes and handcrafted products. [Repo](https://github.com/MaxiGarcia13/la-casita-del-arbol) | [Website](https://la-casita-del-arbol.vercel.app)
-- **Pádel Cantabria** — Clearer view of upcoming matches and league timeline for the Liga Cántabra de Pádel. [Repo](https://github.com/MaxiGarcia13/unofficial-fcp) | [Website](https://unofficial-fcp.vercel.app)
-- **Bilde konverterer** — Fast image conversion (React/TypeScript frontend, Node.js/Express backend). [Repo](https://github.com/MaxiGarcia13/bildekonverterer/tree/main) | [Website](https://bildekonverterer.vercel.app)
-- **Vinos LM** — Wine marketplace with Next.js and Supabase. [Repo](https://github.com/MaxiGarcia13/vinoslm) | [Website](https://vinoslm.vercel.app)
-- **Examples React** — Practical guide to React state management (useState, useEffect, Context, Redux, Redux Saga). [Repo](https://github.com/MaxiGarcia13/examples-react) | [Website](https://examples-react.vercel.app)
+- **Glb studio** [Repo](https://github.com/MaxiGarcia13/glb-studio) | [Website](https://glb-studio-beta.vercel.app)
+
+Browser-native GLB character & animation editor. Load or build characters, shape their motion, and ship clean GLBs without leaving the tab.
+
+- **Conter Strai** [Repo](https://github.com/MaxiGarcia13/conter-strai) | [Website](https://conter-strai.onrender.com)
+
+Browser tactical shooter — Civilians vs Soldiers, round-based team elimination. Astro, React Three Fiber, and Colyseus.
+
+- **Maxi's Photo Gallery** [Repo](https://github.com/MaxiGarcia13/my-gallery) | [Website](https://maxi-photo-gallery.vercel.app)
+
+Immersive personal photo gallery with a 3D corridor of framed photographs.
+
+- **Playtiva** [Repo](https://github.com/MaxiGarcia13/playtiva) | [Website](https://playtva.vercel.app)
+
+Cross-platform app for padel and tennis players to find matches, fill rosters, record results, and track personal stats.
+
+- **Iconify** [Repo](https://github.com/MaxiGarcia13/iconify) | [Website](https://iconset-generator.vercel.app)
+
+High-performance icon set generator for favicons, PWA icons, iOS, and Android assets.
+
+- **Mockingbird** [Repo](https://github.com/MaxiGarcia13/mockingbird) | [Website](https://mockiingbird.vercel.app/)
+
+Define HTTP responses and test frontend behavior via a browser extension or local API with a web app.
+
+- **View Transitions** [Repo](https://github.com/MaxiGarcia13/js-theme-animation-monorepo) | [Website](https://view-transitionsapi.vercel.app)
+
+Smooth, dependency-free transitions using the native View Transitions API.
+
+- **Fetcher** [Repo](https://github.com/MaxiGarcia13/fetcher) | [Website](https://fetcherapi.vercel.app)
+
+Lightweight REST API client for testing, debugging, and managing HTTP requests.
+
+- **RunJS Playground** [Repo](https://github.com/MaxiGarcia13/runjs) | [Website](https://runjs-playground.vercel.app)
+
+Run JavaScript in the browser (React, TypeScript).
+
+- **Chat assistant for the Liga Cántabra de Pádel** [Repo](https://github.com/MaxiGarcia13/fcp-chat) | [Website](https://fcp-chat.vercel.app/)
+
+Find the leaderboard, a team, or compare teams head-to-head.
+
+- **Bookly!** [Repo](https://github.com/MaxiGarcia13/bookly) | [Website](https://bookly-class.vercel.app)
+
+Scheduling and user management for coaches and teachers.
+
+- **Web Chatbot powered by Web LLM** [Repo](https://github.com/MaxiGarcia13/web-llm-chat) | [Website](https://maxi-gpt.vercel.app)
+
+Chat component integrated with web-llm (React).
+
+- **La casita del árbol** [Repo](https://github.com/MaxiGarcia13/la-casita-del-arbol) | [Website](https://la-casita-del-arbol.vercel.app)
+
+Ceramic studio offering classes and handcrafted products.
+
+- **Pádel Cantabria** [Repo](https://github.com/MaxiGarcia13/unofficial-fcp) | [Website](https://unofficial-fcp.vercel.app)
+
+Clearer view of upcoming matches and league timeline for the Liga Cántabra de Pádel.
+
+- **Bilde konverterer** [Repo](https://github.com/MaxiGarcia13/bildekonverterer/tree/main) | [Website](https://bildekonverterer.vercel.app)
+
+Fast image conversion (React/TypeScript frontend, Node.js/Express backend).
+
+- **Vinos LM** [Repo](https://github.com/MaxiGarcia13/vinoslm) | [Website](https://vinoslm.vercel.app)
+
+Wine marketplace with Next.js and Supabase.
+
+- **Examples React** [Repo](https://github.com/MaxiGarcia13/examples-react) | [Website](https://examples-react.vercel.app)
+
+Practical guide to React state management (useState, useEffect, Context, Redux, Redux Saga).
