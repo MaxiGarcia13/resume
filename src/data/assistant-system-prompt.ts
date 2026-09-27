@@ -31,7 +31,7 @@ const workExperienceText = workExperience.map((work, index) => {
     .map((position) => `${position.title} — ${position.description.join('; ')}`)
     .join('; ');
 
-  return `${index + 1}. ${work.company} | ${start} – ${end} | ${yearsWorking.years}y ${yearsWorking.months}m
+  return `${index + 1}. ${work.company} | ${start} – ${end} | ${yearsWorking.years}y ${yearsWorking.months}m | ${work.location} (${work.modality})
    Roles: ${positions}
    Stack: ${formatSkills(work.skills)}`;
 }).join('\n');
@@ -45,7 +45,7 @@ const educationText = education
     const start = formatDate(new Date(item.schedule.startDate));
     const end = item.schedule.endDate ? formatDate(new Date(item.schedule.endDate)) : 'Present';
 
-    return `- ${item.degree} | ${item.institution} | ${start} – ${end} | ${item.url}`;
+    return `- ${item.degree} | ${item.institution} | ${start} – ${end} | ${item.location}`;
   })
   .join('\n');
 
