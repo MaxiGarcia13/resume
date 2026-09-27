@@ -1,13 +1,12 @@
 ---
 import pkg from '../../package.json';
-
+import { getProfile } from '@/data/profile';
 import '../styles/global.css';
 
-const name = pkg.author;
+const { name, role, nickName } = getProfile();
 
-const role = 'Senior Frontend Software Engineer';
-const title = `${name} – ${role} | Portfolio & CV`;
-const keywords = `${name}, ${role}, frontend, software engineer, portfolio, cv, resume`;
+const title = `${nickName} – ${role} | Portfolio & CV`;
+const keywords = pkg.keywords.join(', ');
 const description = pkg.description;
 const webSite = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
 const faviconPath = `/assets/images/favicon.png`;
