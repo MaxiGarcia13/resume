@@ -2,13 +2,12 @@
 
 **Senior Frontend Software Engineer & Full Stack Developer**
 
-**Demo:** [maxi-garcia-mortigliengo-cv.vercel.app](https://maxi-garcia-mortigliengo-cv.vercel.app)
-
 ## Contact
 
 - **Email:** [maxig8@hotmail.com](mailto:maxig8@hotmail.com)
 - **LinkedIn:** [linkedin.com/in/maximilianogarcia13](https://www.linkedin.com/in/maximilianogarcia13)
 - **GitHub:** [github.com/MaxiGarcia13](https://github.com/MaxiGarcia13)
+- **Portfolio:** [maxi-garcia-mortigliengo-cv.vercel.app](https://maxi-garcia-mortigliengo-cv.vercel.app)
 
 ## Languages
 
