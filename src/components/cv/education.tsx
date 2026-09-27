@@ -9,7 +9,7 @@ interface EducationProps {
 export function Education({ education }: EducationProps) {
   return (
     <Section title="Education" flexDirection="column" gap="md">
-      {education.map(({ institution, degree, schedule }) => {
+      {education.map(({ institution, degree, schedule, location }) => {
         const { startDate, endDate } = formatSechedule(schedule);
 
         return (
@@ -22,18 +22,22 @@ export function Education({ education }: EducationProps) {
                 flexDirection="row"
                 style={{ justifyContent: 'flex-start', alignItems: 'center' }}
               >
-                <Text size="md" color="secondary" weight="bold">
+                <Text size="sm" color="secondary" weight="bold">
                   {degree}
                   {' '}
                 </Text>
-                <Text size="xs" color="tertiary" weight="oblique">
-                  (
+                <Text size="xs" color="tertiary">
+                  at
+                  {' '}
                   {institution}
-                  )
                 </Text>
               </Wrapper>
 
               <Text size="xs" color="tertiary" weight="oblique">
+                {location}
+                {' '}
+                -
+                {' '}
                 {`${startDate} – ${endDate ?? 'Present'}`}
               </Text>
             </Wrapper>

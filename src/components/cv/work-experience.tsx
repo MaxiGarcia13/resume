@@ -22,6 +22,14 @@ export function WorkExperience({ works }: WorkExperienceProps) {
                 {experience.company}
               </Text>
               <Text size="xs" color="tertiary" weight="oblique">
+                {experience.location}
+                {' '}
+                (
+                {experience.modality}
+                )
+                {' '}
+                -
+                {' '}
                 {`${startDate} – ${endDate ?? 'Present'}`}
               </Text>
             </Wrapper>
