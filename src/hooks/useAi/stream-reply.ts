@@ -9,7 +9,11 @@ export async function streamReply(userMessages: LLMMessage[]) {
       role: 'system',
       content: ASSISTANT_SYSTEM_PROMPT,
     },
-    ...llm.sliceMessagesByContextWindowSize(userMessages),
+    ...(
+      llm.isLocalModel
+        ? llm.trimMessagesToContext(userMessages)
+        : userMessages
+    ),
   ];
 
   setReplying({
@@ -26,7 +30,7 @@ export async function streamReply(userMessages: LLMMessage[]) {
   let reply = '';
 
   for await (const chunk of chunks) {
-    reply += chunk.choices[0]?.delta.content || '';
+    reply += chunk.choices[0]?.delta?.content || '';
     setReplying({
       role: 'assistant',
       content: llm.sanitizeReply(reply),
