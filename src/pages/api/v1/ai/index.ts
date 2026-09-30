@@ -26,19 +26,7 @@ export const POST: APIRoute<EndpointProps> = async ({ request }) => {
     const stream = await router.create(messages);
 
     if (isAiErrorArray(stream)) {
-      console.error(stream);
-
-      return new Response(
-        JSON.stringify({
-          error: stream.map((error) => `${error.providerName} - ${error.status}`).join(', '),
-        }),
-        {
-          status: 503,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
+      throw stream;
     }
 
     const body = writeNdjsonStream(stream);
@@ -49,7 +37,22 @@ export const POST: APIRoute<EndpointProps> = async ({ request }) => {
         'Cache-Control': 'no-cache',
       },
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
+
+    if (isAiErrorArray(error)) {
+      return new Response(
+        JSON.stringify({
+          error: error.map((e) => `${e.providerName} - ${e.status}`).join(', '),
+        }),
+        {
+          status: 503,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+    }
     return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
       headers: {
