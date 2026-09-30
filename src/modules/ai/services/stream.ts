@@ -131,6 +131,6 @@ export async function postMessageToLlmEndpoint(provider: AiProviderName, message
   return readNdjsonStream(response.body);
 }
 
-export function getEndpointUrl(provider: AiProviderName) {
-  return `/api/v1/ai/provider/${provider}`;
+export function getEndpointUrl(_provider: AiProviderName) {
+  return `/api/v1/ai`;
 }
