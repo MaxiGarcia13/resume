@@ -1,10 +1,18 @@
-import type { ChatCompletionChunk, ChatCompletionMessageParam } from '@mlc-ai/web-llm';
+import type { ChatCompletionMessageParam } from 'openai/resources';
 
 export type LLMMessage = ChatCompletionMessageParam;
 
-export type LocalLLMResponse = Promise<AsyncIterable<ChatCompletionChunk> | undefined>;
+export interface LLMStreamChunk {
+  choices: Array<{
+    delta?: {
+      content?: string | null;
+    } | null;
+  }>;
+}
 
-export type LLMServiceType = 'local' | 'groq' | 'open-router';
+export type LocalLLMResponse = AsyncIterable<LLMStreamChunk>;
+
+export type LLMServiceType = 'local' | 'router';
 
 export class LLMError extends Error {
   readonly status?: number;

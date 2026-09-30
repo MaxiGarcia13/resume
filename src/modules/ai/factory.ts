@@ -1,12 +1,10 @@
 import type { BaseLLM } from './domain/base-llm';
 import type { LLMServiceType } from './types';
-import { GroqService } from './domain/groq';
+import { AiRouter } from './domain/ai-router';
 import { LocalLLM } from './domain/local-llm';
-import { OpenRouterService } from './domain/open-router';
 
 const SERVICE_ORDER: LLMServiceType[] = [
-  'groq',
-  'open-router',
+  'router',
   'local',
 ];
 
@@ -23,11 +21,8 @@ export function createLLM(type: LLMServiceType): BaseLLM {
   let llm: BaseLLM;
 
   switch (type) {
-    case 'groq':
-      llm = new GroqService();
-      break;
-    case 'open-router':
-      llm = new OpenRouterService();
+    case 'router':
+      llm = new AiRouter();
       break;
     case 'local':
       llm = new LocalLLM();

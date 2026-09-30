@@ -1,6 +1,5 @@
-import type { ChatCompletionChunk } from '@mlc-ai/web-llm';
 import type { AiProviderName } from '../providers/types';
-import type { LLMMessage } from '@/modules/ai/types';
+import type { LLMMessage, LLMStreamChunk } from '@/modules/ai/types';
 import { LLMError } from '@/modules/ai/types';
 
 export function getErrorMessage(error: unknown) {
@@ -47,8 +46,8 @@ export function withStreamErrors(stream: ReadableStream<Uint8Array>): ReadableSt
   });
 }
 
-function parseLlmStreamLine(line: string): ChatCompletionChunk {
-  const parsed = JSON.parse(line) as ChatCompletionChunk | { error?: string | { message?: string } };
+function parseLlmStreamLine(line: string): LLMStreamChunk {
+  const parsed = JSON.parse(line) as LLMStreamChunk | { error?: string | { message?: string } };
 
   if ('error' in parsed && parsed.error) {
     const error = parsed.error;
@@ -56,12 +55,12 @@ function parseLlmStreamLine(line: string): ChatCompletionChunk {
     throw new LLMError(message);
   }
 
-  return parsed as ChatCompletionChunk;
+  return parsed as LLMStreamChunk;
 }
 
 async function* readNdjsonStream(
   body: ReadableStream<Uint8Array>,
-): AsyncGenerator<ChatCompletionChunk> {
+): AsyncGenerator<LLMStreamChunk> {
   const reader = body.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
