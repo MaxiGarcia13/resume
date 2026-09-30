@@ -4,7 +4,6 @@ import { consumeRateLimit, getClientIp } from './rate-limit';
 import { readSession } from './session';
 
 export { requireSecret } from './env';
-export { readLlmMessages } from './messages';
 export { ensureSessionCookie } from './session';
 
 function jsonError(message: string, status: number, headers?: Record<string, string>) {
