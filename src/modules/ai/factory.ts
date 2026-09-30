@@ -11,7 +11,7 @@ const SERVICE_ORDER: LLMServiceType[] = [
 const instances = new Map<LLMServiceType, BaseLLM>();
 let currentType: LLMServiceType = SERVICE_ORDER[0];
 
-export function createLLM(type: LLMServiceType): BaseLLM {
+function createLLM(type: LLMServiceType): BaseLLM {
   const existing = instances.get(type);
 
   if (existing) {
