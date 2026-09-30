@@ -1,6 +1,8 @@
-import type { MLCEngine } from '@mlc-ai/web-llm';
+import type { ChatCompletionMessageParam, MLCEngine } from '@mlc-ai/web-llm';
 import type { LLMMessage, LocalLLMResponse } from '../types';
+import { trimMessagesToContext } from '@maxigarcia/ai-utils';
 import { CreateMLCEngine, hasModelInCache } from '@mlc-ai/web-llm';
+import { ASSISTANT_SYSTEM_PROMPT } from '@/data/assistant-system-prompt';
 import { BaseLLM } from './base-llm';
 
 const MODEL_NAME = 'Qwen3.5-2B-q4f16_1-MLC';
@@ -12,15 +14,10 @@ const CHAT_TEMPLATE_OVERHEAD_CHARS = 128;
 
 export class LocalLLM extends BaseLLM {
   private engine: MLCEngine | null = null;
+  public readonly isLocalModel: boolean = true;
 
   constructor() {
-    super(
-      'local',
-      CONTEXT_WINDOW_SIZE,
-      MAX_OUTPUT_TOKENS,
-      CHARS_PER_TOKEN,
-      CHAT_TEMPLATE_OVERHEAD_CHARS,
-    );
+    super('local');
   }
 
   async loadModel(callback: (progress: { text: string; value: number }) => void) {
@@ -48,13 +45,13 @@ export class LocalLLM extends BaseLLM {
     );
   }
 
-  async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse | undefined> {
+  async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse> {
     if (!this.engine) {
       throw new Error('Local model is not loaded');
     }
 
     return this.engine.chat.completions.create({
-      messages,
+      messages: messages as ChatCompletionMessageParam[],
       stream: true,
       temperature: TEMPERATURE,
       max_tokens: MAX_OUTPUT_TOKENS,
@@ -63,5 +60,16 @@ export class LocalLLM extends BaseLLM {
 
   async isModelCached(): Promise<boolean> {
     return hasModelInCache(MODEL_NAME);
+  }
+
+  trimMessagesToContext(messages: LLMMessage[]): LLMMessage[] {
+    return trimMessagesToContext({
+      messages,
+      contextWindowSize: CONTEXT_WINDOW_SIZE,
+      charsPerToken: CHARS_PER_TOKEN,
+      chatTemplateOverheadChars: CHAT_TEMPLATE_OVERHEAD_CHARS,
+      systemPrompt: ASSISTANT_SYSTEM_PROMPT,
+      maxOutputTokens: MAX_OUTPUT_TOKENS,
+    });
   }
 }
