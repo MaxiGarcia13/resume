@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import type { LLMMessage } from '@/modules/ai';
 import { AiRouter, writeNdjsonStream } from '@maxigarcia/ai-router';
+import { isAiErrorArray } from '@maxigarcia/ai-utils';
 import { requireSecret } from '@/modules/ai/security';
 
 const router = AiRouter({
@@ -24,15 +25,15 @@ export const POST: APIRoute<EndpointProps> = async ({ request }) => {
     const { messages } = await request.json();
     const stream = await router.create(messages);
 
-    if (Array.isArray(stream)) {
+    if (isAiErrorArray(stream)) {
       console.error(stream);
 
       return new Response(
         JSON.stringify({
-          error: stream.map((error) => error.error).join(', '),
+          error: stream.map((error) => `${error.providerName} - ${error.status}`).join(', '),
         }),
         {
-          status: 500,
+          status: 503,
           headers: {
             'Content-Type': 'application/json',
           },
