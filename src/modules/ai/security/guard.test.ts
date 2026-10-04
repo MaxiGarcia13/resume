@@ -5,7 +5,7 @@ import {
   ACCESS_TOKEN_COOKIE,
   ensureAccessTokenCookie,
 } from './access-token';
-import { applyCorsHeaders, guardLlmApiRequest } from './index';
+import { applyCorsHeaders, guardLlmApiRequest } from './guard';
 import { MAX_REQUESTS_PER_IP, resetRateLimits } from './rate-limit';
 
 const SITE_ORIGIN = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
