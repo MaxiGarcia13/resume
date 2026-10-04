@@ -1,21 +1,25 @@
 ---
 import { cn } from '@maxigarcia/js-utils';
-import { Image } from 'astro:assets';
 import Link from '@/components/shared/actions/link/link.astro';
 import ImgLoader from '@/components/shared/img-loader.astro';
+import {
+  PROJECT_PREVIEW_WIDTHS,
+  getProjectPreviewSlug,
+  getProjectPreviewSrc,
+  getProjectPreviewSrcSet,
+} from '@/utils/project-preview';
 
 interface Props {
-  /** Public website URL (preview API source and link target). */
   src: string;
-  /** Project title; used for accessible preview alt text. */
   title: string;
   class?: string;
 }
 
 const { src, title, class: className } = Astro.props;
 
-const previewSrc = `https://snap-website-api.vercel.app/website-to-blob-img?url=${src}`;
-const previewId = `preview-${src}`;
+const previewId = `preview-${getProjectPreviewSlug(title)}`;
+const srcSet = getProjectPreviewSrcSet(title);
+const defaultSrc = getProjectPreviewSrc(title, PROJECT_PREVIEW_WIDTHS.at(-1)!);
 ---
 
 <Link
@@ -26,13 +30,14 @@ const previewId = `preview-${src}`;
   aria-label={`${title} website (opens in new tab)`}
 >
   <ImgLoader id={previewId}>
-    <Image
+    <img
       id={previewId}
-      src={previewSrc}
+      src={defaultSrc}
+      srcset={srcSet}
+      sizes="(max-width: 900px) 100vw, 900px"
       alt={`Preview of ${title}`}
       width={900}
       height={506}
-      widths={[200, 400, 600, 900]}
       loading="lazy"
       decoding="async"
       class={cn('w-full h-auto overflow-hidden rounded-sm', className)}
