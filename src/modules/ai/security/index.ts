@@ -1,10 +1,10 @@
 import type { APIContext } from 'astro';
+import { isValidAccessToken, readAccessToken } from './access-token';
 import { isAllowedOrigin, isAllowedRequestOrigin } from './origin';
 import { consumeRateLimit, getClientIp } from './rate-limit';
-import { readSession } from './session';
 
+export { ensureAccessTokenCookie } from './access-token';
 export { requireSecret } from './env';
-export { ensureSessionCookie } from './session';
 
 function jsonError(message: string, status: number, headers?: Record<string, string>) {
   return new Response(JSON.stringify({ error: message }), {
@@ -33,13 +33,11 @@ export function guardLlmApiRequest(context: Pick<APIContext, 'cookies' | 'reques
     return jsonError('Forbidden', 403);
   }
 
-  const session = readSession(context.cookies);
-
-  if (!session) {
+  if (!isValidAccessToken(readAccessToken(context.cookies))) {
     return jsonError('Unauthorized', 401);
   }
 
-  if (!consumeRateLimit(session.id, getClientIp(context.request))) {
+  if (!consumeRateLimit(getClientIp(context.request))) {
     return jsonError('Too many requests', 429, { 'Retry-After': '60' });
   }
 

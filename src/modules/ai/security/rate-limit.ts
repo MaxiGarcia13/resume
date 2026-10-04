@@ -1,8 +1,6 @@
 export const RATE_LIMIT_WINDOW_MS = 60_000;
-export const MAX_REQUESTS_PER_SESSION = 15;
-export const MAX_REQUESTS_PER_IP = 40;
+export const MAX_REQUESTS_PER_IP = 15;
 
-const sessionHits = new Map<string, number[]>();
 const ipHits = new Map<string, number[]>();
 
 function prune(store: Map<string, number[]>, key: string, windowStart: number) {
@@ -29,15 +27,10 @@ export function getClientIp(request: Request) {
   return ip || 'unknown';
 }
 
-export function consumeRateLimit(sessionId: string, ip: string) {
-  const now = Date.now();
-  return (
-    hit(sessionHits, sessionId, MAX_REQUESTS_PER_SESSION, now)
-    && hit(ipHits, ip, MAX_REQUESTS_PER_IP, now)
-  );
+export function consumeRateLimit(ip: string) {
+  return hit(ipHits, ip, MAX_REQUESTS_PER_IP, Date.now());
 }
 
 export function resetRateLimits() {
-  sessionHits.clear();
   ipHits.clear();
 }

@@ -3,7 +3,6 @@ import {
   consumeRateLimit,
   getClientIp,
   MAX_REQUESTS_PER_IP,
-  MAX_REQUESTS_PER_SESSION,
   resetRateLimits,
 } from './rate-limit';
 
@@ -32,33 +31,25 @@ describe('consumeRateLimit', () => {
     resetRateLimits();
   });
 
-  it('allows requests under the session limit', () => {
-    for (let index = 0; index < MAX_REQUESTS_PER_SESSION; index += 1) {
-      expect(consumeRateLimit('session-a', '203.0.113.1')).toBe(true);
+  it('allows requests under the ip limit', () => {
+    for (let index = 0; index < MAX_REQUESTS_PER_IP; index += 1) {
+      expect(consumeRateLimit('203.0.113.1')).toBe(true);
     }
-  });
-
-  it('blocks the next request after the session limit', () => {
-    for (let index = 0; index < MAX_REQUESTS_PER_SESSION; index += 1) {
-      consumeRateLimit('session-a', '203.0.113.1');
-    }
-
-    expect(consumeRateLimit('session-a', '203.0.113.1')).toBe(false);
-  });
-
-  it('does not share session buckets', () => {
-    for (let index = 0; index < MAX_REQUESTS_PER_SESSION; index += 1) {
-      consumeRateLimit('session-a', '203.0.113.1');
-    }
-
-    expect(consumeRateLimit('session-b', '203.0.113.1')).toBe(true);
   });
 
   it('blocks the next request after the ip limit', () => {
     for (let index = 0; index < MAX_REQUESTS_PER_IP; index += 1) {
-      expect(consumeRateLimit(`session-${index}`, '203.0.113.9')).toBe(true);
+      consumeRateLimit('203.0.113.1');
     }
 
-    expect(consumeRateLimit('session-overflow', '203.0.113.9')).toBe(false);
+    expect(consumeRateLimit('203.0.113.1')).toBe(false);
+  });
+
+  it('does not share ip buckets', () => {
+    for (let index = 0; index < MAX_REQUESTS_PER_IP; index += 1) {
+      consumeRateLimit('203.0.113.1');
+    }
+
+    expect(consumeRateLimit('203.0.113.2')).toBe(true);
   });
 });

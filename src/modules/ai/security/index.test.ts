@@ -1,18 +1,21 @@
 import type { AstroCookies } from 'astro';
 import process from 'node:process';
 import { beforeEach, describe, expect, it } from 'vitest';
+import {
+  ACCESS_TOKEN_COOKIE,
+  ensureAccessTokenCookie,
+} from './access-token';
 import { applyCorsHeaders, guardLlmApiRequest } from './index';
-import { MAX_REQUESTS_PER_SESSION, resetRateLimits } from './rate-limit';
-import { ensureSessionCookie, SESSION_COOKIE_NAME } from './session';
+import { MAX_REQUESTS_PER_IP, resetRateLimits } from './rate-limit';
 
 const SITE_ORIGIN = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
-const TEST_SECRET = 'test-session-secret';
+const TEST_SECRET = 'test-access-token-secret';
 
 function createCookies(value?: string) {
   const store = new Map<string, string>();
 
   if (value) {
-    store.set(SESSION_COOKIE_NAME, value);
+    store.set(ACCESS_TOKEN_COOKIE, value);
   }
 
   return {
@@ -50,9 +53,9 @@ function createContext(options: {
 
   if (options.cookie === undefined) {
     process.env.SESSION_SECRET = TEST_SECRET;
-    ensureSessionCookie(cookies);
+    ensureAccessTokenCookie(cookies);
   } else if (options.cookie) {
-    cookies.set(SESSION_COOKIE_NAME, options.cookie, {});
+    cookies.set(ACCESS_TOKEN_COOKIE, options.cookie, {});
   }
 
   return {
@@ -93,7 +96,7 @@ describe('guardLlmApiRequest', () => {
     );
   });
 
-  it('returns 401 when the session cookie is missing or invalid', async () => {
+  it('returns 401 when the access token cookie is missing or invalid', async () => {
     await expectJsonError(
       guardLlmApiRequest(createContext({ origin: SITE_ORIGIN, cookie: '' })),
       401,
@@ -106,7 +109,7 @@ describe('guardLlmApiRequest', () => {
     );
   });
 
-  it('allows a same-origin request with a valid session', () => {
+  it('allows a same-origin request with a valid access token', () => {
     expect(guardLlmApiRequest(createContext({ origin: SITE_ORIGIN, ip: '203.0.113.20' }))).toBeNull();
   });
 
@@ -117,10 +120,10 @@ describe('guardLlmApiRequest', () => {
     }))).toBeNull();
   });
 
-  it('returns 429 after the session rate limit', async () => {
+  it('returns 429 after the ip rate limit', async () => {
     const context = createContext({ origin: SITE_ORIGIN, ip: '203.0.113.22' });
 
-    for (let index = 0; index < MAX_REQUESTS_PER_SESSION; index += 1) {
+    for (let index = 0; index < MAX_REQUESTS_PER_IP; index += 1) {
       expect(guardLlmApiRequest(context)).toBeNull();
     }
 
