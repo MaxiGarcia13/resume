@@ -19,3 +19,4 @@ jobs:
     with:
       deployment_environment: Production
       deployment_url: https://maxi-garcia-mortigliengo-cv.vercel.app
+      prebuilt: false
