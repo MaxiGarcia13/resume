@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import type { LLMMessage } from '@/modules/ai';
 import { AiRouter, writeNdjsonStream } from '@maxigarcia/ai-router';
 import { isAiErrorArray } from '@maxigarcia/ai-utils';
+import { jsonError } from '@/http';
 import { requireSecret } from '@/modules/ai/security';
 
 const router = AiRouter({
@@ -41,23 +42,12 @@ export const POST: APIRoute<EndpointProps> = async ({ request }) => {
     console.error(error);
 
     if (isAiErrorArray(error)) {
-      return new Response(
-        JSON.stringify({
-          error: error.map((e) => `${e.providerName} - ${e.status}`).join(', '),
-        }),
-        {
-          status: 503,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
+      return jsonError(
+        error.map((e) => `${e.providerName} - ${e.status}`).join(', '),
+        503,
       );
     }
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+
+    return jsonError('Internal server error', 500);
   }
 };

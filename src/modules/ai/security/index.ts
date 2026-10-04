@@ -1,20 +1,11 @@
 import type { APIContext } from 'astro';
+import { jsonError } from '@/http';
 import { isValidAccessToken, readAccessToken } from './access-token';
 import { isAllowedOrigin, isAllowedRequestOrigin } from './origin';
 import { consumeRateLimit, getClientIp } from './rate-limit';
 
 export { ensureAccessTokenCookie } from './access-token';
 export { requireSecret } from './env';
-
-function jsonError(message: string, status: number, headers?: Record<string, string>) {
-  return new Response(JSON.stringify({ error: message }), {
-    status,
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
-  });
-}
 
 export function applyCorsHeaders(request: Request, response: Response) {
   const origin = request.headers.get('origin');
