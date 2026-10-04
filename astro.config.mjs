@@ -4,6 +4,7 @@ import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField } from 'astro/config';
 import { generateCvIntegration } from './integrations/generate-cv';
+import { generateProjectPreviewsIntegration } from './integrations/generate-project-previews';
 
 export default defineConfig({
   output: 'server',
@@ -37,12 +38,13 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  image: {
-    domains: ['snap-website-api.vercel.app'],
-  },
-
   site: 'https://maxi-garcia-mortigliengo-cv.vercel.app',
-  integrations: [sitemap(), react(), generateCvIntegration()],
+  integrations: [
+    sitemap(),
+    react(),
+    generateProjectPreviewsIntegration(),
+    generateCvIntegration(),
+  ],
 
   adapter: vercel(),
 });
