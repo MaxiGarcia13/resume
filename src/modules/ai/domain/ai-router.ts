@@ -1,8 +1,10 @@
 import type { LLMMessage, LocalLLMResponse } from '../types';
-import { streamChatCompletion } from '@maxigarcia/ai-client';
+import { http } from '@maxigarcia/js-utils';
 import { BaseLLM } from './base-llm';
 
 export class AiRouter extends BaseLLM {
+  private http = http('/api/v1/ai');
+
   constructor() {
     super('router');
   }
@@ -10,7 +12,9 @@ export class AiRouter extends BaseLLM {
   async loadModel(_callback: (progress: { text: string; value: number }) => void) {}
 
   async onMessage(messages: LLMMessage[]): Promise<LocalLLMResponse> {
-    return streamChatCompletion('/api/v1/ai', {
+    return this.http.stream({
+      method: 'POST',
+      format: 'ndjson',
       body: {
         messages,
       },
