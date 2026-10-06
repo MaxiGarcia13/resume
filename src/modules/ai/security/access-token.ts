@@ -1,28 +1,28 @@
 import type { AstroCookies } from 'astro';
-import { createAccessToken } from '@maxigarcia/access-token';
+import { accessToken } from '@maxigarcia/access-token';
 import { getSecret } from './env';
 
 export const ACCESS_TOKEN_COOKIE = 'cv_access_token';
 export const ACCESS_TOKEN_MAX_AGE_SECONDS = 60 * 60; // 1 hour
 
-function getAccessToken() {
+function getAccessTokenManager() {
   const secret = getSecret('SESSION_SECRET');
 
   if (!secret) {
     return null;
   }
 
-  return createAccessToken(secret, {
+  return accessToken(secret, {
     ttlMs: ACCESS_TOKEN_MAX_AGE_SECONDS * 1000,
   });
 }
 
 export function createAccessTokenValue() {
-  return getAccessToken()?.create() ?? null;
+  return getAccessTokenManager()?.create() ?? null;
 }
 
 export function isValidAccessToken(value: string | undefined) {
-  return getAccessToken()?.isValid(value) ?? false;
+  return getAccessTokenManager()?.isValid(value) ?? false;
 }
 
 export function readAccessToken(cookies: AstroCookies) {
