@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import type { LLMMessage } from '@/modules/ai';
 import { AiRouter, writeNdjsonStream } from '@maxigarcia/ai-router';
 import { isAiErrorArray } from '@maxigarcia/ai-utils';
+import { ASSISTANT_SYSTEM_PROMPT } from '@/data/assistant-system-prompt';
 import { jsonError } from '@/http';
 import { requireSecret } from '@/modules/ai/security';
 
@@ -23,8 +24,20 @@ interface EndpointProps {
 
 export const POST: APIRoute<EndpointProps> = async ({ request }) => {
   try {
-    const { messages } = await request.json();
-    const stream = await router.create(messages);
+    const { messages } = await request.json() as EndpointProps;
+
+    if (messages.length === 0) {
+      return jsonError('No messages provided', 400);
+    }
+
+    const sanitizedMessages: LLMMessage[] = [
+      {
+        role: 'system',
+        content: ASSISTANT_SYSTEM_PROMPT,
+      },
+      ...messages.filter((message) => message.role !== 'system'),
+    ];
+    const stream = await router.create(sanitizedMessages);
 
     if (isAiErrorArray(stream)) {
       throw stream;
