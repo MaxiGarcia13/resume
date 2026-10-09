@@ -1,20 +1,11 @@
 import type { LLMMessage } from '@/modules/ai/types';
-import { ASSISTANT_SYSTEM_PROMPT } from '@/data/assistant-system-prompt';
 import { getLLM, LLMError, pushMessage, setReplying } from '@/modules/ai';
 
 export async function streamReply(userMessages: LLMMessage[]) {
   const llm = getLLM();
-  const messages: LLMMessage[] = [
-    {
-      role: 'system',
-      content: ASSISTANT_SYSTEM_PROMPT,
-    },
-    ...(
-      llm.isLocalModel
-        ? llm.trimMessagesToContext(userMessages)
-        : userMessages
-    ),
-  ];
+  const messages = llm.isLocalModel
+    ? llm.trimMessagesToContext(userMessages)
+    : userMessages;
 
   setReplying({
     role: 'assistant',

@@ -50,8 +50,16 @@ export class LocalLLM extends BaseLLM {
       throw new Error('Local model is not loaded');
     }
 
+    const sanitizedMessages: LLMMessage[] = [
+      {
+        role: 'system',
+        content: ASSISTANT_SYSTEM_PROMPT,
+      },
+      ...messages.filter((message) => message.role !== 'system'),
+    ];
+
     return this.engine.chat.completions.create({
-      messages: messages as ChatCompletionMessageParam[],
+      messages: sanitizedMessages as ChatCompletionMessageParam[],
       stream: true,
       temperature: TEMPERATURE,
       max_tokens: MAX_OUTPUT_TOKENS,
