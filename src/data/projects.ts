@@ -53,7 +53,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Roomcast',
-      description: 'Peer-to-peer file and text transfer for devices on the same network — no cloud upload, no accounts, no waiting on a third-party relay for your bytes.',
+      description: 'LAN-first peer-to-peer file and text sharing. A small signaling server helps peers find each other; after that, payloads move over WebRTC data channels between browsers — not uploaded as a cloud file store.',
       website: 'https://roomcast-pgge.onrender.com',
       repo: 'https://github.com/MaxiGarcia13/roomcast',
       skills: getSkills([
