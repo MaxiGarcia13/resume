@@ -1,0 +1,10 @@
+---
+import { ensureAccessTokenCookie } from '@/modules/ai/security';
+import { AiButton } from './button';
+
+const { class: className } = Astro.props;
+
+ensureAccessTokenCookie(Astro.cookies);
+---
+
+<AiButton client:only="react" className={className} />
