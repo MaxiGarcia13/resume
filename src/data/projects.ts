@@ -202,7 +202,6 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'View Transitions',
-      showInCv: true,
       description: 'Smooth, dependency-free transitions using the native View Transitions API. Lightweight CSS-first animations—no framework required.',
       repo: 'https://github.com/MaxiGarcia13/js-theme-animation-monorepo',
       website: 'https://view-transitionsapi.vercel.app',
