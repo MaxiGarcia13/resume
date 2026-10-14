@@ -58,9 +58,10 @@ export function getProjects(): Array<Project> {
       repo: 'https://github.com/MaxiGarcia13/roomcast',
       skills: getSkills([
         'vue',
+        'typescript',
         'fastify',
-        'websockets',
         'nodejs',
+        'websockets',
         'nanostores',
         'render',
         'github-actions',
