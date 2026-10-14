@@ -12,10 +12,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return next();
   }
 
-  const accept = context.request.headers.get('accept') ?? '';
+  if (!context.isPrerendered) {
+    const accept = context.request.headers.get('accept') ?? '';
 
-  if (accept.includes('text/html')) {
-    ensureAccessTokenCookie(context.cookies);
+    if (accept.includes('text/html')) {
+      ensureAccessTokenCookie(context.cookies);
+    }
   }
 
   return next();
