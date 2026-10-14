@@ -53,7 +53,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Roomcast',
-      description: 'Peer-to-peer (P2P) local network file transfer tool using WebSockets and WebRTC data channels.',
+      description: 'Peer-to-peer file and text transfer for devices on the same network — no cloud upload, no accounts, no waiting on a third-party relay for your bytes.',
       website: 'https://roomcast-pgge.onrender.com',
       repo: 'https://github.com/MaxiGarcia13/roomcast',
       skills: getSkills([
