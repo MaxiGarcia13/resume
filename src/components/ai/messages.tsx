@@ -50,7 +50,7 @@ export function Messages(props: { className?: string }) {
       {showEmptyMessage && (
         <div className="flex flex-col gap-2 items-center text-center px-4 py-6 self-center max-w-xs">
           <p className="text-sm text-neutral-600 dark:text-neutral-400">
-            {`Ask about ${profile.nickName}'s career, work experience, projects, and tech stack. The assistant answers from this CV and runs locally in your browser.`}
+            {`Ask about ${profile.nickName}'s work, projects, education, skills, and languages. Answers use only what's on this CV.`}
           </p>
           <p className="text-xs text-neutral-500 dark:text-neutral-500">
             Replies in English or Spanish, depending on your question.
