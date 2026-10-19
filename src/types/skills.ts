@@ -122,7 +122,8 @@ type TestingSkillId
   = 'jest'
     | 'vitest'
     | 'playwright'
-    | 'cypress';
+    | 'cypress'
+    | 'puppeteer';
 
 type OtherSkillId
   = 'html'

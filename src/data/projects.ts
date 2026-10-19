@@ -4,6 +4,23 @@ import { getSkills } from '@/utils/skills';
 export function getProjects(): Array<Project> {
   return [
     {
+
+      title: 'Liga Cántabra de Pádel',
+      description: 'A clearer way to follow **teams, matches, and stats** from the Liga de Pádel de Cantabria.',
+      repo: 'https://github.com/MaxiGarcia13/padel-cantabria',
+      website: 'https://liga-padel-cantabra.vercel.app/',
+      skills: getSkills([
+        'astro',
+        'vue',
+        'typescript',
+        'tailwind',
+        'puppeteer',
+        'nx',
+        'monorepo',
+        'react-query',
+      ]),
+    },
+    {
       title: 'Mockingbird',
       showInCv: true,
       description: 'Mockingbird lets you define HTTP responses — status, headers, body — and test how your frontend behaves. Pick the workflow that fits your setup: a browser extension that intercepts fetch on any page, or a local API with a web app.',
