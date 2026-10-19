@@ -64,6 +64,7 @@ export const SKILLS_REGISTRY: Record<SkillId, SkillRegistryEntry> = {
   'cypress': entry('testing'),
   'jest': entry('testing'),
   'playwright': entry('testing'),
+  'puppeteer': entry('testing'),
 
   // State Management
   'react-query': entry('state-management'),
