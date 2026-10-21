@@ -1,5 +1,5 @@
 import { Buffer } from 'node:buffer';
-import { access, mkdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
@@ -7,12 +7,14 @@ import sharp from 'sharp';
 import { getProjects } from '@/data/projects';
 import {
   getProjectPreviewFilename,
+  getProjectPreviewSlug,
   PROJECT_PREVIEW_DIR,
   PROJECT_PREVIEW_WIDTHS,
 } from '@/utils/project-preview';
 
 const SNAP_API = 'https://snap-website-api.vercel.app/website-to-blob-img';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ASSETS_DIR = path.join(ROOT, 'assets');
 const OUT_DIR = path.join(ROOT, 'public', PROJECT_PREVIEW_DIR);
 const FORCE = process.argv.includes('--force');
 const MAX_RETRIES = 3;
@@ -26,14 +28,20 @@ async function fileExists(filePath: string) {
   }
 }
 
-async function fetchPreview(website: string, waitForWebsiteToLoad?: number) {
+async function loadLocalSource(title: string) {
+  const localPath = path.join(ASSETS_DIR, `${getProjectPreviewSlug(title)}.webp`);
+
+  if (!(await fileExists(localPath))) {
+    return null;
+  }
+
+  return readFile(localPath);
+}
+
+async function fetchPreview(website: string) {
   const url = new URL(SNAP_API);
 
   url.searchParams.set('url', encodeURIComponent(website));
-
-  if (waitForWebsiteToLoad) {
-    url.searchParams.set('wait', waitForWebsiteToLoad.toString());
-  }
 
   let lastError: unknown;
 
@@ -99,8 +107,10 @@ async function main() {
       continue;
     }
 
-    console.log(`fetch ${project.title} (${website})`);
-    const source = await fetchPreview(website, project.waitForWebsiteToLoad);
+    const local = await loadLocalSource(project.title);
+    const source = local ?? (await fetchPreview(website));
+
+    console.log(`${local ? 'local' : 'fetch'} ${project.title}${local ? '' : ` (${website})`}`);
     await writeWidths(project.title, source);
     console.log(`wrote ${project.title}`);
   }
