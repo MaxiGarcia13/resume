@@ -26,13 +26,20 @@ async function fileExists(filePath: string) {
   }
 }
 
-async function fetchPreview(website: string) {
-  const url = `${SNAP_API}?url=${encodeURIComponent(website)}`;
+async function fetchPreview(website: string, waitForWebsiteToLoad?: number) {
+  const url = new URL(SNAP_API);
+
+  url.searchParams.set('url', encodeURIComponent(website));
+
+  if (waitForWebsiteToLoad) {
+    url.searchParams.set('wait', waitForWebsiteToLoad.toString());
+  }
+
   let lastError: unknown;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt += 1) {
     try {
-      const response = await fetch(url);
+      const response = await fetch(url.toString());
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status} for ${website}`);
@@ -93,7 +100,7 @@ async function main() {
     }
 
     console.log(`fetch ${project.title} (${website})`);
-    const source = await fetchPreview(website);
+    const source = await fetchPreview(website, project.waitForWebsiteToLoad);
     await writeWidths(project.title, source);
     console.log(`wrote ${project.title}`);
   }

@@ -9,6 +9,7 @@ export function getProjects(): Array<Project> {
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
       website: 'https://urban-clarity.vercel.app',
       showInCv: true,
+      waitForWebsiteToLoad: 1000,
       skills: getSkills([
         'vue',
         'typescript',

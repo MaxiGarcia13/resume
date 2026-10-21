@@ -7,4 +7,5 @@ export interface Project {
   website?: string;
   skills?: Array<Skill>;
   showInCv?: boolean;
+  waitForWebsiteToLoad?: number;
 }
