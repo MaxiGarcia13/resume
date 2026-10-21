@@ -29,6 +29,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:force": "astro build --force",
     "preview": "astro preview",
     "generate:cv": "node --import tsx/esm scripts/generate-cv.ts",
     "generate:project-previews": "node --import tsx/esm scripts/generate-project-previews.ts",
