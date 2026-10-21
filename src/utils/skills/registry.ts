@@ -97,6 +97,8 @@ export const SKILLS_REGISTRY: Record<SkillId, SkillRegistryEntry> = {
   'i18n': entry('tool'),
   'zod': entry('tool'),
   'leaflet': entry('tool'),
+  'maplibre-gl': entry('tool'),
+  'deck-gl': entry('tool'),
   'react-pdf': entry('tool'),
 
   // Other

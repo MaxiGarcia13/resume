@@ -4,7 +4,26 @@ import { getSkills } from '@/utils/skills';
 export function getProjects(): Array<Project> {
   return [
     {
-
+      title: 'Urban clarity',
+      description: 'Public spending and urban data on the map of Spain',
+      repo: 'https://github.com/MaxiGarcia13/urban-transparency',
+      website: 'https://urban-clarity.vercel.app',
+      skills: getSkills([
+        'vue',
+        'typescript',
+        'astro',
+        'tailwind',
+        'maplibre-gl',
+        'deck-gl',
+        'react-query',
+        'puppeteer',
+        'monorepo',
+        'nx',
+        'vercel',
+        'ci',
+      ]),
+    },
+    {
       title: 'Liga Cántabra de Pádel',
       description: 'A clearer way to follow **teams, matches, and stats** from the Liga de Pádel de Cantabria.',
       repo: 'https://github.com/MaxiGarcia13/padel-cantabria',

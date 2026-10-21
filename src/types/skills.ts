@@ -93,6 +93,8 @@ type ToolSkillId
     | 'nanostores'
     | 'monaco-editor'
     | 'leaflet'
+    | 'maplibre-gl'
+    | 'deck-gl'
     | 'react-pdf';
 
 type CloudSkillId = 'cloudflare'

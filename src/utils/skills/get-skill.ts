@@ -15,6 +15,8 @@ const SKILL_NAME_MAP: Partial<Record<SkillId, string>> = {
   'react-native': 'React Native',
   'nodejs': 'Node.js',
   'threejs': 'Three.js',
+  'maplibre-gl': 'MapLibre GL',
+  'deck-gl': 'deck.gl',
   'pwa': 'PWA',
   'mcp': 'MCP',
   'ci': 'CI/CD',
