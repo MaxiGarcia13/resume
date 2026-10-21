@@ -8,6 +8,7 @@ export function getProjects(): Array<Project> {
       description: 'Public spending and urban data on the map of Spain',
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
       website: 'https://urban-clarity.vercel.app',
+      showInCv: true,
       skills: getSkills([
         'vue',
         'typescript',
@@ -235,7 +236,6 @@ export function getProjects(): Array<Project> {
         'github-actions',
         'vercel',
       ]),
-      showInCv: true,
     },
     {
       title: 'View Transitions',
