@@ -5,7 +5,7 @@ export function getProjects(): Array<Project> {
   return [
     {
       title: 'Urban clarity',
-      description: 'Public spending and urban data on the map of Spain (For now just Cantabria)',
+      description: 'Explore public spending and urban data on an interactive map of Spain — currently Cantabria only.',
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
       website: 'https://urban-clarity.vercel.app',
       showInCv: true,
