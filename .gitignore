@@ -13,3 +13,5 @@ playwright-report
 
 public/assets/maxi_garcia_mortigliengo_cv.pdf
 public/assets/project-previews/
+
+.DS_Store
