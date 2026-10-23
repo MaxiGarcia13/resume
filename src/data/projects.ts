@@ -5,7 +5,7 @@ export function getProjects(): Array<Project> {
   return [
     {
       title: 'Urban clarity',
-      description: 'Explore public spending and urban data on an interactive map of Spain — currently Cantabria only.',
+      description: 'A spatial intelligence platform for Spain covering four metrics — Public Spending and Business Power',
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
       website: 'https://urban-clarity.vercel.app',
       showInCv: true,
@@ -26,7 +26,7 @@ export function getProjects(): Array<Project> {
     },
     {
       title: 'Liga Cántabra de Pádel',
-      description: 'A clearer way to follow **teams, matches, and stats** from the Liga de Pádel de Cantabria.',
+      description: 'A clearer way to follow teams, matches, and stats from the Liga de Pádel de Cantabria.',
       repo: 'https://github.com/MaxiGarcia13/padel-cantabria',
       website: 'https://liga-padel-cantabra.vercel.app/',
       skills: getSkills([
