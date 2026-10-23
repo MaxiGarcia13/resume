@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:force": "astro build --force",
+    "build:force": "npm run clean:build && astro build --force",
     "preview": "astro preview",
     "generate:cv": "node --import tsx/esm scripts/generate-cv.ts",
     "generate:project-previews": "node --import tsx/esm scripts/generate-project-previews.ts",
@@ -37,7 +37,9 @@
     "lint:fix": "eslint --fix .",
     "test": "vitest run",
     "postinstall": "npx simple-git-hooks",
-    "phoenix": "rm -rf node_modules .astro dist package-lock.json && npm install"
+    "clean:build": "rm -rf dist .astro public/assets/project-previews",
+    "clean": "npm run clean:build && rm -rf node_modules .vercel package-lock.json",
+    "phoenix": "npm run clean && npm install"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",
