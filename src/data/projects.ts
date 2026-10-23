@@ -5,7 +5,7 @@ export function getProjects(): Array<Project> {
   return [
     {
       title: 'Urban clarity',
-      description: 'A spatial intelligence platform for Spain covering four metrics — Public Spending and Business Power',
+      description: 'A civic transparency platform that maps public procurement spending and business activity across Spanish regions (currently Cantabria, País Vasco, and Asturias), so people can see where public money goes and where economic activity concentrates.',
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
       website: 'https://urban-clarity.vercel.app',
       showInCv: true,
