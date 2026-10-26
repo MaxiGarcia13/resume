@@ -6,6 +6,10 @@ export interface HeaderProps {
   profile: CvData['profile'];
 }
 
+function ContactSeparator() {
+  return <Text size="sm" color="tertiary"> · </Text>;
+}
+
 export function Header({ profile }: HeaderProps) {
   const portfolioUrl = 'https://maxi-garcia-mortigliengo-cv.vercel.app';
   const telephoneNumber = process.env.TELEPHONE_NUMBER;
@@ -16,18 +20,19 @@ export function Header({ profile }: HeaderProps) {
       <Text size="xxl" color="primary" weight="bold">{profile.name}</Text>
       <Text size="md" color="secondary">{profile.role}</Text>
 
-      <Wrapper flexDirection="row" gap="sm" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
+      <Wrapper flexDirection="row" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
         <Text size="sm" color="tertiary">{location}</Text>
-
+        <ContactSeparator />
         <Link src={`mailto:${profile.email}`} size="sm" color="tertiary">{profile.email}</Link>
-        {
-          telephoneNumber && (
+        {telephoneNumber && (
+          <>
+            <ContactSeparator />
             <Link src={`tel:${telephoneNumber}`} size="sm" color="tertiary">{telephoneNumber}</Link>
-          )
-        }
+          </>
+        )}
       </Wrapper>
 
-      <Wrapper flexDirection="row" gap="sm" style={{ alignItems: 'center' }}>
+      <Wrapper flexDirection="column" gap="xs">
         <Link src={profile.socialMedia.linkedin} size="xs" color="tertiary">
           {profile.socialMedia.linkedin}
         </Link>

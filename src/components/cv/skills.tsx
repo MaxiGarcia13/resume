@@ -1,14 +1,13 @@
 import type { CvData } from '@/data/cv';
 import type { SkillCategory } from '@/types/skills';
 import { capitalize } from '@maxigarcia/js-utils';
-import { spaces } from './constants';
 import { Section, Text, Wrapper } from './shared';
 
 interface SkillsProps {
   skills: CvData['skills'];
 }
 
-const SKILS_ORDER: SkillCategory[] = [
+const SKILLS_ORDER: SkillCategory[] = [
   'language',
   'frontend-framework',
   'css-framework',
@@ -23,50 +22,43 @@ const SKILS_ORDER: SkillCategory[] = [
   'other',
 ];
 
+const CATEGORY_TITLES: Record<SkillCategory, string> = {
+  'language': 'Languages & Web',
+  'state-management': 'State & Data',
+  'tool': 'Tools',
+  'testing': 'Testing',
+  'database': 'Databases/BaaS/CMS',
+  'frontend-framework': 'Frontend',
+  'backend-framework': 'Backend',
+  'css-framework': 'Styling',
+  'ai': 'AI',
+  'cloud': 'Cloud',
+  'devops': 'DevOps',
+  'other': 'Others',
+};
+
 export function Skills({ skills }: SkillsProps) {
   return (
     <Section title="Skills" gap="sm">
-      {SKILS_ORDER.map((category) => {
+      {SKILLS_ORDER.map((category) => {
         const list = skills[category];
 
-        const titles: Record<SkillCategory, string> = {
-          'language': 'Languages & Web',
-          'state-management': 'State & Data',
-          'tool': 'Tools',
-          'testing': 'Testing',
-          'database': 'Databases/BaaS/CMS',
-          'frontend-framework': 'Frontend',
-          'backend-framework': 'Backend',
-          'css-framework': 'Styling',
-          'ai': 'AI',
-          'cloud': 'Cloud',
-          'devops': 'DevOps',
-          'other': 'Others',
-        };
+        if (!list?.length) {
+          return null;
+        }
 
-        const title = titles[category as SkillCategory] ?? capitalize(category);
+        const title = CATEGORY_TITLES[category] ?? capitalize(category);
+        const names = list.map((skill) => skill.name).join(', ');
 
         return (
-          <Wrapper key={category} flexDirection="row" style={{ flexWrap: 'wrap' }}>
-            <Text size="sm" color="secondary" weight="bold" style={{ marginRight: spaces.xs }}>
-              {`${title}:`}
+          <Wrapper key={category} flexDirection="row">
+            <Text size="sm" color="tertiary">
+              {'• '}
+              <Text size="sm" color="secondary" weight="bold">
+                {`${title}: `}
+              </Text>
+              {names}
             </Text>
-
-            {list.map((skill, index) => (
-              <>
-                <Text key={skill.id} size="sm" color="tertiary">
-                  {
-                    `${skill.name}${
-                      index === list.length - 2
-                        ? ' and '
-                        : index < list.length - 1
-                          ? ', '
-                          : ''
-                    }`
-                  }
-                </Text>
-              </>
-            ))}
           </Wrapper>
         );
       })}
