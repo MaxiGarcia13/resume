@@ -1,6 +1,6 @@
-import type { ChatCompletionMessageParam } from 'openai/resources';
+import type { AiRouterInterface } from '@maxigarcia/ai-router';
 
-export type LLMMessage = ChatCompletionMessageParam;
+export type LLMMessage = Parameters<AiRouterInterface['create']>[0];
 
 export interface LLMStreamChunk {
   choices: Array<{
