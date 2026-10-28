@@ -25,7 +25,9 @@ const stack = uniqueSkills(
 
 const workExperienceText = workExperience.map((work, index) => {
   const start = formatDate(new Date(work.schedule.startDate));
-  const end = work.schedule.endDate ? formatDate(new Date(work.schedule.endDate)) : 'Present';
+  const end = work.schedule.endDate
+    ? formatDate(new Date(work.schedule.endDate))
+    : 'Present';
   const yearsWorking = diffDates(work.schedule);
   const positions = work.positions
     .map((position) => `${position.title} — ${position.description.join('; ')}`)
@@ -43,7 +45,9 @@ const projectsText = projects
 const educationText = education
   .map((item) => {
     const start = formatDate(new Date(item.schedule.startDate));
-    const end = item.schedule.endDate ? formatDate(new Date(item.schedule.endDate)) : 'Present';
+    const end = item.schedule.endDate
+      ? formatDate(new Date(item.schedule.endDate))
+      : 'Present';
 
     return `- ${item.degree} | ${item.institution} | ${start} – ${end} | ${item.location}`;
   })

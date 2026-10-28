@@ -41,7 +41,9 @@ export function setTheme(theme: Theme): void {
 }
 
 export function toggleTheme(): void {
-  const nextTheme: Theme = $theme.get() === 'light' ? 'dark' : 'light';
+  const nextTheme: Theme = $theme.get() === 'light'
+    ? 'dark'
+    : 'light';
   setTheme(nextTheme);
 }
 

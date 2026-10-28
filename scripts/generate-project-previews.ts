@@ -110,7 +110,9 @@ async function main() {
     const local = await loadLocalSource(project.title);
     const source = local ?? (await fetchPreview(website));
 
-    console.log(`${local ? 'local' : 'fetch'} ${project.title}${local ? '' : ` (${website})`}`);
+    console.log(`${local ? 'local' : 'fetch'} ${project.title}${local
+      ? ''
+      : ` (${website})`}`);
     await writeWidths(project.title, source);
     console.log(`wrote ${project.title}`);
   }

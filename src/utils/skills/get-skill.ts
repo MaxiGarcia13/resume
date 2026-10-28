@@ -35,7 +35,9 @@ export function getSkill(id: SkillId): Skill {
 }
 
 export function getSkills(ids: SkillId[]): Skill[] {
-  const uniqueIds = [...new Set(ids)];
+  const uniqueIds = [
+    ...new Set(ids),
+  ];
   return uniqueIds.map(getSkill);
 }
 
@@ -50,7 +52,9 @@ export function uniqueSkills(...lists: Array<Skill[] | undefined>): Skill[] {
     }
   }
 
-  return [...seen.values()];
+  return [
+    ...seen.values(),
+  ];
 }
 
 export function formatSkills(skills?: Skill[]): string {

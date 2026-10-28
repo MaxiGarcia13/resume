@@ -19,7 +19,9 @@ function createCookies(value?: string) {
   return {
     get(name: string) {
       const cookie = store.get(name);
-      return cookie === undefined ? undefined : { value: cookie };
+      return cookie === undefined
+        ? undefined
+        : { value: cookie };
     },
     set(name: string, next: string) {
       store.set(name, next);

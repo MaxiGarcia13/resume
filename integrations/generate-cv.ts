@@ -20,7 +20,12 @@ export function generateCvIntegration(): AstroIntegration {
         try {
           const { stdout, stderr } = await execFileAsync(
             process.execPath,
-            ['--import', 'tsx/esm', scriptPath, outPath],
+            [
+              '--import',
+              'tsx/esm',
+              scriptPath,
+              outPath,
+            ],
             { cwd: root },
           );
 
@@ -31,7 +36,9 @@ export function generateCvIntegration(): AstroIntegration {
             logger.warn(stderr.trim());
           }
         } catch (error) {
-          const message = error instanceof Error ? error.message : String(error);
+          const message = error instanceof Error
+            ? error.message
+            : String(error);
           logger.error(`Failed to generate CV PDF: ${message}`);
           throw error;
         }

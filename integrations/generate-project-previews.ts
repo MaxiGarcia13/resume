@@ -29,7 +29,9 @@ export function generateProjectPreviewsIntegration(): AstroIntegration {
             logger.warn(stderr.trim());
           }
         } catch (error) {
-          const message = error instanceof Error ? error.message : String(error);
+          const message = error instanceof Error
+            ? error.message
+            : String(error);
           logger.error(`Failed to generate project previews: ${message}`);
           throw error;
         }

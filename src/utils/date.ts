@@ -2,11 +2,15 @@ import type { Schedule } from '@/types/schedule';
 
 export function formatSechedule(schedule: Schedule) {
   const startDate = new Date(schedule.startDate);
-  const endDate = schedule.endDate ? new Date(schedule.endDate) : null;
+  const endDate = schedule.endDate
+    ? new Date(schedule.endDate)
+    : null;
 
   return {
     startDate: formatDate(startDate),
-    endDate: endDate ? formatDate(endDate) : null,
+    endDate: endDate
+      ? formatDate(endDate)
+      : null,
   };
 };
 
@@ -18,7 +22,9 @@ export function formatDate(date: Date) {
 
 export function diffDates(schedule: Schedule) {
   const startDate = new Date(schedule.startDate);
-  const endDate = schedule.endDate ? new Date(schedule.endDate) : new Date();
+  const endDate = schedule.endDate
+    ? new Date(schedule.endDate)
+    : new Date();
 
   const totalMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth());
 
@@ -34,7 +40,9 @@ export function formatScheduleDuration(schedule: Schedule) {
 
   const duration
     = years > 0
-      ? `${years} years${months > 0 ? ` and ${months} months` : ''}`
+      ? `${years} years${months > 0
+        ? ` and ${months} months`
+        : ''}`
       : `${months} months`;
 
   return `${startDate} - ${endDate ?? 'now'}. ${duration}`;

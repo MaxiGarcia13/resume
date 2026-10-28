@@ -3,9 +3,9 @@ import Link from '@/components/shared/actions/link/link.astro';
 import Heading from '@/components/shared/heading/heading.astro';
 import ExternalLinkIcon from '@/components/shared/icons/external-link.astro';
 import Text from '@/components/shared/text/text.astro';
+import { getEducation } from '@/data/education';
 import { formatScheduleDuration } from '@/utils';
 import { getCvAnchorId } from '@/utils/link-cv-anchors';
-import { getEducation } from '@/data/education';
 
 const education = getEducation();
 ---

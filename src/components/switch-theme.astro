@@ -18,35 +18,43 @@ const { class: className } = Astro.props;
 </Button>
 
 <script>
-  import type { SweepDirection } from '@maxigarcia/view-transitions';
-  import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
-  import { initializeThemeStore, toggleTheme } from '@/modules/theme';
+import type { SweepDirection } from '@maxigarcia/view-transitions';
+import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
+import { initializeThemeStore, toggleTheme } from '@/modules/theme';
 
-  initializeThemeStore();
+initializeThemeStore();
 
-  const switchThemeButton = document.getElementById('switch-theme');
+const switchThemeButton = document.getElementById('switch-theme');
 
-  function syncThemeToggleLabel() {
-    const theme = document.documentElement.dataset.theme;
-    switchThemeButton?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-  }
+function isDarkMode() {
+  return document.documentElement.dataset.theme === 'dark';
+}
 
-  syncThemeToggleLabel();
+function syncThemeToggleLabel() {
+  const label = isDarkMode()
+    ? 'Switch to light theme'
+    : 'Switch to dark theme';
 
-  switchThemeButton?.addEventListener('click', () => {
-    const theme = document.documentElement.dataset.theme;
-    const direction: SweepDirection = theme === 'dark' ? 'corner-top-right' : 'corner-bottom-left';
+  switchThemeButton?.setAttribute('aria-label', label);
+}
 
-    onSweepRevealAnimation(
-      () => {
-        toggleTheme();
-        syncThemeToggleLabel();
-      },
-      direction,
-      {
-        blur: true,
-        blurAmount: '20px',
-      },
-    );
-  });
+syncThemeToggleLabel();
+
+switchThemeButton?.addEventListener('click', () => {
+  const direction: SweepDirection = isDarkMode()
+    ? 'corner-top-right'
+    : 'corner-bottom-left';
+
+  onSweepRevealAnimation(
+    () => {
+      toggleTheme();
+      syncThemeToggleLabel();
+    },
+    direction,
+    {
+      blur: true,
+      blurAmount: '20px',
+    },
+  );
+});
 </script>

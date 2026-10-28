@@ -8,7 +8,9 @@ import { Table, TableCell, TableHead, TableHeader } from './table';
 export function Bubble({ content, role }: LLMMessage) {
   const text = typeof content === 'string'
     ? content
-    : content?.map((part) => part.type === 'text' ? part.text : part.type).join('');
+    : content?.map((part) => part.type === 'text'
+        ? part.text
+        : part.type).join('');
 
   return (
     <div
@@ -16,7 +18,9 @@ export function Bubble({ content, role }: LLMMessage) {
         'p-2 rounded-sm text-sm whitespace-pre-wrap max-w-full wrap-break-word',
         role === 'user' && 'bg-gray-200 dark:bg-gray-600 ml-auto',
       )}
-      aria-label={role === 'user' ? 'User message' : 'AI assistant message'}
+      aria-label={role === 'user'
+        ? 'User message'
+        : 'AI assistant message'}
     >
       <Markdown
         remarkPlugins={[remarkGfm]}

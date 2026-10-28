@@ -35,7 +35,9 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+    ],
   },
 
   site: 'https://maxi-garcia-mortigliengo-cv.vercel.app',

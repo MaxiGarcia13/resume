@@ -81,7 +81,9 @@ export function Input(props: { className?: string }) {
         onClick={submit}
         aria-label="Send message"
       >
-        {replying !== null || modelDownloading ? <LoadingIcon className="animate-spin" /> : <SendIcon />}
+        {replying !== null || modelDownloading
+          ? <LoadingIcon className="animate-spin" />
+          : <SendIcon />}
       </button>
     </div>
   );

@@ -34,7 +34,12 @@ export function Messages(props: { className?: string }) {
       top: messagesRef.current?.scrollHeight,
       behavior: 'smooth',
     });
-  }, [replying, messages, error, awaitingLocalDownload]);
+  }, [
+    replying,
+    messages,
+    error,
+    awaitingLocalDownload,
+  ]);
 
   const showEmptyMessage = messages.length === 0 && !replying && modelCached === true;
 

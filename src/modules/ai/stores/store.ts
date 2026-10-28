@@ -12,7 +12,10 @@ export const $error = atom<LLMError | null>(null);
 export const $replying = atom<LLMMessage | null>(null);
 
 export function pushMessage(message: LLMMessage): void {
-  $messages.set([...$messages.get(), message]);
+  $messages.set([
+    ...$messages.get(),
+    message,
+  ]);
 }
 
 export function setReplying(message: LLMMessage | null): void {
