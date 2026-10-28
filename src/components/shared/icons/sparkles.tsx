@@ -1,4 +1,4 @@
-import { DEFAULT_ICON_SIZE } from './constans';
+import { DEFAULT_ICON_SIZE } from './constants';
 
 export function SparklesIcon({
   width = DEFAULT_ICON_SIZE,

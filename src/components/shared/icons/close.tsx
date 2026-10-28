@@ -1,5 +1,5 @@
 import type { IconProps } from './type';
-import { DEFAULT_ICON_SIZE } from './constans';
+import { DEFAULT_ICON_SIZE } from './constants';
 
 export function CloseIcon(props: IconProps & { className?: string }) {
   return (

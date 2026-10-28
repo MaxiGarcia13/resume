@@ -1,4 +1,4 @@
-import { DEFAULT_ICON_SIZE } from './constans';
+import { DEFAULT_ICON_SIZE } from './constants';
 
 interface SendIconProps {
   width?: number;

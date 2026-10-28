@@ -1,4 +1,4 @@
-import { DEFAULT_ICON_SIZE } from './constans';
+import { DEFAULT_ICON_SIZE } from './constants';
 
 export function DownloadIcon({ className, width = DEFAULT_ICON_SIZE, height = DEFAULT_ICON_SIZE }: { className?: string; width?: number; height?: number }) {
   return (
