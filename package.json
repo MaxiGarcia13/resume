@@ -42,42 +42,45 @@
     "phoenix": "npm run clean && npm install"
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.5",
-    "@astrojs/vercel": "^11.0.10",
-    "@maxigarcia/access-token": "^1.0.0",
+    "@astrojs/react": "^7.1.1",
+    "@maxigarcia/access-token": "^1.0.2",
     "@maxigarcia/ai-router": "^0.1.1",
-    "@maxigarcia/js-utils": "^1.20.0",
+    "@maxigarcia/js-utils": "^1.22.1",
     "@maxigarcia/view-transitions": "^0.9.0",
-    "@mlc-ai/web-llm": "^0.2.84",
+    "@mlc-ai/web-llm": "^0.2.86",
     "@nanostores/react": "^2.0.1",
     "@react-pdf/renderer": "^4.9.0",
-    "astro": "^7.2.10",
+    "astro": "^7.4.2",
     "nanostores": "^1.5.3",
-    "openai": "^7.23.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@eslint-react/eslint-plugin": "^5.18.7",
-    "@maxigarcia/eslint-config": "^1.14.1",
+    "@astrojs/vercel": "^11.0.16",
+    "@eslint-react/eslint-plugin": "^5.28.8",
+    "@maxigarcia/eslint-config": "^1.15.0",
     "@tailwindcss/vite": "^4.3.3",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "eslint-plugin-astro": "^3.1.0",
-    "lint-staged": "^17.4.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "lint-staged": "^17.6.0",
     "sharp": "^0.35.5",
-    "simple-git-hooks": "^2.13.1",
+    "simple-git-hooks": "^2.14.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.5"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "allowScripts": {
+    "simple-git-hooks@2.14.0": true,
+    "esbuild@0.28.2": true
   }
 }
