@@ -9,20 +9,20 @@ const languages = getLanguages();
 
 <section id="languages" class="flex flex-col gap-4">
   <Heading tag="h2">
-    <Link href="#languages" noWrap>Languages</Link>
+    <Link href="#languages" noWrap>
+      Languages
+    </Link>
   </Heading>
   <ul class="flex flex-col gap-2">
-    {
-      languages.map((language) => (
-        <li class="flex gap-2 items-baseline">
-          <Text tag="span" class="font-medium">
-            {language.name}
-          </Text>
-          <Text tag="span" variant="ghost">
-            — {language.proficiency}
-          </Text>
-        </li>
-      ))
-    }
+    {languages.map((language) => (
+      <li class="flex gap-2 items-baseline">
+        <Text tag="span" class="font-medium">
+          {language.name}
+        </Text>
+        <Text tag="span" variant="ghost">
+          — {language.proficiency}
+        </Text>
+      </li>
+    ))}
   </ul>
 </section>

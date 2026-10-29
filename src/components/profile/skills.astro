@@ -7,23 +7,17 @@ const { skills = [], class: className }: { skills?: Skill[]; class?: string } = 
 ---
 
 <div class:list={[className, 'flex flex-wrap gap-2']}>
-  {
-    skills.map((skill) => {
-      const Icon = getSkillIcon(skill.id);
+  {skills.map((skill) => {
+    const Icon = getSkillIcon(skill.id);
 
-      return (
-        <Text variant="ghost" tag="span" class="text-xs flex gap-1 items-center justify-start">
-          {Icon
-? <Icon class="size-4" />
-: null}
+    return (
+      <Text variant="ghost" tag="span" class="text-xs flex gap-1 items-center justify-start">
+        {Icon ? <Icon class="size-4" /> : null}
 
-          {skill.name}
+        {skill.name}
 
-          {skills.indexOf(skill) < skills.length - 1
-? ','
-: '.'}
-        </Text>
-      );
-    })
-  }
+        {skills.indexOf(skill) < skills.length - 1 ? ',' : '.'}
+      </Text>
+    );
+  })}
 </div>

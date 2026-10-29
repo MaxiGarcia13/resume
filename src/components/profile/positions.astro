@@ -13,26 +13,24 @@ const { positions, class: className } = Astro.props;
 ---
 
 <ul class={cn('flex flex-col gap-4 py-2', className)}>
-  {
-    positions.map((position) => (
-      <li class="flex gap-2">
-        <Text variant="highlight" tag="span" aria-hidden="true">
-          {'=>'}
-        </Text>
-        <div>
-          <Heading tag="h4">{position.title}</Heading>
-          <ul class="mt-1 flex flex-col gap-1">
-            {position.description.map((item) => (
-              <li class="flex gap-2">
-                <Text tag="span" aria-hidden="true">
-                  •
-                </Text>
-                <Text>{item}</Text>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
-    ))
-  }
+  {positions.map((position) => (
+    <li class="flex gap-2">
+      <Text variant="highlight" tag="span" aria-hidden="true">
+        {'=>'}
+      </Text>
+      <div>
+        <Heading tag="h4">{position.title}</Heading>
+        <ul class="mt-1 flex flex-col gap-1">
+          {position.description.map((item) => (
+            <li class="flex gap-2">
+              <Text tag="span" aria-hidden="true">
+                •
+              </Text>
+              <Text>{item}</Text>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  ))}
 </ul>

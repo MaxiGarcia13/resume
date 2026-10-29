@@ -18,43 +18,39 @@ const { class: className } = Astro.props;
 </Button>
 
 <script>
-import type { SweepDirection } from '@maxigarcia/view-transitions';
-import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
-import { initializeThemeStore, toggleTheme } from '@/modules/theme';
+  import type { SweepDirection } from '@maxigarcia/view-transitions';
+  import { onSweepRevealAnimation } from '@maxigarcia/view-transitions';
+  import { initializeThemeStore, toggleTheme } from '@/modules/theme';
 
-initializeThemeStore();
+  initializeThemeStore();
 
-const switchThemeButton = document.getElementById('switch-theme');
+  const switchThemeButton = document.getElementById('switch-theme');
 
-function isDarkMode() {
-  return document.documentElement.dataset.theme === 'dark';
-}
+  function isDarkMode() {
+    return document.documentElement.dataset.theme === 'dark';
+  }
 
-function syncThemeToggleLabel() {
-  const label = isDarkMode()
-    ? 'Switch to light theme'
-    : 'Switch to dark theme';
+  function syncThemeToggleLabel() {
+    const label = isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme';
 
-  switchThemeButton?.setAttribute('aria-label', label);
-}
+    switchThemeButton?.setAttribute('aria-label', label);
+  }
 
-syncThemeToggleLabel();
+  syncThemeToggleLabel();
 
-switchThemeButton?.addEventListener('click', () => {
-  const direction: SweepDirection = isDarkMode()
-    ? 'corner-top-right'
-    : 'corner-bottom-left';
+  switchThemeButton?.addEventListener('click', () => {
+    const direction: SweepDirection = isDarkMode() ? 'corner-top-right' : 'corner-bottom-left';
 
-  onSweepRevealAnimation(
-    () => {
-      toggleTheme();
-      syncThemeToggleLabel();
-    },
-    direction,
-    {
-      blur: true,
-      blurAmount: '20px',
-    },
-  );
-});
+    onSweepRevealAnimation(
+      () => {
+        toggleTheme();
+        syncThemeToggleLabel();
+      },
+      direction,
+      {
+        blur: true,
+        blurAmount: '20px',
+      },
+    );
+  });
 </script>

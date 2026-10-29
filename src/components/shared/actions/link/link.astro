@@ -18,26 +18,22 @@ const rel = getLinkRel(target ?? undefined);
 const hasChildren = Astro.slots.has('default');
 const hasIcon = Astro.slots.has('icon');
 const styles = !noWrap
-? getActionStyles({
-variant,
-className,
-hasChildren,
-hasIcon,
-})
-: className;
+  ? getActionStyles({
+      variant,
+      className,
+      hasChildren,
+      hasIcon,
+    })
+  : className;
 ---
 
 <a target={target} rel={rel} class={styles} {...props}>
-  {
-    noWrap
-? (
+  {noWrap ? (
+    <slot />
+  ) : (
+    <ActionText variant={variant} iconPosition={iconPosition}>
+      <slot name="icon" slot="icon" />
       <slot />
-    )
-: (
-      <ActionText variant={variant} iconPosition={iconPosition}>
-        <slot name="icon" slot="icon" />
-        <slot />
-      </ActionText>
-    )
-  }
+    </ActionText>
+  )}
 </a>
