@@ -38,11 +38,6 @@ export const POST: APIRoute<EndpointProps> = async ({ request }) => {
       ...messages.filter((message) => message.role !== 'system'),
     ];
     const stream = await router.create(sanitizedMessages);
-
-    if (isAiErrorArray(stream)) {
-      throw stream;
-    }
-
     const body = writeNdjsonStream(stream);
 
     return new Response(body, {

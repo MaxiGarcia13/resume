@@ -1,6 +1,6 @@
 import type { AiRouterInterface } from '@maxigarcia/ai-router';
 
-export type LLMMessage = Parameters<AiRouterInterface['create']>[0];
+export type LLMMessage = Parameters<AiRouterInterface['create']>[0][number];
 
 export interface LLMStreamChunk {
   choices: Array<{
