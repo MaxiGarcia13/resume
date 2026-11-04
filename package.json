@@ -44,6 +44,7 @@
   "dependencies": {
     "@astrojs/react": "^7.1.1",
     "@maxigarcia/access-token": "^1.0.2",
+    "@maxigarcia/ai-client": "^0.3.0",
     "@maxigarcia/ai-router": "^0.1.1",
     "@maxigarcia/js-utils": "^1.22.1",
     "@maxigarcia/view-transitions": "^0.9.0",
