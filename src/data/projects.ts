@@ -4,6 +4,22 @@ import { getSkills } from '@/utils/skills';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'Pádel Cantabria Assistant',
+      description: 'A chat assistant for the Liga de Pádel de Cantabria. People ask about categories, standings, rosters, player points, and the next match, and get answers taken from public federation data.',
+      repo: 'https://github.com/MaxiGarcia13/padel-cantabria/tree/main/packages/assistant',
+      website: 'https://padel-cantabria.onrender.com',
+      skills: getSkills([
+        'vue',
+        'typescript',
+        'mcp',
+        'ai',
+        'fastify',
+        'tailwind',
+        'javascript',
+        'zod',
+      ]),
+    },
+    {
       title: 'Urban clarity',
       description: 'A civic transparency platform that maps public procurement spending and business activity across Spanish regions (currently Cantabria, País Vasco, and Asturias), so people can see where public money goes and where economic activity concentrates.',
       repo: 'https://github.com/MaxiGarcia13/urban-transparency',
