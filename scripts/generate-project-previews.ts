@@ -1,20 +1,24 @@
 import { Buffer } from 'node:buffer';
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { getProjects } from '@/data/projects';
 import {
+  findLocalProjectPreviewFile,
   getProjectPreviewFilename,
+  getProjectPreviewPassthroughFilename,
   getProjectPreviewSlug,
+  isPassthroughPreviewExtension,
+  PROJECT_LOCAL_ASSETS_DIR,
   PROJECT_PREVIEW_DIR,
   PROJECT_PREVIEW_WIDTHS,
 } from '@/utils/project-preview';
 
 const SNAP_API = 'https://snap-website-api.vercel.app/website-to-blob-img';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ASSETS_DIR = path.join(ROOT, 'assets');
+const ASSETS_DIR = path.join(ROOT, PROJECT_LOCAL_ASSETS_DIR);
 const OUT_DIR = path.join(ROOT, 'public', PROJECT_PREVIEW_DIR);
 const FORCE = process.argv.includes('--force');
 const MAX_RETRIES = 3;
@@ -26,16 +30,6 @@ async function fileExists(filePath: string) {
   } catch {
     return false;
   }
-}
-
-async function loadLocalSource(title: string) {
-  const localPath = path.join(ASSETS_DIR, `${getProjectPreviewSlug(title)}.webp`);
-
-  if (!(await fileExists(localPath))) {
-    return null;
-  }
-
-  return readFile(localPath);
 }
 
 async function fetchPreview(website: string) {
@@ -88,29 +82,69 @@ async function writeWidths(title: string, source: Buffer) {
   );
 }
 
+async function writePassthrough(title: string, localPath: string) {
+  const extension = path.extname(localPath).toLowerCase();
+  const outPath = path.join(OUT_DIR, getProjectPreviewPassthroughFilename(title, extension));
+
+  await copyFile(localPath, outPath);
+}
+
+async function needsWidthOutputs(title: string) {
+  const missing = await Promise.all(
+    PROJECT_PREVIEW_WIDTHS.map(async (width) => {
+      const outPath = path.join(OUT_DIR, getProjectPreviewFilename(title, width));
+      return !(await fileExists(outPath));
+    }),
+  );
+
+  return missing.some(Boolean);
+}
+
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
 
-  const projects = getProjects().filter((project) => project.website);
+  const projects = getProjects().filter(
+    (project) => project.website || findLocalProjectPreviewFile(project.title, ASSETS_DIR),
+  );
 
   for (const project of projects) {
-    const website = project.website!;
-    const missing = await Promise.all(
-      PROJECT_PREVIEW_WIDTHS.map(async (width) => {
-        const outPath = path.join(OUT_DIR, getProjectPreviewFilename(project.title, width));
-        return !(await fileExists(outPath));
-      }),
-    );
+    const localPath = findLocalProjectPreviewFile(project.title, ASSETS_DIR);
+    const extension = localPath
+      ? path.extname(localPath).toLowerCase()
+      : null;
 
-    if (!FORCE && missing.every((isMissing) => !isMissing)) {
+    if (localPath && extension && isPassthroughPreviewExtension(extension)) {
+      const outPath = path.join(OUT_DIR, getProjectPreviewPassthroughFilename(project.title, extension));
+
+      if (!FORCE && await fileExists(outPath)) {
+        console.log(`skip ${project.title}`);
+        continue;
+      }
+
+      console.log(`local ${project.title} (${getProjectPreviewSlug(project.title)}${extension})`);
+      await writePassthrough(project.title, localPath);
+      console.log(`wrote ${project.title}`);
+      continue;
+    }
+
+    if (!FORCE && !(await needsWidthOutputs(project.title))) {
       console.log(`skip ${project.title}`);
       continue;
     }
 
-    const local = await loadLocalSource(project.title);
-    const source = local ?? (await fetchPreview(website));
+    const website = project.website;
+    const source = localPath
+      ? await readFile(localPath)
+      : website
+        ? await fetchPreview(website)
+        : null;
 
-    console.log(`${local ? 'local' : 'fetch'} ${project.title}${local
+    if (!source) {
+      console.log(`skip ${project.title} (no local source or website)`);
+      continue;
+    }
+
+    console.log(`${localPath ? 'local' : 'fetch'} ${project.title}${localPath
       ? ''
       : ` (${website})`}`);
     await writeWidths(project.title, source);

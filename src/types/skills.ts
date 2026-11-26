@@ -35,7 +35,8 @@ export type SkillId
 type LanguageSkillId
   = 'typescript'
     | 'javascript'
-    | 'graphql';
+    | 'graphql'
+    | 'go';
 
 type FrameworkSkillId
   = 'react'

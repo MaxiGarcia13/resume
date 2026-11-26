@@ -15,6 +15,7 @@ export const SKILLS_REGISTRY: Record<SkillId, SkillRegistryEntry> = {
   'typescript': entry('language'),
   'javascript': entry('language'),
   'graphql': entry('language'),
+  'go': entry('language'),
   'html': entry('language'),
   'css': entry('language'),
 

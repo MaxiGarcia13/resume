@@ -6,6 +6,7 @@ import GithubIcon from '@/components/shared/icons/github.astro';
 import Text from '@/components/shared/text/text.astro';
 import { getProfile, getProjects } from '@/data';
 import { getCvAnchorId } from '@/utils/link-cv-anchors';
+import { hasLocalProjectPreviewSource } from '@/utils/project-preview';
 import Skills from './skills.astro';
 
 const projects = getProjects();
@@ -23,6 +24,7 @@ const {
   <ul class="flex flex-col gap-10">
     {projects.map((project) => {
       const id = getCvAnchorId(project.title);
+      const showPreview = Boolean(project.website) || hasLocalProjectPreviewSource(project.title);
 
       return (
         <li id={id} class="flex flex-col gap-4">
@@ -36,7 +38,7 @@ const {
           </Heading>
           <Text>{project.description}</Text>
           <Skills skills={project.skills} />
-          {project.website && <ProjectPreview src={project.website} title={project.title} />}
+          {showPreview && <ProjectPreview src={project.website ?? project.repo} title={project.title} />}
         </li>
       );
     })}

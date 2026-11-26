@@ -3,9 +3,12 @@ import { cn } from '@maxigarcia/js-utils';
 import Link from '@/components/shared/actions/link/link.astro';
 import ImgLoader from '@/components/shared/img-loader.astro';
 import {
+  getLocalProjectPreviewExtension,
+  getProjectPreviewPassthroughSrc,
   getProjectPreviewSlug,
   getProjectPreviewSrc,
   getProjectPreviewSrcSet,
+  isPassthroughPreviewExtension,
   PROJECT_PREVIEW_WIDTHS,
 } from '@/utils/project-preview';
 
@@ -18,8 +21,12 @@ interface Props {
 const { src, title, class: className } = Astro.props;
 
 const previewId = `preview-${getProjectPreviewSlug(title)}`;
-const srcSet = getProjectPreviewSrcSet(title);
-const defaultSrc = getProjectPreviewSrc(title, PROJECT_PREVIEW_WIDTHS.at(-1)!);
+const localExtension = getLocalProjectPreviewExtension(title);
+const usePassthrough = Boolean(localExtension && isPassthroughPreviewExtension(localExtension));
+const srcSet = usePassthrough ? undefined : getProjectPreviewSrcSet(title);
+const defaultSrc = usePassthrough
+  ? getProjectPreviewPassthroughSrc(title, localExtension!)
+  : getProjectPreviewSrc(title, PROJECT_PREVIEW_WIDTHS.at(-1)!);
 ---
 
 <Link
@@ -27,14 +34,14 @@ const defaultSrc = getProjectPreviewSrc(title, PROJECT_PREVIEW_WIDTHS.at(-1)!);
   target="_blank"
   noWrap
   class={cn('block relative', className)}
-  aria-label={`${title} website (opens in new tab)`}
+  aria-label={`${title} (opens in new tab)`}
 >
   <ImgLoader id={previewId}>
     <img
       id={previewId}
       src={defaultSrc}
       srcset={srcSet}
-      sizes="(max-width: 900px) 100vw, 900px"
+      sizes={usePassthrough ? undefined : '(max-width: 900px) 100vw, 900px'}
       alt={`Preview of ${title}`}
       width={900}
       height={506}

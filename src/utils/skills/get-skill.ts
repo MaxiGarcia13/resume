@@ -11,6 +11,7 @@ const SKILL_NAME_MAP: Partial<Record<SkillId, string>> = {
   'javascript': 'JavaScript',
   'typescript': 'TypeScript',
   'graphql': 'GraphQL',
+  'go': 'Go',
   'next': 'Next.js',
   'react-native': 'React Native',
   'nodejs': 'Node.js',

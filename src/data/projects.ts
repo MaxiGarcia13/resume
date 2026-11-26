@@ -4,6 +4,23 @@ import { getSkills } from '@/utils/skills';
 export function getProjects(): Array<Project> {
   return [
     {
+      title: 'PipeBox',
+      description: 'Local CI/CD for GitHub Actions and Jenkins — run and debug pipelines from the desktop UI, terminal, or MCP. No git push required.',
+      repo: 'https://github.com/MaxiGarcia13/pipebox',
+      showInCv: true,
+      skills: getSkills([
+        'go',
+        'typescript',
+        'electron',
+        'nodejs',
+        'ci',
+        'github-actions',
+        'jenkins',
+        'monorepo',
+        'mcp',
+      ]),
+    },
+    {
       title: 'Pádel Cantabria Assistant',
       description: 'A chat assistant for the Liga de Pádel de Cantabria. People ask about categories, standings, rosters, player points, and the next match, and get answers taken from public federation data.',
       repo: 'https://github.com/MaxiGarcia13/padel-cantabria/tree/main/packages/assistant',
